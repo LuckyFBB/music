@@ -1,3 +1,13 @@
+/*
+ * @Author: FBB
+ * @Date: 2019-08-13 21:34:55
+ * @LastEditors: FBB
+ * @LastEditTime: 2019-08-21 21:45:41
+ */
+
+@top_height: 50px;
+@bgColor: #d84741;
+
 .tabs {
   position: fixed;
   display: flex;
@@ -6,13 +16,15 @@
   width: 100vw;
   box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.1);
   background-color: #fff;
+
   &__item {
     padding: 8px 0 5px;
     display: inline-block;
     text-align: center;
   }
-  &__active{
-    background-color: #df0a17;
+
+  &__active {
+    background-color: @bgColor;
     height: 24px;
     width: 24px;
     border-radius: 12px;
@@ -20,28 +32,68 @@
     justify-content: center;
     align-items: center;
   }
+
   &__img {
     display: inline-block;
     height: 22px;
     width: 22px;
-    &--active{
+
+    &--active {
       height: 18px;
       width: 18px;
     }
   }
+
   &__title {
     padding-top: 6px;
     font-size: 10px;
     line-height: 12px;
     color: #cccccc;
     font-family: PingFangSC-Regular;
+
     &--active {
-      color: #df0a17;
+      color: @bgColor;
     }
   }
 }
 
-.top{
+.top {
   display: flex;
-  justify-content: con
+  justify-content: center;
+  height: @top_height;
+  background-color: @bgColor;
+
+  &__left {
+    width: 15vw;
+  }
+
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    color: #fff;
+  }
+
+  &__text {
+    line-height: @top_height;
+    text-align: center;
+  }
+
+  &__search {
+    input {
+      height: 30px;
+      width: 70vw;
+      border-radius: 15px;
+      padding-left: 15px;
+      border: none;
+      outline: none;
+      color: #333;
+      background-color: #eeeeee;
+    }
+  }
+
+  &__right {
+    width: 15vw;
+  }
 }
