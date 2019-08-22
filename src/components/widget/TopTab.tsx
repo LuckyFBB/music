@@ -2,14 +2,15 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2019-08-21 21:07:27
+ * @LastEditTime: 2019-08-22 22:11:37
  */
 
 import React from 'react'
 interface ISProps {
-  left: boolean,
-  right: boolean,
-  type: string
+  left?: boolean,
+  right?: boolean,
+  type: string,
+  text?: string
 }
 
 export const TopTab = (props: ISProps) => {
@@ -17,12 +18,12 @@ export const TopTab = (props: ISProps) => {
     switch (type) {
       case 'text':
         return (
-          <div className='top__text'>云音乐</div>
+          <div className='top__text'>{props.text}</div>
         )
       case 'search':
         return (
           <div className='top__search'>
-            <input type="text" placeholder='请输入'/>
+            <input type="text" placeholder='请输入' />
           </div>
         )
     }
