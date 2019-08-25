@@ -2,7 +2,7 @@
  * @Authors: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2019-08-25 17:23:45
+ * @LastEditTime: 2019-08-25 23:16:33
  */
 
 import React, { useEffect, useState } from 'react'
@@ -33,7 +33,6 @@ export const Home = () => {
   //获取热门推荐
   const getPersonalizedList = (limit: number = 0) => {
     store.getPersonalized(limit).then((res: any) => {
-      console.log(res)
       setPersonalizedList(res.result)
     })
   }
@@ -55,7 +54,7 @@ export const Home = () => {
         {HOME_ICONS_OPTIONS.map(([title, icon]) => (
           <div className='icon__item' key={title}>
             <div className='item__img'>
-              <img src={icon} />
+              <img src={icon} alt={title} />
             </div>
             <p className='item__title'>{title}</p>
           </div>
@@ -67,7 +66,7 @@ export const Home = () => {
           <span className='redirect'>歌单广场</span>
         </div>
         <div className='personalized__content'>
-          <SongList list={personalizedList}/>
+          <SongList list={personalizedList.slice(0, 6)} />
         </div>
       </div>
       <BottomTab active='home' />
