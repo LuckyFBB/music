@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-22 22:18:13
  * @LastEditors: FBB
- * @LastEditTime: 2019-08-22 22:25:08
+ * @LastEditTime: 2019-08-25 17:34:12
  */
 import axios from 'axios'
 import { Toast } from 'antd-mobile'
@@ -28,7 +28,6 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(
   response => {
     // 对响应数据做点什么
-    console.log(response)
     if (response.status === 200 && response.data.code === 200) {
       return Promise.resolve(response.data)
     } else {
@@ -37,7 +36,6 @@ axios.interceptors.response.use(
     }
   },
   error => {
-    console.log('error', Toast)
     Toast.info('请求失败')
     return Promise.reject(error)
   }

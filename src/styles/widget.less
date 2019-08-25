@@ -2,11 +2,10 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:55
  * @LastEditors: FBB
- * @LastEditTime: 2019-08-21 21:45:41
+ * @LastEditTime: 2019-08-25 17:42:43
  */
 
 @top_height: 50px;
-@bgColor: #d84741;
 
 .tabs {
   position: fixed;
@@ -95,5 +94,27 @@
 
   &__right {
     width: 15vw;
+  }
+}
+
+.songlist {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  &__item {
+    img {
+      height: 105px;
+      width: 105px;
+    }
+
+    p {
+      width: 105px;
+      overflow: hidden; //超出部分隐藏
+      white-space: nowrap; //强制显示在同一行
+      text-overflow: ellipsis; //显示省略号
+      -o-text-overflow: ellipsis; //兼容低版本opera 
+    }
   }
 }

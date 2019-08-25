@@ -1,16 +1,26 @@
-import request from "../utils/request";
-
 /*
  * @Author: FBB
- * @Date: 2019-08-22 22:22:45
+ * @Date: 2019-08-23 09:15:31
  * @LastEditors: FBB
- * @LastEditTime: 2019-08-22 22:26:45
+ * @LastEditTime: 2019-08-25 16:48:33
+ * @Description: 所有请求
  */
+
+import request from "../utils/request";
+
 class Store {
-  public getBannerList = (type: number) => {
+  public getBanner = (type: number) => {
     const url = '/banner'
     const pre = {
-      type: type
+      type
+    }
+    return request({ url, pre })
+  }
+
+  public getPersonalized = (limit: number) => {
+    const url = '/personalized'
+    const pre = {
+      limit
     }
     return request({ url, pre })
   }
