@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:55
  * @LastEditors: FBB
- * @LastEditTime: 2019-08-25 23:05:43
+ * @LastEditTime: 2019-08-26 23:22:49
  */
 
 @top_height: 50px;
@@ -57,13 +57,16 @@
 }
 
 .top {
+  position: relative;
   display: flex;
   justify-content: center;
   height: @top_height;
   background-color: @bgColor;
 
   &__left {
-    width: 15vw;
+    position: absolute;
+    top: 15px;
+    left: 5px;
   }
 
   &__container {
@@ -77,6 +80,8 @@
   &__text {
     line-height: @top_height;
     text-align: center;
+    font-size: 18px;
+    font-family: @PingFangSC-Medium;
   }
 
   &__search {
@@ -93,7 +98,14 @@
   }
 
   &__right {
-    width: 15vw;
+    position: absolute;
+    top: 17px;
+    right: 5px;
+  }
+
+  &__slideimg {
+    height: 20px;
+    width: 20px
   }
 }
 
@@ -147,5 +159,70 @@
         color: #fff;
       }
     }
+  }
+}
+
+.ranklist {
+  &__line {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    .line {
+      &__item {
+        display: flex;
+        flex-direction: row;
+        padding: 10px 0 5px;
+      }
+
+      &__img {
+        height: 80px;
+        width: 80px;
+        border-radius: 5px;
+      }
+
+      &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 10px;
+
+        .content {
+          span {
+            font-size: 14px;
+            color: #666666;
+            line-height: 20px;
+          }
+        }
+      }
+    }
+  }
+
+  &__block {
+    position: relative;
+    padding-top: 15px;
+
+    .block {
+      &__img {
+        height: 27vw;
+        width: 27vw;
+        padding: 0 1.833vw 4vw;
+
+        img {
+          height: 100%;
+          width: 100%;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+
+  &__fixed {
+    position: absolute;
+    bottom: 10px;
+    left: 5px;
+    font-size: 10px;
+    color: #fff;
+    font-family: @PingFangSC-Light;
   }
 }

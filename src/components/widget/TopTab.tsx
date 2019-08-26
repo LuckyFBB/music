@@ -2,10 +2,11 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2019-08-22 22:11:37
+ * @LastEditTime: 2019-08-26 20:36:43
  */
 
 import React from 'react'
+import left from '../../static/icon/left_arrow.png'
 interface ISProps {
   left?: boolean,
   right?: boolean,
@@ -18,7 +19,7 @@ export const TopTab = (props: ISProps) => {
     switch (type) {
       case 'text':
         return (
-          <div className='top__text'>{props.text}</div>
+          <div className='top__text'>{props.text || '云音乐'}</div>
         )
       case 'search':
         return (
@@ -30,7 +31,9 @@ export const TopTab = (props: ISProps) => {
   }
   return (
     <div className='top'>
-      {props.left && <div className='top__left'>left</div>}
+      {props.left && <div className='top__left'>
+        <img className='top__slideimg' src={left} alt='' />
+      </div>}
       <div className='top__container'>
         {renderTop(props.type)}
       </div>

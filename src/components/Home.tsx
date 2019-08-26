@@ -1,8 +1,9 @@
 /*
- * @Authors: FBB
+ * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2019-08-25 23:16:33
+ * @LastEditTime: 2019-08-26 20:28:29
+ * @Description: 首页
  */
 
 import React, { useEffect, useState } from 'react'
@@ -14,7 +15,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { HOME_ICONS_OPTIONS } from './enums'
 import { SongList } from './widget/SongList';
 
-export const Home = () => {
+export const Home = (props: any) => {
   const [bannerList, setBannerList] = useState([])
   const [personalizedList, setPersonalizedList] = useState([])   //热门推荐歌单
 
@@ -37,6 +38,10 @@ export const Home = () => {
     })
   }
 
+  const homeIconsClick = (path: string) => {
+    props.history.push(path)
+  }
+
   return (
     <div className='home'>
       <TopTab left={false} right={false} type='text' text='云音乐' />
@@ -51,8 +56,8 @@ export const Home = () => {
         </Carousel>
       </div>
       <div className='home__icons'>
-        {HOME_ICONS_OPTIONS.map(([title, icon]) => (
-          <div className='icon__item' key={title}>
+        {HOME_ICONS_OPTIONS.map(([path, title, icon]) => (
+          <div className='icon__item' key={title} onClick={() => homeIconsClick(path)}>
             <div className='item__img'>
               <img src={icon} alt={title} />
             </div>
