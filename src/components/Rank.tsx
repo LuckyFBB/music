@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-26 20:19:16
  * @LastEditors: FBB
- * @LastEditTime: 2019-08-26 22:46:42
+ * @LastEditTime: 2019-08-27 21:45:18
  * @Description: 排行榜
  */
 
@@ -12,7 +12,7 @@ import { BottomTab } from './widget/BottomTab';
 import { RankList } from './widget/RankList'
 import { store } from '../store/store';
 
-export const Rank = () => {
+export const Rank = (props: any) => {
   const [rankList, setRankList] = useState([])
   useEffect(() => {
     getTopListDetail()
@@ -23,9 +23,14 @@ export const Rank = () => {
       setRankList(res.list)
     })
   }
+
+  const handleBack = () => {
+    props.history.go(-1)
+  }
+
   return (
     <div className='rank'>
-      <TopTab type='text' text='排行榜' left={true} />
+      <TopTab type='text' text='排行榜' left={true} onLeft={handleBack} />
       <div className='rank__container'>
         <div className='rank__content'>
           <div className='rank__title'>官方榜</div>

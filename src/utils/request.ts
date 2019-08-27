@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-22 22:18:13
  * @LastEditors: FBB
- * @LastEditTime: 2019-08-25 17:34:12
+ * @LastEditTime: 2019-08-27 21:07:53
  */
 import axios from 'axios'
 import { Toast } from 'antd-mobile'
@@ -43,7 +43,7 @@ axios.interceptors.response.use(
 
 const request = (config: any) => {
   if (!config.method || config.method.toLowerCase() === 'get') {
-    config.params = config.params
+    //config.params = config.params
   }
   return axios(config)
 }

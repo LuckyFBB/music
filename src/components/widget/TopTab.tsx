@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2019-08-26 20:36:43
+ * @LastEditTime: 2019-08-27 21:43:04
  */
 
 import React from 'react'
@@ -11,7 +11,8 @@ interface ISProps {
   left?: boolean,
   right?: boolean,
   type: string,
-  text?: string
+  text?: string,
+  onLeft?: () => void
 }
 
 export const TopTab = (props: ISProps) => {
@@ -32,7 +33,7 @@ export const TopTab = (props: ISProps) => {
   return (
     <div className='top'>
       {props.left && <div className='top__left'>
-        <img className='top__slideimg' src={left} alt='' />
+        <img className='top__slideimg' src={left} alt='' onClick={props.onLeft} />
       </div>}
       <div className='top__container'>
         {renderTop(props.type)}

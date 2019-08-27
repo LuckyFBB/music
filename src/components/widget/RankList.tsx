@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-26 21:16:24
  * @LastEditors: FBB
- * @LastEditTime: 2019-08-26 23:22:53
+ * @LastEditTime: 2019-08-27 21:05:11
  * @Description: 排行榜item
  */
 
@@ -17,10 +17,9 @@ export const RankList = (props: any) => {
         return (
           <div className='ranklist__block'>
             {ranklist.map((item: any) => (
-              <div className='ranklist__block'>
-                <div className='block__img'>
-                  <img src={item.coverImgUrl} alt='' key={item.id} />
-                </div>
+              <div className='block__img'>
+                <img src={item.coverImgUrl} alt='' key={item.id} />
+                <div className='block__fixed'>{item.updateFrequency}</div>
               </div>
             ))}
           </div>
@@ -39,7 +38,7 @@ export const RankList = (props: any) => {
                     </div>
                   ))}
                 </div>
-                <div className='ranklist__fixed'>{item.updateFrequency}</div>
+                <div className='line__fixed'>{item.updateFrequency}</div>
               </div>
             ))}
           </div>

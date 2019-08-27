@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:55
  * @LastEditors: FBB
- * @LastEditTime: 2019-08-26 23:22:49
+ * @LastEditTime: 2019-08-27 21:05:53
  */
 
 @top_height: 50px;
@@ -164,12 +164,12 @@
 
 .ranklist {
   &__line {
-    position: relative;
     display: flex;
     flex-direction: column;
 
     .line {
       &__item {
+        position: relative;
         display: flex;
         flex-direction: row;
         padding: 10px 0 5px;
@@ -195,15 +195,26 @@
           }
         }
       }
+
+      &__fixed {
+        position: absolute;
+        bottom: 10px;
+        left: 5px;
+        font-size: 10px;
+        color: #fff;
+        font-family: @PingFangSC-Light;
+      }
     }
   }
 
   &__block {
-    position: relative;
+    display: flex;
+    flex-wrap: wrap;
     padding-top: 15px;
 
     .block {
       &__img {
+        position: relative;
         height: 27vw;
         width: 27vw;
         padding: 0 1.833vw 4vw;
@@ -214,15 +225,15 @@
           border-radius: 5px;
         }
       }
-    }
-  }
 
-  &__fixed {
-    position: absolute;
-    bottom: 10px;
-    left: 5px;
-    font-size: 10px;
-    color: #fff;
-    font-family: @PingFangSC-Light;
+      &__fixed {
+        position: absolute;
+        bottom: 20px;
+        left: 10px;
+        font-size: 10px;
+        color: #fff;
+        font-family: @PingFangSC-Light;
+      }
+    }
   }
 }
