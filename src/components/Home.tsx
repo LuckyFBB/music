@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2019-08-26 20:28:29
+ * @LastEditTime: 2019-08-28 23:09:41
  * @Description: 首页
  */
 
@@ -45,7 +45,6 @@ export const Home = (props: any) => {
   return (
     <div className='home'>
       <TopTab left={false} right={false} type='text' text='云音乐' />
-      <div className='home__block'></div>
       <div className='home__banner'>
         <Carousel autoPlay={true} infiniteLoop={true} showStatus={false} showThumbs={false} showArrows={false}>
           {bannerList.map((item: any) => (

@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:55
  * @LastEditors: FBB
- * @LastEditTime: 2019-08-27 21:05:53
+ * @LastEditTime: 2019-08-28 23:09:22
  */
 
 @top_height: 50px;
@@ -57,11 +57,13 @@
 }
 
 .top {
-  position: relative;
+  position: fixed;
   display: flex;
   justify-content: center;
   height: @top_height;
+  width: 100%;
   background-color: @bgColor;
+  z-index: 1;
 
   &__left {
     position: absolute;
