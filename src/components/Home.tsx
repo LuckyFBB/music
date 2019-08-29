@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2019-08-28 23:09:41
+ * @LastEditTime: 2019-08-28 23:23:01
  * @Description: 首页
  */
 
@@ -45,32 +45,34 @@ export const Home = (props: any) => {
   return (
     <div className='home'>
       <TopTab left={false} right={false} type='text' text='云音乐' />
-      <div className='home__banner'>
-        <Carousel autoPlay={true} infiniteLoop={true} showStatus={false} showThumbs={false} showArrows={false}>
-          {bannerList.map((item: any) => (
-            <div className='banner__item' key={item.picUrl}>
-              <img src={item.picUrl} alt="" />
+      <div className='home__container'>
+        <div className='home__banner'>
+          <Carousel autoPlay={true} infiniteLoop={true} showStatus={false} showThumbs={false} showArrows={false}>
+            {bannerList.map((item: any) => (
+              <div className='banner__item' key={item.picUrl}>
+                <img src={item.picUrl} alt="" />
+              </div>
+            ))}
+          </Carousel>
+        </div>
+        <div className='home__icons'>
+          {HOME_ICONS_OPTIONS.map(([path, title, icon]) => (
+            <div className='icon__item' key={title} onClick={() => homeIconsClick(path)}>
+              <div className='item__img'>
+                <img src={icon} alt={title} />
+              </div>
+              <p className='item__title'>{title}</p>
             </div>
           ))}
-        </Carousel>
-      </div>
-      <div className='home__icons'>
-        {HOME_ICONS_OPTIONS.map(([path, title, icon]) => (
-          <div className='icon__item' key={title} onClick={() => homeIconsClick(path)}>
-            <div className='item__img'>
-              <img src={icon} alt={title} />
-            </div>
-            <p className='item__title'>{title}</p>
-          </div>
-        ))}
-      </div>
-      <div className='home__personalized'>
-        <div className='personalized__header'>
-          <span className='title'>推荐歌单</span>
-          <span className='redirect'>歌单广场</span>
         </div>
-        <div className='personalized__content'>
-          <SongList list={personalizedList.slice(0, 6)} />
+        <div className='home__personalized'>
+          <div className='personalized__header'>
+            <span className='title'>推荐歌单</span>
+            <span className='redirect'>歌单广场</span>
+          </div>
+          <div className='personalized__content'>
+            <SongList list={personalizedList.slice(0, 6)} />
+          </div>
         </div>
       </div>
       <BottomTab active='home' />
