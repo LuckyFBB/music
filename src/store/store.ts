@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-23 09:15:31
  * @LastEditors: FBB
- * @LastEditTime: 2019-08-26 21:09:14
+ * @LastEditTime: 2019-09-01 15:43:20
  * @Description: 所有请求
  */
 
@@ -30,6 +30,12 @@ class Store {
   //获取排行榜详情
   public getTopListDetail = () => {
     const url = '/toplist/detail'
+    return request({ url })
+  }
+
+  //获取歌单分类详情
+  public getHotPlay = () => {
+    const url = '/playlist/hot'
     return request({ url })
   }
 }

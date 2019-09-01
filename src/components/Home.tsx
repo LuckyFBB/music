@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2019-08-28 23:23:01
+ * @LastEditTime: 2019-09-01 15:31:49
  * @Description: 首页
  */
 
@@ -14,12 +14,14 @@ import { Carousel } from 'react-responsive-carousel'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { HOME_ICONS_OPTIONS } from './enums'
 import { SongList } from './widget/SongList';
+import { Toast } from 'antd-mobile'
 
 export const Home = (props: any) => {
   const [bannerList, setBannerList] = useState([])
   const [personalizedList, setPersonalizedList] = useState([])   //热门推荐歌单
 
   useEffect(() => {
+    Toast.loading('加载中')
     getBannerList(1)
     getPersonalizedList()
   }, [])
@@ -35,6 +37,7 @@ export const Home = (props: any) => {
   const getPersonalizedList = (limit: number = 0) => {
     store.getPersonalized(limit).then((res: any) => {
       setPersonalizedList(res.result)
+      Toast.hide()
     })
   }
 

@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-26 20:19:16
  * @LastEditors: FBB
- * @LastEditTime: 2019-08-27 21:45:18
+ * @LastEditTime: 2019-09-01 15:35:49
  * @Description: 排行榜
  */
 
@@ -11,16 +11,19 @@ import { TopTab } from './widget/TopTab';
 import { BottomTab } from './widget/BottomTab';
 import { RankList } from './widget/RankList'
 import { store } from '../store/store';
+import {Toast} from 'antd-mobile'
 
 export const Rank = (props: any) => {
   const [rankList, setRankList] = useState([])
   useEffect(() => {
+    Toast.loading('加载中')
     getTopListDetail()
   }, [])
 
   const getTopListDetail = () => {
     store.getTopListDetail().then((res: any) => {
       setRankList(res.list)
+      Toast.hide()
     })
   }
 

@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-26 21:16:24
  * @LastEditors: FBB
- * @LastEditTime: 2019-08-27 21:05:11
+ * @LastEditTime: 2019-09-01 15:36:57
  * @Description: 排行榜item
  */
 
@@ -17,8 +17,8 @@ export const RankList = (props: any) => {
         return (
           <div className='ranklist__block'>
             {ranklist.map((item: any) => (
-              <div className='block__img'>
-                <img src={item.coverImgUrl} alt='' key={item.id} />
+              <div className='block__img' key={item.id} >
+                <img src={item.coverImgUrl} alt='' />
                 <div className='block__fixed'>{item.updateFrequency}</div>
               </div>
             ))}
