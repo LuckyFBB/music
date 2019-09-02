@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-23 09:15:31
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-02 21:36:00
+ * @LastEditTime: 2019-09-02 23:17:15
  * @Description: 所有请求
  */
 
@@ -37,6 +37,15 @@ class Store {
   public getHotPlay = () => {
     const url = "/playlist/hot";
     return request({ url });
+  };
+
+  /* 获取歌单详情 */
+  public getHotPlayDetail = (tag: string) => {
+    const url = "/top/playlist";
+    const params = {
+      cat:tag
+    };
+    return request({ url, params });
   };
 }
 

@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-25 17:19:35
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-02 21:35:38
+ * @LastEditTime: 2019-09-02 23:12:18
  * @Description: 歌单组件
  */
 import React from "react";
@@ -17,7 +17,7 @@ export const SongList = (props: any) => {
     <div className="songlist">
       {props.list.map((item: any) => (
         <div key={item.id} className="songlist__item">
-          <img className="img" src={item.picUrl} alt="" />
+          <img className="img" src={item.picUrl || item.coverImgUrl} alt="" />
           <p className="title">{item.name}</p>
           <div className="fixed">
             <img className="fixed__img" src={play} alt="" />
