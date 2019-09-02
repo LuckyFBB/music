@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:55
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-01 16:15:23
+ * @LastEditTime: 2019-09-02 21:33:47
  */
 
 @top_height: 50px;
@@ -240,24 +240,32 @@
   }
 }
 
-.tabbar{
+.tabbar {
   position: fixed;
   top: 50px;
   height: 35px;
+  width: 100%;
   line-height: 35px;
   overflow-x: scroll;
   white-space: nowrap;
   background-color: @bgColor;
-  &__item{
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &__item {
     display: inline-block;
     width: 20vw;
     font-size: 14px;
     text-align: center;
     color: #fff;
-    &--active{
+
+    &--active {
       position: relative;
       font-size: 16px;
-      &::after{
+
+      &::after {
         content: '';
         position: absolute;
         height: 2px;
