@@ -4,6 +4,7 @@ import { Home } from "./Home";
 import { Rank } from "./Rank";
 import "../styles/index.less";
 import { Music } from "./Music";
+import { Singer } from "./Singer";
 
 export const App = () => {
   return (
@@ -12,6 +13,7 @@ export const App = () => {
       <Route exact path="/home" component={Home} />
       <Route exact path="/rank" component={Rank} />
       <Route exact path="/music" component={Music} />
+      <Route exact path="/singer" component={Singer} />
     </Router>
   );
 };

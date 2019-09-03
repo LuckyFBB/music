@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:55
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-02 23:19:46
+ * @LastEditTime: 2019-09-03 23:26:24
  */
 
 @top_height: 50px;
@@ -107,7 +107,7 @@
 
   &__slideimg {
     height: 20px;
-    width: 20px
+    width: 20px;
   }
 }
 
@@ -257,7 +257,8 @@
 
   &__item {
     display: inline-block;
-    width: 20vw;
+    min-width: 8vw;
+    padding: 0 3vw;
     font-size: 14px;
     text-align: center;
     color: #fff;
@@ -267,14 +268,53 @@
       font-size: 16px;
 
       &::after {
-        content: '';
+        content: "";
         position: absolute;
-        height: 2px;
-        width: 5vw;
-        background-color: #fff;
         bottom: 0;
-        left: 7.5vw;
+        left: 0;
+        height: 2px;
+        width: 100%;
+        background-color: #fff;
       }
+    }
+  }
+}
+
+.singerlist {
+  &__item {
+    display: flex;
+    flex-direction: row;
+    padding: 5px 15px;
+  }
+  &__img {
+    width: 65px;
+    height: 65px;
+    img {
+      height: 100%;
+      width: 100%;
+      border-radius: 5px;
+    }
+  }
+  &__content {
+    flex: 1;
+    padding-left: 15px;
+    .name {
+      padding-top: 5px;
+      font-size: 16px;
+      color: #333;
+      font-family:  @PingFangSC-Medium;
+    }
+    .album {
+      padding-top: 8px;
+      font-size: 13px;
+      color: #666;
+      font-family:  @PingFangSC-Regular;
+    }
+    .music{
+      padding-top: 8px;
+      font-size: 10px;
+      color: #999;
+      font-family:  @PingFangSC-Light;
     }
   }
 }

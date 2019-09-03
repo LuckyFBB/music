@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-23 09:15:31
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-02 23:17:15
+ * @LastEditTime: 2019-09-03 22:55:43
  * @Description: 所有请求
  */
 
@@ -43,7 +43,39 @@ class Store {
   public getHotPlayDetail = (tag: string) => {
     const url = "/top/playlist";
     const params = {
-      cat:tag
+      cat: tag
+    };
+    return request({ url, params });
+  };
+
+  /**
+   * 获取歌手热门列表
+   */
+
+  public getTopSinger = (offset = 0, limit = 50) => {
+    const url = "/top/artists";
+    const params = {
+      offset,
+      limit
+    };
+    return request({ url, params });
+  };
+
+  /**
+   * 获取歌手分类
+   */
+  public getCategorySinger = (
+    cat: number,
+    initial?: string,
+    offset?: number,
+    limit?: number
+  ) => {
+    const url = "/artist/list";
+    const params = {
+      cat,
+      initial,
+      offset,
+      limit
     };
     return request({ url, params });
   };

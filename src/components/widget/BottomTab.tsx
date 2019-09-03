@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-02 21:35:26
+ * @LastEditTime: 2019-09-03 21:07:36
  */
 
 import React, { useState } from "react";
@@ -17,6 +17,10 @@ import account_active from "../../static/icon/account_active.png";
 import home from "../../static/icon/home.png";
 import home_active from "../../static/icon/home_active.png";
 
+interface ISProps {
+  active: string;
+}
+
 const TAB_MAP = [
   {
     key: "home",
@@ -30,7 +34,7 @@ const TAB_MAP = [
     title: "歌手",
     default_img: singer,
     active_img: singer_active,
-    link: "/home"
+    link: "/singer"
   },
   {
     key: "mine",
@@ -48,7 +52,7 @@ const TAB_MAP = [
   }
 ];
 
-export const BottomTab = (props: any) => {
+export const BottomTab = (props: ISProps) => {
   const [active, setActive] = useState(props.active);
 
   return (
@@ -61,7 +65,11 @@ export const BottomTab = (props: any) => {
               setActive(item.key);
             }}
           >
-            <div className={classnames({ tabs__active: active === item.key })}>
+            <div
+              className={classnames({
+                tabs__active: active === item.key
+              })}
+            >
               <img
                 alt={item.title}
                 className={classnames("tabs__img", {
