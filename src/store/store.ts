@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-23 09:15:31
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-03 22:55:43
+ * @LastEditTime: 2019-09-04 22:44:21
  * @Description: 所有请求
  */
 
@@ -76,6 +76,18 @@ class Store {
       initial,
       offset,
       limit
+    };
+    return request({ url, params });
+  };
+
+  /**
+   * 通过邮箱登录
+   */
+  public submitLoginByEmail = (email: string, password: string) => {
+    const url = "/login";
+    const params = {
+      email,
+      password
     };
     return request({ url, params });
   };
