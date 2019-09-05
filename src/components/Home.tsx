@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-02 21:34:45
+ * @LastEditTime: 2019-09-05 22:37:44
  * @Description: 首页
  */
 
@@ -43,6 +43,10 @@ export const Home = (props: any) => {
 
   const redirectToPath = (path: string) => {
     props.history.push(path);
+  };
+
+  const redirectToSonglistDetail = (id: string) => {
+    props.history.push(`/songlist/${id}`);
   };
 
   return (
@@ -86,7 +90,10 @@ export const Home = (props: any) => {
             </span>
           </div>
           <div className="personalized__content">
-            <SongList list={personalizedList.slice(0, 6)} />
+            <SongList
+              list={personalizedList.slice(0, 6)}
+              onClick={redirectToSonglistDetail}
+            />
           </div>
         </div>
       </div>

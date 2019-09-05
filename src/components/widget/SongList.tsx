@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-25 17:19:35
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-02 23:12:18
+ * @LastEditTime: 2019-09-05 22:36:51
  * @Description: 歌单组件
  */
 import React from "react";
@@ -13,10 +13,15 @@ import play from "../../static/home/play.png";
 } */
 
 export const SongList = (props: any) => {
+  const { list, onClick } = props;
   return (
     <div className="songlist">
-      {props.list.map((item: any) => (
-        <div key={item.id} className="songlist__item">
+      {list.map((item: any) => (
+        <div
+          key={item.id}
+          className="songlist__item"
+          onClick={() => onClick(item.id)}
+        >
           <img className="img" src={item.picUrl || item.coverImgUrl} alt="" />
           <p className="title">{item.name}</p>
           <div className="fixed">

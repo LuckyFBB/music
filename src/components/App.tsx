@@ -6,6 +6,7 @@ import "../styles/index.less";
 import { Music } from "./Music";
 import { Singer } from "./Singer";
 import { Login } from "./Login";
+import { SongListDetail } from "./SongListDetail";
 
 export const App = () => {
   return (
@@ -16,6 +17,7 @@ export const App = () => {
       <Route exact path="/rank" component={Rank} />
       <Route exact path="/music" component={Music} />
       <Route exact path="/singer" component={Singer} />
+      <Route exact path="/songlist/:id" component={SongListDetail} />
     </Router>
   );
 };

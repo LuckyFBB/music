@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-23 09:15:31
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-04 22:44:21
+ * @LastEditTime: 2019-09-05 22:30:02
  * @Description: 所有请求
  */
 
@@ -88,6 +88,17 @@ class Store {
     const params = {
       email,
       password
+    };
+    return request({ url, params });
+  };
+
+  /**
+   *获取歌单下的歌曲详情
+   */
+  public getPlayDetail = (id: string) => {
+    const url = "playlist/detail";
+    const params = {
+      id
     };
     return request({ url, params });
   };

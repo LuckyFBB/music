@@ -2,14 +2,14 @@
  * @Author: FBB
  * @Date: 2019-08-26 21:16:24
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-02 21:35:29
+ * @LastEditTime: 2019-09-05 23:45:43
  * @Description: 排行榜item
  */
 
 import React from "react";
 
 export const RankList = (props: any) => {
-  const { type, ranklist } = props;
+  const { type, ranklist, onClick } = props;
 
   const renderRankList = (ranklist: any, type: string) => {
     switch (type) {
@@ -17,7 +17,13 @@ export const RankList = (props: any) => {
         return (
           <div className="ranklist__block">
             {ranklist.map((item: any) => (
-              <div className="block__img" key={item.id}>
+              <div
+                className="block__img"
+                key={item.id}
+                onClick={() => {
+                  onClick(item.id);
+                }}
+              >
                 <img src={item.coverImgUrl} alt="" />
                 <div className="block__fixed">{item.updateFrequency}</div>
               </div>
@@ -28,7 +34,13 @@ export const RankList = (props: any) => {
         return (
           <div className="ranklist__line">
             {ranklist.map((item: any) => (
-              <div className="line__item" key={item.id}>
+              <div
+                className="line__item"
+                key={item.id}
+                onClick={() => {
+                  onClick(item.id);
+                }}
+              >
                 <img className="line__img" src={item.coverImgUrl} alt="" />
                 <div className="line__content">
                   {item.tracks.map((track: any, index: number) => (
