@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-27 21:35:13
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-03 21:55:07
+ * @LastEditTime: 2019-09-08 20:07:57
  * @Description: 首页榜单组件
  */
 
@@ -10,7 +10,7 @@ import React, { useState, useEffect } from "react";
 import { TopTab } from "./widget/TopTab";
 import { store } from "../store/store";
 import { TabBar } from "./widget/TabBar";
-import { SongList } from "./widget/SongList";
+import { SongBlock } from "./widget/SongBlock";
 
 export const Music = (props: any) => {
   const [tag, setTag] = useState("");
@@ -41,16 +41,16 @@ export const Music = (props: any) => {
     });
   };
 
+  const redirectToSonglistDetail = (id: string) => {
+    props.history.push(`/songlist/${id}`);
+  };
+
   return (
     <div className="music">
       <TopTab text="歌单广场" left={true} type="text" onLeft={handleBack} />
-      <TabBar
-        current={tag}
-        tagList={hotTagList}
-        onChange={getHotPlayDetail}
-      />
+      <TabBar current={tag} tagList={hotTagList} onChange={getHotPlayDetail} />
       <div className="music__content">
-        <SongList list={hotPlayList} />
+        <SongBlock list={hotPlayList} onClick={redirectToSonglistDetail} />
       </div>
     </div>
   );

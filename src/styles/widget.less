@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:55
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-03 23:26:24
+ * @LastEditTime: 2019-09-08 20:03:54
  */
 
 @top_height: 50px;
@@ -111,7 +111,7 @@
   }
 }
 
-.songlist {
+.songblock {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -280,7 +280,7 @@
   }
 }
 
-.singerlist {
+.singerblock {
   &__item {
     display: flex;
     flex-direction: row;
@@ -302,19 +302,103 @@
       padding-top: 5px;
       font-size: 16px;
       color: #333;
-      font-family:  @PingFangSC-Medium;
+      font-family: @PingFangSC-Medium;
     }
     .album {
       padding-top: 8px;
       font-size: 13px;
       color: #666;
-      font-family:  @PingFangSC-Regular;
+      font-family: @PingFangSC-Regular;
     }
-    .music{
+    .music {
       padding-top: 8px;
       font-size: 10px;
       color: #999;
-      font-family:  @PingFangSC-Light;
+      font-family: @PingFangSC-Light;
+    }
+  }
+}
+
+.songlist {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+  background-color: #fff;
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 45px;
+    border-bottom: 1px solid #999;
+    .left {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding-left: 20px;
+      img {
+        height: 26px;
+        width: 26px;
+      }
+      .title {
+        padding-left: 10px;
+        color: #333;
+        font-size: 14px;
+      }
+      .subtitle {
+        padding-left: 5px;
+        color: #666;
+        font-size: 12px;
+      }
+    }
+    .right {
+      width: 120px;
+      .button {
+        font-size: 14px;
+        color: #fff;
+        line-height: 45px;
+        text-align: center;
+        border-top-right-radius: 15px;
+        background-color: @bgColor;
+      }
+    }
+  }
+  &__content {
+    .item {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 4vw;
+      height: 50px;
+      .index {
+        width: 11vw;
+        color: #666666;
+      }
+      .content {
+        flex: 1;
+        min-width: 0;
+        .song {
+          font-size: 14px;
+          color: #333;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+        .ar {
+          padding-top: 8px;
+          font-size: 12px;
+          color: #999;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+      }
+      img {
+        height: 17px;
+        width: 17px;
+      }
     }
   }
 }

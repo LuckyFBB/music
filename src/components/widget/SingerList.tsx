@@ -1,3 +1,11 @@
+/*
+ * @Author: FBB
+ * @Date: 2019-09-03 23:00:39
+ * @LastEditors: FBB
+ * @LastEditTime: 2019-09-08 16:51:55
+ * @Description: 歌手展示列表
+ */
+
 import React from "react";
 
 export const SingerList = (props: any) => {

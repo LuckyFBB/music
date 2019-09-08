@@ -2,14 +2,14 @@
  * @Author: FBB
  * @Date: 2019-08-22 22:18:13
  * @LastEditors: FBB
- * @LastEditTime: 2019-08-27 21:07:53
+ * @LastEditTime: 2019-09-08 14:54:36
  */
 import axios from 'axios'
 import { Toast } from 'antd-mobile'
 import 'antd-mobile/dist/antd-mobile.css';
 
 //默认请求地址
-axios.defaults.baseURL = 'http://musicapi.leanapp.cn'
+axios.defaults.baseURL = "http://localhost:3000";
 
 //处理跨域
 axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded'

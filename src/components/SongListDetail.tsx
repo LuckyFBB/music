@@ -1,12 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { store } from "../store/store";
 import { TopTab } from "./widget/TopTab";
+import more from "../static/icon/more.png";
+import collect from "../static/icon/collect.png";
+import like from "../static/icon/like.png";
+import comment from "../static/icon/comment.png";
+import play from "../static/home/play.png";
+import { SongList } from "./widget/SongList";
+
+const ACTION_MAP = [
+  {
+    icon: comment,
+    title: "评论"
+  },
+  {
+    icon: like,
+    title: "点赞"
+  },
+  {
+    icon: collect,
+    title: "收藏"
+  },
+  {
+    icon: more,
+    title: "更多"
+  }
+];
 
 export const SongListDetail = (props: any) => {
   const { id } = props.match.params;
 
   const [playlist, setPlaylist]: [
-    { [propName: string]: string | number | [] | object },
+    { [propName: string]: string | number },
     Function
   ] = useState({});
 
@@ -14,6 +39,8 @@ export const SongListDetail = (props: any) => {
     { [propName: string]: string },
     Function
   ] = useState({});
+
+  const [tracks, setTracks] = useState([]);
 
   useEffect(() => {
     getSonglist();
@@ -23,6 +50,7 @@ export const SongListDetail = (props: any) => {
     store.getPlayDetail(id).then((res: any) => {
       setPlaylist(res.playlist);
       setCreator(res.playlist.creator);
+      setTracks(res.playlist.tracks);
     });
   };
 
@@ -38,18 +66,39 @@ export const SongListDetail = (props: any) => {
         style={{ backgroundImage: "url(" + `${playlist.coverImgUrl}` + ")" }}
       ></div>
       <div className="songlistDetail__header">
-        {playlist.coverImgUrl && (
-          <img className="bg" src={playlist.coverImgUrl as string} />
-        )}
-        <div className="content">
-          <p className="title">{playlist.name}</p>
-          <div className="creator">
-            {creator.avatarUrl && (
-              <img className="avatar" src={creator.avatarUrl} />
+        <div className="container">
+          <div className="bg">
+            {playlist.coverImgUrl && (
+              <img className="bg__cover" src={playlist.coverImgUrl as string} />
             )}
-            <span className="nick">{creator.nickname}</span>
+            <div className="bg__fixed">
+              <img src={play} alt="播放" />
+              <span>
+                {((playlist.playCount as number) / 10000).toFixed(0)}万
+              </span>
+            </div>
+          </div>
+          <div className="content">
+            <p className="title">{playlist.name}</p>
+            <div className="creator">
+              {creator.avatarUrl && (
+                <img className="avatar" src={creator.avatarUrl} />
+              )}
+              <span className="nick">{creator.nickname}</span>
+            </div>
           </div>
         </div>
+        <div className="action">
+          {ACTION_MAP.map((item: any, index: number) => (
+            <div className="action__item" key={index}>
+              <img src={item.icon} alt={item.title} className="img" />
+              <p className="title">{item.title}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="songlistDetail__content">
+        <SongList tracks={tracks} />
       </div>
     </div>
   );

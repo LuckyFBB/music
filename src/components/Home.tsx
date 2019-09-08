@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-05 22:37:44
+ * @LastEditTime: 2019-09-08 16:46:53
  * @Description: 首页
  */
 
@@ -13,7 +13,7 @@ import { store } from "../store/store";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { HOME_ICONS_OPTIONS } from "./enums";
-import { SongList } from "./widget/SongList";
+import { SongBlock } from "./widget/SongBlock";
 import { Toast } from "antd-mobile";
 
 export const Home = (props: any) => {
@@ -63,7 +63,7 @@ export const Home = (props: any) => {
           >
             {bannerList.map((item: any) => (
               <div className="banner__item" key={item.picUrl}>
-                <img src={item.picUrl} alt="" />
+                <img src={item.pic} alt="" />
               </div>
             ))}
           </Carousel>
@@ -90,7 +90,7 @@ export const Home = (props: any) => {
             </span>
           </div>
           <div className="personalized__content">
-            <SongList
+            <SongBlock
               list={personalizedList.slice(0, 6)}
               onClick={redirectToSonglistDetail}
             />
