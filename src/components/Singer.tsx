@@ -72,7 +72,7 @@ const tagList = [
   }
 ];
 
-export const Singer = () => {
+export const Singer = (props: any) => {
   const [tag, setTag] = useState("热门");
   const [singerList, setSingerList] = useState([]);
 
@@ -101,12 +101,16 @@ export const Singer = () => {
     });
   };
 
+  const redirectToSinger = (id: string) => {
+    props.history.push(`/singerlist/${id}`);
+  };
+
   return (
     <div className="singer">
       <TopTab text="歌手" type="text" />
       <TabBar current={tag} tagList={tagList} onChange={changeSingerCategory} />
       <div className="singer__container">
-        <SingerList list={singerList} />
+        <SingerList list={singerList} onClick={redirectToSinger} />
       </div>
       <BottomTab active="singer" />
     </div>

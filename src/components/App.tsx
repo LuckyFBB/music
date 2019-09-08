@@ -7,6 +7,7 @@ import { Music } from "./Music";
 import { Singer } from "./Singer";
 import { Login } from "./Login";
 import { SongListDetail } from "./SongListDetail";
+import { SingerDetail } from "./SingerDetail";
 
 export const App = () => {
   return (
@@ -18,6 +19,7 @@ export const App = () => {
       <Route exact path="/music" component={Music} />
       <Route exact path="/singer" component={Singer} />
       <Route exact path="/songlist/:id" component={SongListDetail} />
+      <Route exact path="/singerlist/:id" component={SingerDetail} />
     </Router>
   );
 };

@@ -40,8 +40,6 @@ export const Login = () => {
     e.preventDefault();
     if (enLogin && validate(email)) {
       //登录操作
-      console.log("login");
-      console.log(email, pass)
       submitLogin()
     }
   };
@@ -51,8 +49,6 @@ export const Login = () => {
       console.log(res)
     });
   }
-
-  
 
   return (
     <div className="login">
