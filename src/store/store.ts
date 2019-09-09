@@ -2,13 +2,27 @@
  * @Author: FBB
  * @Date: 2019-08-23 09:15:31
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-08 21:15:07
+ * @LastEditTime: 2019-09-09 23:18:58
  * @Description: 所有请求
  */
 
 import request from "../utils/request";
 
 class Store {
+  /**
+   * 设置localStorage
+   */
+  public setStorage = (key: string, value: string) => {
+    window.localStorage.setItem(key, value);
+  };
+
+  /**
+   * 获取localStorage
+   */
+  public getStorage = (key: string) => {
+    return window.localStorage.getItem(key) || undefined;
+  };
+
   //获取banner
   public getBanner = (type: number) => {
     const url = "/banner";
@@ -110,6 +124,20 @@ class Store {
     const url = "artists";
     const params = {
       id
+    };
+    return request({ url, params });
+  };
+
+  /**
+   * @description: 用户详情资料
+   * @param {type} 
+   * @return: 
+   * @author: FBB
+   */
+  public getUserDetail = (uid: string) => {
+    const url = "/user/detail";
+    const params = {
+      uid
     };
     return request({ url, params });
   };

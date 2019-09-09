@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import classnames from "classnames";
-import close from '../static/icon/close.png'
+import close from "../static/icon/close.png";
 import { store } from "../store/store";
+import { Toast } from "antd-mobile";
 
-export const Login = () => {
+export const Login = (props: any) => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [enLogin, setEnLogin] = useState(false);
@@ -21,7 +22,7 @@ export const Login = () => {
     setPass(pass);
     judgeLogin(pass, email);
   };
-  
+
   //校验电话
   const validate = (phone: string) => {
     if (!/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(phone)) {
@@ -40,15 +41,21 @@ export const Login = () => {
     e.preventDefault();
     if (enLogin && validate(email)) {
       //登录操作
-      submitLogin()
+      submitLogin();
     }
   };
 
   const submitLogin = () => {
-    store.submitLoginByEmail(email, pass).then(res => {
-      console.log(res)
+    store.submitLoginByEmail(email, pass).then((res: any) => {
+      const { id } = res.account;
+      console.log(id)
+      store.setStorage("uid", id);
+      Toast.show("登录成功");
+      setTimeout(() => {
+        props.history.go(-1);
+      }, 1000);
     });
-  }
+  };
 
   return (
     <div className="login">

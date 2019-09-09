@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-03 21:07:36
+ * @LastEditTime: 2019-09-09 21:46:19
  */
 
 import React, { useState } from "react";
@@ -48,7 +48,7 @@ const TAB_MAP = [
     title: "账号",
     default_img: account,
     active_img: account_active,
-    link: "/home"
+    link: "/account"
   }
 ];
 
