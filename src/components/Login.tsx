@@ -48,7 +48,6 @@ export const Login = (props: any) => {
   const submitLogin = () => {
     store.submitLoginByEmail(email, pass).then((res: any) => {
       const { id } = res.account;
-      console.log(id)
       store.setStorage("uid", id);
       Toast.show("登录成功");
       setTimeout(() => {
@@ -57,10 +56,14 @@ export const Login = (props: any) => {
     });
   };
 
+  const handleBack = () => {
+    props.history.go(-1);
+  };
+
   return (
     <div className="login">
       <div className="container">
-        <img src={close} alt="关闭按钮" />
+        <img src={close} alt="关闭按钮" onClick={handleBack} />
         <h2>欢迎登录</h2>
         <form className="form">
           <input
