@@ -9,6 +9,8 @@ import { Login } from "./Login";
 import { SongListDetail } from "./SongListDetail";
 import { SingerDetail } from "./SingerDetail";
 import { Account } from "./Account";
+import { Mine } from "./Mine";
+import { Recommend } from "./Recommend";
 
 export const App = () => {
   return (
@@ -22,6 +24,8 @@ export const App = () => {
       <Route exact path="/songlist/:id" component={SongListDetail} />
       <Route exact path="/singerlist/:id" component={SingerDetail} />
       <Route exact path="/account" component={Account} />
+      <Route exact path="/mine" component={Mine} />
+      <Route exact path="/recommend" component={Recommend} />
     </Router>
   );
 };

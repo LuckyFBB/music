@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-09-08 16:49:52
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-08 20:10:08
+ * @LastEditTime: 2019-09-14 23:02:34
  * @Description: 歌曲展示列表
  */
 
@@ -26,22 +26,26 @@ export const SongList = (props: any) => {
         </div>
       </div>
       <div className="songlist__content">
-        {tracks.map((item: any, index: number) => (
-          <div className="item" key={item.id}>
-            <span className="index">{index + 1}</span>
-            <div className="content">
-              <p className="song">{item.name}</p>
-              <p className="ar">
-                {item.ar.map((item: any) => (
-                  <span key={item.name}>{item.name}</span>
-                ))}
-                <span>-</span>
-                <span>{item.al.name}</span>
-              </p>
+        {tracks.map((item: any, index: number) => {
+          const ar = item.ar || item.artists;
+          const al = item.al || item.album;
+          return (
+            <div className="item" key={item.id}>
+              <span className="index">{index + 1}</span>
+              <div className="content">
+                <p className="song">{item.name}</p>
+                <p className="ar">
+                  {ar.map((item: any) => (
+                    <span key={item.name}>{item.name}</span>
+                  ))}
+                  <span>-</span>
+                  <span>{al.name}</span>
+                </p>
+              </div>
+              <img src={more} alt="更多" />
             </div>
-            <img src={more} alt="更多" />
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-23 09:15:31
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-09 23:18:58
+ * @LastEditTime: 2019-09-14 22:57:19
  * @Description: 所有请求
  */
 
@@ -130,8 +130,8 @@ class Store {
 
   /**
    * @description: 用户详情资料
-   * @param {type} 
-   * @return: 
+   * @param {type}
+   * @return:
    * @author: FBB
    */
   public getUserDetail = (uid: string) => {
@@ -140,6 +140,16 @@ class Store {
       uid
     };
     return request({ url, params });
+  };
+
+  /**
+   * @description: 获取每日推荐歌曲
+   * @param {type}
+   * @return:
+   */
+  public getRecommendSongs = () => {
+    const url = "/recommend/songs";
+    return request({ url });
   };
 }
 

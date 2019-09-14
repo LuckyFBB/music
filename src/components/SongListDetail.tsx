@@ -1,31 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { store } from "../store/store";
 import { TopTab } from "./widget/TopTab";
-import more from "../static/icon/more.png";
-import collect from "../static/icon/collect.png";
-import like from "../static/icon/like.png";
-import comment from "../static/icon/comment.png";
 import play from "../static/home/play.png";
 import { SongList } from "./widget/SongList";
-
-const ACTION_MAP = [
-  {
-    icon: comment,
-    title: "评论"
-  },
-  {
-    icon: like,
-    title: "点赞"
-  },
-  {
-    icon: collect,
-    title: "收藏"
-  },
-  {
-    icon: more,
-    title: "更多"
-  }
-];
+import { ACTION_MAP } from "./enums";
 
 export const SongListDetail = (props: any) => {
   const { id } = props.match.params;

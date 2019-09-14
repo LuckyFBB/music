@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-22 22:18:13
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-08 14:54:36
+ * @LastEditTime: 2019-09-14 23:02:15
  */
 import axios from 'axios'
 import { Toast } from 'antd-mobile'
@@ -16,6 +16,9 @@ axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded'
 
 //默认请求时间
 axios.defaults.timeout = 10000
+
+//处理登陆之后，接口依旧返回301
+axios.defaults.withCredentials = true;
 
 // 添加请求拦截器
 axios.interceptors.request.use(config => {
