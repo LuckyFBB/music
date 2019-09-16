@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-08 16:46:53
+ * @LastEditTime: 2019-09-16 22:18:26
  * @Description: 首页
  */
 
@@ -15,6 +15,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { HOME_ICONS_OPTIONS } from "./enums";
 import { SongBlock } from "./widget/SongBlock";
 import { Toast } from "antd-mobile";
+import search from "../static/icon/search.png";
 
 export const Home = (props: any) => {
   const [bannerList, setBannerList] = useState([]);
@@ -51,7 +52,12 @@ export const Home = (props: any) => {
 
   return (
     <div className="home">
-      <TopTab left={false} right={false} type="text" text="云音乐" />
+      <TopTab
+        type="text"
+        text="云音乐"
+        right={search}
+        onRight={() => redirectToPath("/search")}
+      />
       <div className="home__container">
         <div className="home__banner">
           <Carousel
@@ -61,8 +67,8 @@ export const Home = (props: any) => {
             showThumbs={false}
             showArrows={false}
           >
-            {bannerList.map((item: any) => (
-              <div className="banner__item" key={item.picUrl}>
+            {bannerList.map((item: any, index: number) => (
+              <div className="banner__item" key={index}>
                 <img src={item.pic} alt="" />
               </div>
             ))}

@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-27 21:35:13
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-08 20:07:57
+ * @LastEditTime: 2019-09-16 21:14:33
  * @Description: 首页榜单组件
  */
 
@@ -11,6 +11,7 @@ import { TopTab } from "./widget/TopTab";
 import { store } from "../store/store";
 import { TabBar } from "./widget/TabBar";
 import { SongBlock } from "./widget/SongBlock";
+import left from "../static/icon/left_arrow.png";
 
 export const Music = (props: any) => {
   const [tag, setTag] = useState("");
@@ -47,7 +48,7 @@ export const Music = (props: any) => {
 
   return (
     <div className="music">
-      <TopTab text="歌单广场" left={true} type="text" onLeft={handleBack} />
+      <TopTab text="歌单广场" left={left} type="text" onLeft={handleBack} />
       <TabBar current={tag} tagList={hotTagList} onChange={getHotPlayDetail} />
       <div className="music__content">
         <SongBlock list={hotPlayList} onClick={redirectToSonglistDetail} />

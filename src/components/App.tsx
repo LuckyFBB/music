@@ -11,6 +11,7 @@ import { SingerDetail } from "./SingerDetail";
 import { Account } from "./Account";
 import { Mine } from "./Mine";
 import { Recommend } from "./Recommend";
+import { Search } from "./Search";
 
 export const App = () => {
   return (
@@ -26,6 +27,7 @@ export const App = () => {
       <Route exact path="/account" component={Account} />
       <Route exact path="/mine" component={Mine} />
       <Route exact path="/recommend" component={Recommend} />
+      <Route exact path="/search" component={Search} />
     </Router>
   );
 };

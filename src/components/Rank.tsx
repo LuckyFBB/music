@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-26 20:19:16
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-05 23:44:44
+ * @LastEditTime: 2019-09-16 21:14:52
  * @Description: 排行榜
  */
 
@@ -12,6 +12,7 @@ import { BottomTab } from "./widget/BottomTab";
 import { RankList } from "./widget/RankList";
 import { store } from "../store/store";
 import { Toast } from "antd-mobile";
+import left from "../static/icon/left_arrow.png";
 
 export const Rank = (props: any) => {
   const [rankList, setRankList] = useState([]);
@@ -37,7 +38,7 @@ export const Rank = (props: any) => {
 
   return (
     <div className="rank">
-      <TopTab type="text" text="排行榜" left={true} onLeft={handleBack} />
+      <TopTab type="text" text="排行榜" left={left} onLeft={handleBack} />
       <div className="rank__container">
         <div className="rank__content">
           <div className="rank__title">官方榜</div>

@@ -2,24 +2,26 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-02 21:34:59
+ * @LastEditTime: 2019-09-16 22:08:36
  */
 
 import React from "react";
-import left from "../../static/icon/left_arrow.png";
+
 interface ISProps {
-  left?: boolean;
-  right?: boolean;
+  left?: string;
+  right?: string;
   type: string;
   text?: string;
   onLeft?: () => void;
+  onRight?: () => void;
 }
 
 export const TopTab = (props: ISProps) => {
+  const { left, right, onRight, onLeft, type, text } = props;
   const renderTop = (type: string) => {
     switch (type) {
       case "text":
-        return <div className="top__text">{props.text || "云音乐"}</div>;
+        return <div className="top__text">{text || "云音乐"}</div>;
       case "search":
         return (
           <div className="top__search">
@@ -30,18 +32,17 @@ export const TopTab = (props: ISProps) => {
   };
   return (
     <div className="top">
-      {props.left && (
+      {left && (
         <div className="top__left">
-          <img
-            className="top__slideimg"
-            src={left}
-            alt=""
-            onClick={props.onLeft}
-          />
+          <img className="top__slideimg 1" src={left} alt="" onClick={onLeft} />
         </div>
       )}
-      <div className="top__container">{renderTop(props.type)}</div>
-      {props.right && <div className="top__right">right</div>}
+      <div className="top__container">{renderTop(type)}</div>
+      {right && (
+        <div className="top__right">
+          <img className="top__slideimg" src={right} alt="" onClick={onRight} />
+        </div>
+      )}
     </div>
   );
 };

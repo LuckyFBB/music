@@ -78,7 +78,7 @@
     "test": "node scripts/test.js",
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build",
-    "sever":"cd NeteaseCloudMusicApi && node app.js"
+    "server":"cd NeteaseCloudMusicApi && node app.js"
   },
   "eslintConfig": {
     "extends": "react-app"

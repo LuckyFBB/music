@@ -4,6 +4,7 @@ import { TopTab } from "./widget/TopTab";
 import play from "../static/home/play.png";
 import { SongList } from "./widget/SongList";
 import { ACTION_MAP } from "./enums";
+import left from "../static/icon/left_arrow.png";
 
 export const SongListDetail = (props: any) => {
   const { id } = props.match.params;
@@ -38,7 +39,7 @@ export const SongListDetail = (props: any) => {
 
   return (
     <div className="songlistDetail">
-      <TopTab type="text" text="歌单" left={true} onLeft={handleBack} />
+      <TopTab type="text" text="歌单" left={left} onLeft={handleBack} />
       <div
         className="songlistDetail__bg"
         style={{ backgroundImage: "url(" + `${playlist.coverImgUrl}` + ")" }}
