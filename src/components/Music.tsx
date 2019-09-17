@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-27 21:35:13
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-16 21:14:33
+ * @LastEditTime: 2019-09-17 20:30:44
  * @Description: 首页榜单组件
  */
 
@@ -42,7 +42,7 @@ export const Music = (props: any) => {
     });
   };
 
-  const redirectToSonglistDetail = (id: string) => {
+  const redirectToSonglistDetail = (id: number) => {
     props.history.push(`/songlist/${id}`);
   };
 

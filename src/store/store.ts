@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-23 09:15:31
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-14 22:57:19
+ * @LastEditTime: 2019-09-17 22:05:43
  * @Description: 所有请求
  */
 
@@ -129,7 +129,7 @@ class Store {
   };
 
   /**
-   * @description: 用户详情资料
+   * @description: 用户详情资料，需要登录
    * @param {type}
    * @return:
    * @author: FBB
@@ -143,12 +143,56 @@ class Store {
   };
 
   /**
-   * @description: 获取每日推荐歌曲
+   * @description: 获取每日推荐歌曲，需要登录
    * @param {type}
    * @return:
    */
   public getRecommendSongs = () => {
     const url = "/recommend/songs";
+    return request({ url });
+  };
+
+  /**
+   * @description: 获取每日推荐歌单，需要登录
+   * @param {type}
+   * @return:
+   * @author: FBB
+   */
+  public getRecommendResource = () => {
+    const url = "/recommend/resource";
+    return request({ url });
+  };
+
+  /**
+   * @description: 获取用户当前登陆状态
+   * @param {type}
+   * @return:
+   * @author: FBB
+   */
+  public comfirmLoginStatus = () => {
+    const url = "/login/status";
+    return request({ url });
+  };
+
+  /**
+   * @description: 获取默认搜索关键字
+   * @param {type}
+   * @return:
+   * @author: FBB
+   */
+  public getSearchDefault = () => {
+    const url = "/search/default";
+    return request({ url });
+  };
+
+  /**
+   * @description: 获取热门搜索
+   * @param {type}
+   * @return:
+   * @author: FBB
+   */
+  public getSearchHotDetail = () => {
+    const url = "/search/hot/detail";
     return request({ url });
   };
 }

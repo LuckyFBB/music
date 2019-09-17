@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-26 21:16:24
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-05 23:45:43
+ * @LastEditTime: 2019-09-17 21:06:32
  * @Description: 排行榜item
  */
 
@@ -41,7 +41,10 @@ export const RankList = (props: any) => {
                   onClick(item.id);
                 }}
               >
-                <img className="line__img" src={item.coverImgUrl} alt="" />
+                <div className='line__left'>
+                  <img className="line__img" src={item.coverImgUrl} alt="" />
+                  <div className="line__fixed">{item.updateFrequency}</div>
+                </div>
                 <div className="line__content">
                   {item.tracks.map((track: any, index: number) => (
                     <div className="content" key={index}>
@@ -50,7 +53,6 @@ export const RankList = (props: any) => {
                     </div>
                   ))}
                 </div>
-                <div className="line__fixed">{item.updateFrequency}</div>
               </div>
             ))}
           </div>

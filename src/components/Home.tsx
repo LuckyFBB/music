@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-16 22:18:26
+ * @LastEditTime: 2019-09-17 20:29:28
  * @Description: 首页
  */
 
@@ -19,11 +19,15 @@ import search from "../static/icon/search.png";
 
 export const Home = (props: any) => {
   const [bannerList, setBannerList] = useState([]);
-  const [personalizedList, setPersonalizedList] = useState([]); //热门推荐歌单
+  const [personalizedList, setPersonalizedList]: [
+    Array<{ [propName: string]: string }>,
+    Function
+  ] = useState([]); //热门推荐歌单
 
   useEffect(() => {
     Toast.loading("加载中");
     getBannerList(1);
+    comfirmStatus();
     getPersonalizedList();
   }, []);
 
@@ -42,11 +46,29 @@ export const Home = (props: any) => {
     });
   };
 
+  const getRecommendResource = () => {
+    store.getRecommendResource().then((res: any) => {
+      setPersonalizedList(res.recommend);
+      Toast.hide();
+    });
+  };
+
+  const comfirmStatus = () => {
+    store.comfirmLoginStatus().then((res: any) => {
+      if (res.code === 200) {
+        //当前为登录状态
+        getRecommendResource();
+      } else {
+        getPersonalizedList();
+      }
+    });
+  };
+
   const redirectToPath = (path: string) => {
     props.history.push(path);
   };
 
-  const redirectToSonglistDetail = (id: string) => {
+  const redirectToSonglistDetail = (id: number) => {
     props.history.push(`/songlist/${id}`);
   };
 
