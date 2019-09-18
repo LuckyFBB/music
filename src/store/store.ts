@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-23 09:15:31
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-17 22:05:43
+ * @LastEditTime: 2019-09-18 23:02:46
  * @Description: 所有请求
  */
 
@@ -194,6 +194,19 @@ class Store {
   public getSearchHotDetail = () => {
     const url = "/search/hot/detail";
     return request({ url });
+  };
+
+  /**
+   * @description:
+   * @param {type}
+   * @return:
+   */
+  public getSearchKeywords = (keywords: string) => {
+    const url = "/search";
+    const params = {
+      keywords
+    };
+    return request({ url, params });
   };
 }
 
