@@ -3,17 +3,19 @@ import cx from "classnames";
 
 interface ISProps {
   title: string;
-  list: Array<{}>;
+  type: string;
+  hot?: Array<{}>; //热门搜索
+  list?: Array<{}>;
 }
 
 export const SearchList = (props: ISProps) => {
-  const { list, title } = props;
-  return (
-    <div className="searchlist">
-      <p className="searchlist__title">{title}</p>
-      <div className="searchlist__content">
-        {list && list.length
-          ? list.map((item: any, index: number) => (
+  const { hot, title, type, list } = props;
+
+  const renderSearch = () => {
+    switch (type) {
+      case "hot":
+        return hot && hot.length
+          ? hot.map((item: any, index: number) => (
               <div className="searchlist__item" key={item.searchWord}>
                 <span
                   className={cx("index", {
@@ -39,8 +41,19 @@ export const SearchList = (props: ISProps) => {
                 </div>
               </div>
             ))
-          : null}
-      </div>
+          : null;
+      case "content":
+        return list && list.length
+          ? list.map((item: any) => {
+              return <div key={item.id}>{item.name}</div>;
+            })
+          : null;
+    }
+  };
+  return (
+    <div className="searchlist">
+      <p className="searchlist__title">{title}</p>
+      <div className="searchlist__content">{renderSearch()}</div>
     </div>
   );
 };
