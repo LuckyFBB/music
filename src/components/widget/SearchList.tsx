@@ -44,8 +44,26 @@ export const SearchList = (props: ISProps) => {
           : null;
       case "content":
         return list && list.length
-          ? list.map((item: any) => {
-              return <div key={item.id}>{item.name}</div>;
+          ? list.map((item: any, index: number) => {
+              return (
+                <div className="searchlist__item" key={item.id}>
+                  <span
+                    className={cx("index", {
+                      index__active: index < 3
+                    })}
+                  >
+                    {index + 1}
+                  </span>
+                  <div className="item">
+                    <div className="item__line">
+                      <span className="searchWord">{item.name}</span>
+                    </div>
+                    <span className="content">
+                      {item.artists[0].name} - {item.album.name}
+                    </span>
+                  </div>
+                </div>
+              );
             })
           : null;
     }
