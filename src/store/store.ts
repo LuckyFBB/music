@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-23 09:15:31
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-18 23:02:46
+ * @LastEditTime: 2019-09-22 15:57:52
  * @Description: 所有请求
  */
 
@@ -207,6 +207,26 @@ class Store {
       keywords
     };
     return request({ url, params });
+  };
+
+  /**
+   * @description: 退出登录
+   * @param {type}
+   * @return:
+   */
+  public loginOut = () => {
+    const url = "/logout";
+    return request({ url });
+  };
+
+  /**
+   * @description: 刷新登录状态
+   * @param {type}
+   * @return:
+   */
+  public refreshLogin = () => {
+    const url = "/login/refresh";
+    return request({ url });
   };
 }
 
