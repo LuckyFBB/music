@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-23 09:15:31
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-22 15:57:52
+ * @LastEditTime: 2019-09-23 21:05:45
  * @Description: 所有请求
  */
 
@@ -226,6 +226,16 @@ class Store {
    */
   public refreshLogin = () => {
     const url = "/login/refresh";
+    return request({ url });
+  };
+
+  /**
+   * @description:
+   * @param {type}
+   * @return:
+   */
+  public getUserSubcount = () => {
+    const url = "/user/subcount";
     return request({ url });
   };
 }

@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-17 20:29:28
+ * @LastEditTime: 2019-09-23 20:59:38
  * @Description: 首页
  */
 
@@ -28,7 +28,6 @@ export const Home = (props: any) => {
     Toast.loading("加载中");
     getBannerList(1);
     comfirmStatus();
-    getPersonalizedList();
   }, []);
 
   //获取banner
@@ -54,14 +53,14 @@ export const Home = (props: any) => {
   };
 
   const comfirmStatus = () => {
-    store.comfirmLoginStatus().then((res: any) => {
-      if (res.code === 200) {
-        //当前为登录状态
+    store
+      .comfirmLoginStatus()
+      .then(() => {
         getRecommendResource();
-      } else {
+      })
+      .catch(() => {
         getPersonalizedList();
-      }
-    });
+      });
   };
 
   const redirectToPath = (path: string) => {

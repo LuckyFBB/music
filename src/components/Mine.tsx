@@ -1,12 +1,54 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { TopTab } from "./widget/TopTab";
 import { BottomTab } from "./widget/BottomTab";
+import { store } from "../store/store";
+import playlist from "../static/icon/playlist.png";
+import radio from "../static/icon/radio.png";
+import right from "../static/icon/right_arrow.png";
 
 export const Mine = () => {
+  const [createDjRadioCount, setRadioCount] = useState(0);
+  const [createdPlaylistCount, setPlaylistCount] = useState(0);
+  const getUserSubcount = () => {
+    store.getUserSubcount().then((res: any) => {
+      setPlaylistCount(res.createdPlaylistCount);
+      setRadioCount(res.createDjRadioCount);
+    });
+  };
+  const MINE_SHOW_LIST = [
+    {
+      label: "我的电台",
+      img: radio,
+      value: createDjRadioCount
+    },
+    {
+      label: "我的收藏",
+      img: playlist,
+      value: createdPlaylistCount
+    }
+  ];
+  useEffect(() => {
+    getUserSubcount();
+  }, []);
   return (
     <div className="mine">
       <TopTab type="text" text="我的" />
-      <div className="mine__content"></div>
+      <div className="mine__content">
+        <div className="mine__subcount">
+          {MINE_SHOW_LIST.map((item: any) => (
+            <div className="line" key={item.label}>
+              <div className="left">
+                <img className="img" src={item.img} alt={item.label} />
+              </div>
+              <div className="right">
+                <span className="label">{item.label}</span>
+                <span className="value">{item.value}</span>
+                <img className='arrow' src={right} alt="箭头" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
       <BottomTab active="mine" />
     </div>
   );

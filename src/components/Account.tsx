@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-09-09 21:42:57
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-22 15:59:54
+ * @LastEditTime: 2019-09-23 20:55:04
  * @Description: 账号信息展示页
  */
 
@@ -24,16 +24,17 @@ export const Account = (props: any) => {
   }, []);
 
   const comfirmStatus = () => {
-    store.comfirmLoginStatus().then((res: any) => {
-      if (res.code === 200) {
+    store
+      .comfirmLoginStatus()
+      .then((res: any) => {
         getUserDetail(res.profile.userId);
-      } else {
+      })
+      .catch(() => {
         Toast.show("尚未登录，前去登录");
         window.setTimeout(() => {
           props.history.push("/login");
-        });
-      }
-    });
+        }, 1000);
+      });
   };
 
   const getUserDetail = (uid: string) => {
@@ -43,8 +44,11 @@ export const Account = (props: any) => {
   };
 
   const handleLoginout = () => {
-    store.loginOut().then(res => {
-      console.log(res);
+    store.loginOut().then(() => {
+      Toast.show("退出成功");
+      window.setTimeout(() => {
+        props.history.push("/home");
+      }, 1000);
     });
   };
 
