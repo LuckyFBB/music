@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-23 09:15:31
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-23 21:05:45
+ * @LastEditTime: 2019-09-24 21:16:26
  * @Description: 所有请求
  */
 
@@ -230,13 +230,41 @@ class Store {
   };
 
   /**
-   * @description:
+   * @description: 获取用户信息 , 歌单，收藏，mv, dj 数量
    * @param {type}
    * @return:
    */
   public getUserSubcount = () => {
     const url = "/user/subcount";
     return request({ url });
+  };
+
+  /**
+   * @description: 获取歌曲详情
+   * @param {id}
+   * @return:
+   * @author: FBB
+   */
+  public getSongDetail = (id: string) => {
+    const url = "/song/detail";
+    const params = {
+      ids: id
+    };
+    return request({ url, params });
+  };
+
+  /**
+   * @description: 获取歌曲url
+   * @param {id}
+   * @return:
+   * @author: FBB
+   */
+  public getSongUrl = (id: string) => {
+    const url = "/song/url";
+    const params = {
+      id
+    };
+    return request({ url, params });
   };
 }
 
