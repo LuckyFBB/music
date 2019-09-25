@@ -13,7 +13,7 @@ export const MusicPlay = (props: any) => {
   useEffect(() => {
     getSongDetail();
     getSongUrl();
-  });
+  }, []);
 
   const handleBack = () => {
     props.history.go(-1);
