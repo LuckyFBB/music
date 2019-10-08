@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { TopTab } from "./widget/TopTab";
 import left from "../static/icon/left_arrow.png";
 import { store } from "../store/store";
+import { Audio } from "./widget/Audio";
 
 export const MusicPlay = (props: any) => {
   const { id } = props.match.params;
@@ -29,7 +30,7 @@ export const MusicPlay = (props: any) => {
 
   const getSongUrl = () => {
     store.getSongUrl(id).then((res: any) => {
-      setUrl(res.data.url);
+      setUrl(res.data[0].url);
     });
   };
 
@@ -42,6 +43,7 @@ export const MusicPlay = (props: any) => {
           style={{ backgroundImage: "url(" + `${pic}` + ")" }}
         ></div>
         <img className="play__img" src={pic} alt={name} />
+        <Audio url={url} />
       </div>
     </div>
   );
