@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-09-09 21:42:57
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-23 20:55:04
+ * @LastEditTime: 2019-12-02 17:33:13
  * @Description: 账号信息展示页
  */
 
@@ -58,7 +58,7 @@ export const Account = (props: any) => {
       <div className="account__content">
         <div
           className="account__bg"
-          style={{ backgroundImage: "url(" + `${profile.backgroundUrl}` + ")" }}
+          style={{ backgroundImage: `url(" + ${profile.backgroundUrl} + ")` }}
         ></div>
         <div className="account__header">
           <img src={profile.avatarUrl} alt="" />

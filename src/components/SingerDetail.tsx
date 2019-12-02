@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-09-08 21:46:38
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-16 21:27:15
+ * @LastEditTime: 2019-12-02 17:35:00
  * @Description: 歌手所有歌曲展示
  */
 
@@ -20,7 +20,7 @@ export const SingerDetail = (props: any) => {
     Function
   ] = useState({});
 
-  const [hotSongs, setHotSongs] = useState([]);
+  const [hotSongs, setHotSongs]: [[], Function] = useState([]);
 
   useEffect(() => {
     getSingerPlayDetail();
@@ -41,10 +41,10 @@ export const SingerDetail = (props: any) => {
     <div className="singerdetail">
       <TopTab onLeft={handleBack} type="text" text={artist.name} left={left} />
       <div className="singerdetail__header">
-        <img className="img" src={artist.picUrl} />
+        <img className="img" src={artist.picUrl} alt="" />
       </div>
       <div className="singerdetail__content">
-        <SongList tracks={hotSongs} />
+        <SongList tracks={hotSongs} history={props.history} />
       </div>
     </div>
   );

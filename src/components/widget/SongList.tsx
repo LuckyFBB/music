@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-09-08 16:49:52
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-14 23:02:34
+ * @LastEditTime: 2019-12-02 17:03:04
  * @Description: 歌曲展示列表
  */
 
@@ -10,8 +10,18 @@ import React from "react";
 import play from "../../static/icon/play.png";
 import more from "../../static/icon/more_gray.png";
 
-export const SongList = (props: any) => {
+interface ISProp {
+  tracks: [];
+  history: any;
+}
+
+export const SongList = (props: ISProp) => {
   const { tracks } = props;
+
+  const handleClick = (id: string) => {
+    props.history.push(`/play/${id}`);
+  };
+
   return (
     <div className="songlist">
       <div className="songlist__header">
@@ -30,7 +40,11 @@ export const SongList = (props: any) => {
           const ar = item.ar || item.artists;
           const al = item.al || item.album;
           return (
-            <div className="item" key={item.id}>
+            <div
+              className="item"
+              key={item.id}
+              onClick={() => handleClick(item.id)}
+            >
               <span className="index">{index + 1}</span>
               <div className="content">
                 <p className="song">{item.name}</p>

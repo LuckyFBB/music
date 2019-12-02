@@ -7,7 +7,7 @@ import { Toast } from "antd-mobile";
 import left from "../static/icon/left_arrow.png";
 
 export const Recommend = (props: any) => {
-  const [songs, setSongs] = useState([]);
+  const [songs, setSongs]: [[], Function] = useState([]);
 
   useEffect(() => {
     Toast.loading("加载中");
@@ -42,7 +42,7 @@ export const Recommend = (props: any) => {
         <img className="recommend__img" src={bg} alt="" />
       </div>
       <div className="recommend__content">
-        <SongList tracks={songs} />
+        <SongList tracks={songs} history={props.history} />
       </div>
     </div>
   );

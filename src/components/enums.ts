@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-25 21:31:03
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-14 23:03:04
+ * @LastEditTime: 2019-12-02 16:48:03
  */
 import rank from "../static/home/rank.png";
 import recommend from "../static/home/recommend.png";
@@ -20,6 +20,9 @@ import account from "../static/icon/account.png";
 import account_active from "../static/icon/account_active.png";
 import home from "../static/icon/home.png";
 import home_active from "../static/icon/home_active.png";
+import play_loop from "../static/playBar/play_loop.png";
+import play_once from "../static/playBar/play_once.png";
+import play_random from "../static/playBar/play_random.png";
 
 export const HOME_ICONS = {
   RECOMMEND: "每日推荐",
@@ -167,3 +170,8 @@ export const TAB_MAP = [
     link: "/account"
   }
 ];
+
+/**
+ * 播放方式
+ */
+export const PLAY_TYPE = [play_once, play_loop, play_random];

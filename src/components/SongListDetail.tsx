@@ -19,7 +19,7 @@ export const SongListDetail = (props: any) => {
     Function
   ] = useState({});
 
-  const [tracks, setTracks] = useState([]);
+  const [tracks, setTracks]: [[], Function] = useState([]);
 
   useEffect(() => {
     getSonglist();
@@ -42,13 +42,17 @@ export const SongListDetail = (props: any) => {
       <TopTab type="text" text="歌单" left={left} onLeft={handleBack} />
       <div
         className="songlistDetail__bg"
-        style={{ backgroundImage: "url(" + `${playlist.coverImgUrl}` + ")" }}
+        style={{ backgroundImage: `url(" + ${playlist.coverImgUrl} + ")` }}
       ></div>
       <div className="songlistDetail__header">
         <div className="container">
           <div className="bg">
             {playlist.coverImgUrl && (
-              <img className="bg__cover" src={playlist.coverImgUrl as string} />
+              <img
+                className="bg__cover"
+                src={playlist.coverImgUrl as string}
+                alt=""
+              />
             )}
             <div className="bg__fixed">
               <img src={play} alt="播放" />
@@ -61,7 +65,7 @@ export const SongListDetail = (props: any) => {
             <p className="title">{playlist.name}</p>
             <div className="creator">
               {creator.avatarUrl && (
-                <img className="avatar" src={creator.avatarUrl} />
+                <img className="avatar" src={creator.avatarUrl} alt="" />
               )}
               <span className="nick">{creator.nickname}</span>
             </div>
@@ -77,7 +81,7 @@ export const SongListDetail = (props: any) => {
         </div>
       </div>
       <div className="songlistDetail__content">
-        <SongList tracks={tracks} />
+        <SongList tracks={tracks} history={props.history} />
       </div>
     </div>
   );
