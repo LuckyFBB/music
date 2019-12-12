@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-12-02 11:09:02
  * @LastEditors: FBB
- * @LastEditTime: 2019-12-12 16:00:39
+ * @LastEditTime: 2019-12-12 16:11:54
  * @Description: 音乐播放等相关操作
  */
 import React, { useState } from "react";
@@ -11,7 +11,7 @@ import next from "@/static/playBar/next.png";
 import pause from "@/static/playBar/pause.png";
 import play from "@/static/playBar/play.png";
 import list from "@/static/playBar/list.png";
-import { PLAY_TYPE } from "@/components/enums";
+import { PLAY_TYPE } from "@/share/enums";
 
 interface ISprops {
   url: string;

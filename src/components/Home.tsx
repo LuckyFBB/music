@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2019-12-12 15:55:57
+ * @LastEditTime: 2019-12-12 16:11:47
  * @Description: 首页
  */
 
@@ -12,7 +12,7 @@ import { TopTab } from "@/components/widget/TopTab";
 import { store } from "@/store/store";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { HOME_ICONS_OPTIONS } from "@/components/enums";
+import { HOME_ICONS_OPTIONS } from "@/share/enums";
 import { SongBlock } from "@/components/widget/SongBlock";
 import { Toast } from "antd-mobile";
 import search from "@/static/icon/search.png";
@@ -27,7 +27,7 @@ export const Home = (props: any) => {
   useEffect(() => {
     Toast.loading("加载中");
     getBannerList(1);
-    comfirmStatus();
+    getPersonalizedList();
   }, []);
 
   //获取banner

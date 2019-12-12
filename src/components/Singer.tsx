@@ -4,7 +4,7 @@ import { BottomTab } from "@/components/widget/BottomTab";
 import { TabBar } from "@/components/widget/TabBar";
 import { store } from "@/store/store";
 import { SingerList } from "@/components/widget/SingerList";
-import { TAG_LIST } from "@/components/enums";
+import { TAG_LIST } from "@/share/enums";
 
 export const Singer = (props: any) => {
   const [tag, setTag] = useState("热门");

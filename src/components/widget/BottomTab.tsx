@@ -8,7 +8,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import classnames from "classnames";
-import { TAB_MAP } from "@/components/enums";
+import { TAB_MAP } from "@/share/enums";
 
 interface ISProps {
   active: string;

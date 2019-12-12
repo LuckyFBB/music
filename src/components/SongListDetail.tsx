@@ -3,7 +3,7 @@ import { store } from "@/store/store";
 import { TopTab } from "@/components/widget/TopTab";
 import play from "@/static/home/play.png";
 import { SongList } from "@/components/widget/SongList";
-import { ACTION_MAP } from "@/components/enums";
+import { ACTION_MAP } from "@/share/enums";
 import left from "@/static/icon/left_arrow.png";
 
 export const SongListDetail = (props: any) => {
