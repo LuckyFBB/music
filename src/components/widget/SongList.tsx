@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-09-08 16:49:52
  * @LastEditors: FBB
- * @LastEditTime: 2019-12-02 17:03:04
+ * @LastEditTime: 2019-12-04 15:47:05
  * @Description: 歌曲展示列表
  */
 
@@ -11,7 +11,7 @@ import play from "../../static/icon/play.png";
 import more from "../../static/icon/more_gray.png";
 
 interface ISProp {
-  tracks: [];
+  tracks: any[];
   history: any;
 }
 

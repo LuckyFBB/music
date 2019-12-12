@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-22 22:18:13
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-23 20:46:57
+ * @LastEditTime: 2019-12-03 16:03:04
  */
 import axios from "axios";
 import { Toast } from "antd-mobile";
@@ -15,7 +15,7 @@ axios.defaults.baseURL = "http://localhost:3000";
 axios.defaults.headers["Content-Type"] = "application/x-www-form-urlencoded";
 
 //默认请求时间
-axios.defaults.timeout = 10000;
+axios.defaults.timeout = 20000;
 
 //处理登陆之后，接口依旧返回301
 axios.defaults.withCredentials = true;
@@ -43,7 +43,7 @@ axios.interceptors.response.use(
     }
   },
   error => {
-    return Promise.reject(error.response.data);
+    return Promise.reject(error);
   }
 );
 
