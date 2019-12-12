@@ -2,13 +2,15 @@
  * @Author: FBB
  * @Date: 2019-09-08 16:49:52
  * @LastEditors: FBB
- * @LastEditTime: 2019-12-12 16:01:03
+ * @LastEditTime: 2019-12-12 17:07:34
  * @Description: 歌曲展示列表
  */
 
 import React from "react";
 import play from "@/static/icon/play.png";
 import more from "@/static/icon/more_gray.png";
+import { checkMusic } from "@/store/api";
+import { Toast } from "antd-mobile";
 
 interface ISProp {
   tracks: any[];
@@ -19,7 +21,13 @@ export const SongList = (props: ISProp) => {
   const { tracks } = props;
 
   const handleClick = (id: string) => {
-    props.history.push(`/play/${id}`);
+    checkMusic(id).then((res: any) => {
+      if (res.success) {
+        props.history.push(`/play/${id}`);
+      } else {
+        Toast.show(res.message);
+      }
+    });
   };
 
   return (

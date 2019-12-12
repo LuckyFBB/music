@@ -2,27 +2,33 @@
  * @Author: FBB
  * @Date: 2019-12-02 11:09:02
  * @LastEditors: FBB
- * @LastEditTime: 2019-12-12 16:11:54
+ * @LastEditTime: 2019-12-12 20:56:16
  * @Description: 音乐播放等相关操作
  */
 import React, { useState } from "react";
 import pre from "@/static/playBar/pre.png";
 import next from "@/static/playBar/next.png";
-import pause from "@/static/playBar/pause.png";
-import play from "@/static/playBar/play.png";
+import pauseImg from "@/static/playBar/pause.png";
+import playImg from "@/static/playBar/play.png";
 import list from "@/static/playBar/list.png";
-import { PLAY_TYPE } from "@/share/enums";
+import { PLAY_TYPE_IMG } from "@/share/enums";
+import { connect } from "react-redux";
+import { changePlayState, changePlayMode } from "@/actions/playAction";
+import { getOptionsVlaue } from "@/utils/utils";
 
 interface ISprops {
   url: string;
+  playStatus: boolean;
+  playMode: number;
+  play: Function;
+  pause: Function;
+  changeMode: Function;
 }
 
-export const PlayBar = (props: ISprops) => {
-  const { url } = props;
+const PlayBar = (props: ISprops) => {
+  const { url, play, pause, playStatus, playMode, changeMode } = props;
   const [allTime, setAllTime] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
-  const [isPlay, setIsPlay] = useState(true);
-  const [mode, setMode] = useState(1);
 
   const controlAudio = (type: string, e?: any) => {
     const audio = document.getElementById(`audio`) as HTMLAudioElement;
@@ -33,31 +39,31 @@ export const PlayBar = (props: ISprops) => {
       case "changeStatus":
         if (audio.paused) {
           audio.play();
-          setIsPlay(true);
+          play();
         } else {
           audio.pause();
-          setIsPlay(false);
+          pause();
         }
         break;
       case "pause":
         audio.pause();
-        setIsPlay(false);
+        pause();
         break;
       case "changeCurrentTime":
         const value = e.target.value as number;
         setCurrentTime(value);
         audio.currentTime = value;
         if (Math.round(value) === Math.round(audio.duration)) {
-          setIsPlay(false);
+          pause();
         } else {
           audio.play();
-          setIsPlay(true);
+          play();
         }
         break;
       case "getCurrentTime":
         setCurrentTime(audio.currentTime);
         if (audio.currentTime === audio.duration) {
-          setIsPlay(false);
+          pause();
         }
         break;
     }
@@ -77,12 +83,12 @@ export const PlayBar = (props: ISprops) => {
   };
 
   const handleChangeMode = () => {
-    const newMode = (mode + 1) % 3;
-    setMode(newMode);
+    const newMode = (playMode + 1) % 3;
+    changeMode(newMode);
   };
 
   const getMode = () => {
-    return PLAY_TYPE[mode];
+    return getOptionsVlaue(PLAY_TYPE_IMG, playMode);
   };
 
   return (
@@ -117,7 +123,7 @@ export const PlayBar = (props: ISprops) => {
         </div>
         <div className="img__wrapper--bigger">
           <img
-            src={isPlay ? pause : play}
+            src={playStatus ? pauseImg : playImg}
             alt=""
             onClick={() => controlAudio("changeStatus")}
           />
@@ -132,3 +138,17 @@ export const PlayBar = (props: ISprops) => {
     </div>
   );
 };
+const mapStateToProps = (state: any) => ({
+  playStatus: state.playReducer.playStatus,
+  playMode: state.playReducer.playMode
+});
+
+const mapDispatchToProps = (dispatch: Function) => {
+  return {
+    play: () => dispatch(changePlayState(true)),
+    pause: () => dispatch(changePlayState(false)),
+    changeMode: (value: number) => dispatch(changePlayMode(value))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlayBar);

@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-09-08 21:46:38
  * @LastEditors: FBB
- * @LastEditTime: 2019-12-12 15:59:27
+ * @LastEditTime: 2019-12-12 16:52:37
  * @Description: 歌手所有歌曲展示
  */
 
@@ -12,7 +12,7 @@ import { store } from "@/store/store";
 import { SongList } from "@/components/widget/SongList";
 import left from "@/static/icon/left_arrow.png";
 
-export const SingerDetail = (props: any) => {
+export const SingerSongDetail = (props: any) => {
   const { id } = props.match.params;
 
   const [artist, setArtist]: [

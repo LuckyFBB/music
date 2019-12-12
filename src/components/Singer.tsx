@@ -36,7 +36,7 @@ export const Singer = (props: any) => {
   };
 
   const redirectToSinger = (id: string) => {
-    props.history.push(`/singerlist/${id}`);
+    props.history.push(`/singersonglist/${id}`);
   };
 
   return (

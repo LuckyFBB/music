@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { TopTab } from "@/components/widget/TopTab";
 import left from "@/static/icon/left_arrow.png";
 import { store } from "@/store/store";
-import { PlayBar } from "@/components/widget/PlayBar";
+import PlayBar from "@/components/widget/PlayBar";
 import cx from "classnames";
+import { connect } from "react-redux";
 
-export const MusicPlay = (props: any) => {
+const MusicPlay = (props: any) => {
+  const { playStatus } = props;
   const { id } = props.match.params;
   const [url, setUrl] = useState("");
   const [pic, setPic] = useState("");
@@ -42,7 +44,7 @@ export const MusicPlay = (props: any) => {
           style={{ backgroundImage: "url(" + `${pic}` + ")" }}
         />
         <img
-          className={cx("play__img", "play__img--rotate")}
+          className={cx("play__img", { "play__img--rotate": playStatus })}
           src={pic}
           alt={name}
         />
@@ -51,3 +53,9 @@ export const MusicPlay = (props: any) => {
     </div>
   );
 };
+
+const mapStateToProps = (state: any) => ({
+  playStatus: state.playReducer.isPlay
+});
+
+export default connect(mapStateToProps)(MusicPlay);

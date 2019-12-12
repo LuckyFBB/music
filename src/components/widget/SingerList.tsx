@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-09-03 23:00:39
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-08 21:15:18
+ * @LastEditTime: 2019-12-12 16:49:13
  * @Description: 歌手展示列表
  */
 
@@ -13,7 +13,11 @@ export const SingerList = (props: any) => {
   return (
     <div className="singerlist">
       {list.map((item: any) => (
-        <div className="singerlist__item" key={item.id} onClick={()=>onClick(item.id)}>
+        <div
+          className="singerlist__item"
+          key={item.id}
+          onClick={() => onClick(item.id)}
+        >
           <div className="singerlist__img">
             <img src={item.picUrl} alt={item.name} />
           </div>

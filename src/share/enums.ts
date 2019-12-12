@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-25 21:31:03
  * @LastEditors: FBB
- * @LastEditTime: 2019-12-12 15:55:22
+ * @LastEditTime: 2019-12-12 20:54:36
  */
 import rank from "@/static/home/rank.png";
 import recommend from "@/static/home/recommend.png";
@@ -174,4 +174,20 @@ export const TAB_MAP = [
 /**
  * 播放方式
  */
-export const PLAY_TYPE = [play_once, play_loop, play_random];
+export enum PLAY_TYPE {
+  PLAY_ONCE = 0,
+  PLAY_LOOP = 1,
+  PLAY_RANDOM = 2
+}
+
+export const PLAY_TYPE_OPTIONS = [
+  [PLAY_TYPE.PLAY_ONCE, "单曲循环"],
+  [PLAY_TYPE.PLAY_LOOP, "列表循环"],
+  [PLAY_TYPE.PLAY_RANDOM, "随机播放"]
+];
+
+export const PLAY_TYPE_IMG: Array<[any, any]> = [
+  [PLAY_TYPE.PLAY_ONCE, play_once],
+  [PLAY_TYPE.PLAY_LOOP, play_loop],
+  [PLAY_TYPE.PLAY_RANDOM, play_random]
+];

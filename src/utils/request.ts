@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-22 22:18:13
  * @LastEditors: FBB
- * @LastEditTime: 2019-12-12 16:22:57
+ * @LastEditTime: 2019-12-12 17:06:56
  */
 import axios from "axios";
 import { Toast } from "antd-mobile";
@@ -35,7 +35,7 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   response => {
     // 对响应数据做点什么
-    if (response.status === 200 && response.data.code === 200) {
+    if (response.status === 200) {
       return Promise.resolve(response.data);
     } else {
       Toast.info(response.data.msg);
