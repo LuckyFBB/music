@@ -2,20 +2,20 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-23 20:59:38
+ * @LastEditTime: 2019-12-12 15:55:57
  * @Description: 首页
  */
 
 import React, { useEffect, useState } from "react";
-import { BottomTab } from "./widget/BottomTab";
-import { TopTab } from "./widget/TopTab";
-import { store } from "../store/store";
+import { BottomTab } from "@/components/widget/BottomTab";
+import { TopTab } from "@/components/widget/TopTab";
+import { store } from "@/store/store";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { HOME_ICONS_OPTIONS } from "./enums";
-import { SongBlock } from "./widget/SongBlock";
+import { HOME_ICONS_OPTIONS } from "@/components/enums";
+import { SongBlock } from "@/components/widget/SongBlock";
 import { Toast } from "antd-mobile";
-import search from "../static/icon/search.png";
+import search from "@/static/icon/search.png";
 
 export const Home = (props: any) => {
   const [bannerList, setBannerList] = useState([]);

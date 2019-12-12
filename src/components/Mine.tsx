@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { TopTab } from "./widget/TopTab";
-import { BottomTab } from "./widget/BottomTab";
-import { store } from "../store/store";
-import playlist from "../static/icon/playlist.png";
-import radio from "../static/icon/radio.png";
-import right from "../static/icon/right_arrow.png";
+import { TopTab } from "@/components/widget/TopTab";
+import { BottomTab } from "@/components/widget/BottomTab";
+import { store } from "@/store/store";
+import playlist from "@/static/icon/playlist.png";
+import radio from "@/static/icon/radio.png";
+import right from "@/static/icon/right_arrow.png";
 
 export const Mine = () => {
   const [createDjRadioCount, setRadioCount] = useState(0);

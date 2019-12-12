@@ -2,11 +2,11 @@
  * @Author: FBB
  * @Date: 2019-08-25 17:19:35
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-17 20:30:30
+ * @LastEditTime: 2019-12-12 16:00:50
  * @Description: 歌单组件
  */
 import React from "react";
-import play from "../../static/home/play.png";
+import play from "@/static/home/play.png";
 
 interface ISProps {
   list: Array<{}>;

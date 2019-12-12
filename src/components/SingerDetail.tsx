@@ -2,15 +2,15 @@
  * @Author: FBB
  * @Date: 2019-09-08 21:46:38
  * @LastEditors: FBB
- * @LastEditTime: 2019-12-02 17:35:00
+ * @LastEditTime: 2019-12-12 15:59:27
  * @Description: 歌手所有歌曲展示
  */
 
 import React, { useEffect, useState } from "react";
-import { TopTab } from "./widget/TopTab";
-import { store } from "../store/store";
-import { SongList } from "./widget/SongList";
-import left from "../static/icon/left_arrow.png";
+import { TopTab } from "@/components/widget/TopTab";
+import { store } from "@/store/store";
+import { SongList } from "@/components/widget/SongList";
+import left from "@/static/icon/left_arrow.png";
 
 export const SingerDetail = (props: any) => {
   const { id } = props.match.params;

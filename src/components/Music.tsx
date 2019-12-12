@@ -2,16 +2,16 @@
  * @Author: FBB
  * @Date: 2019-08-27 21:35:13
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-17 20:30:44
+ * @LastEditTime: 2019-12-12 15:57:11
  * @Description: 首页榜单组件
  */
 
 import React, { useState, useEffect } from "react";
-import { TopTab } from "./widget/TopTab";
-import { store } from "../store/store";
-import { TabBar } from "./widget/TabBar";
-import { SongBlock } from "./widget/SongBlock";
-import left from "../static/icon/left_arrow.png";
+import { TopTab } from "@/components/widget/TopTab";
+import { store } from "@/store/store";
+import { TabBar } from "@/components/widget/TabBar";
+import { SongBlock } from "@/components/widget/SongBlock";
+import left from "@/static/icon/left_arrow.png";
 
 export const Music = (props: any) => {
   const [tag, setTag] = useState("");

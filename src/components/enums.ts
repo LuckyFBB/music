@@ -2,27 +2,27 @@
  * @Author: FBB
  * @Date: 2019-08-25 21:31:03
  * @LastEditors: FBB
- * @LastEditTime: 2019-12-02 16:48:03
+ * @LastEditTime: 2019-12-12 15:55:22
  */
-import rank from "../static/home/rank.png";
-import recommend from "../static/home/recommend.png";
-import music from "../static/home/music.png";
-import radio from "../static/home/radio.png";
-import more from "../static/icon/more.png";
-import collect from "../static/icon/collect.png";
-import like from "../static/icon/like.png";
-import comment from "../static/icon/comment.png";
-import mine from "../static/icon/mine.png";
-import mine_active from "../static/icon/mine_active.png";
-import singer from "../static/icon/singer.png";
-import singer_active from "../static/icon/singer_active.png";
-import account from "../static/icon/account.png";
-import account_active from "../static/icon/account_active.png";
-import home from "../static/icon/home.png";
-import home_active from "../static/icon/home_active.png";
-import play_loop from "../static/playBar/play_loop.png";
-import play_once from "../static/playBar/play_once.png";
-import play_random from "../static/playBar/play_random.png";
+import rank from "@/static/home/rank.png";
+import recommend from "@/static/home/recommend.png";
+import music from "@/static/home/music.png";
+import radio from "@/static/home/radio.png";
+import more from "@/static/icon/more.png";
+import collect from "@/static/icon/collect.png";
+import like from "@/static/icon/like.png";
+import comment from "@/static/icon/comment.png";
+import mine from "@/static/icon/mine.png";
+import mine_active from "@/static/icon/mine_active.png";
+import singer from "@/static/icon/singer.png";
+import singer_active from "@/static/icon/singer_active.png";
+import account from "@/static/icon/account.png";
+import account_active from "@/static/icon/account_active.png";
+import home from "@/static/icon/home.png";
+import home_active from "@/static/icon/home_active.png";
+import play_loop from "@/static/playBar/play_loop.png";
+import play_once from "@/static/playBar/play_once.png";
+import play_random from "@/static/playBar/play_random.png";
 
 export const HOME_ICONS = {
   RECOMMEND: "每日推荐",

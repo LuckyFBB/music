@@ -2,13 +2,13 @@
  * @Author: FBB
  * @Date: 2019-09-08 16:49:52
  * @LastEditors: FBB
- * @LastEditTime: 2019-12-04 15:47:05
+ * @LastEditTime: 2019-12-12 16:01:03
  * @Description: 歌曲展示列表
  */
 
 import React from "react";
-import play from "../../static/icon/play.png";
-import more from "../../static/icon/more_gray.png";
+import play from "@/static/icon/play.png";
+import more from "@/static/icon/more_gray.png";
 
 interface ISProp {
   tracks: any[];

@@ -2,17 +2,17 @@
  * @Author: FBB
  * @Date: 2019-08-26 20:19:16
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-16 21:14:52
+ * @LastEditTime: 2019-12-12 15:57:50
  * @Description: 排行榜
  */
 
 import React, { useEffect, useState } from "react";
-import { TopTab } from "./widget/TopTab";
-import { BottomTab } from "./widget/BottomTab";
-import { RankList } from "./widget/RankList";
-import { store } from "../store/store";
+import { TopTab } from "@/components/widget/TopTab";
+import { BottomTab } from "@/components/widget/BottomTab";
+import { RankList } from "@/components/widget/RankList";
+import { store } from "@/store/store";
 import { Toast } from "antd-mobile";
-import left from "../static/icon/left_arrow.png";
+import left from "@/static/icon/left_arrow.png";
 
 export const Rank = (props: any) => {
   const [rankList, setRankList] = useState([]);

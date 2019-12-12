@@ -2,11 +2,11 @@
  * @Author: FBB
  * @Date: 2019-08-23 09:15:31
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-24 21:16:26
+ * @LastEditTime: 2019-12-12 15:52:25
  * @Description: 所有请求
  */
 
-import request from "../utils/request";
+import request from "@/utils/request";
 
 class Store {
   /**

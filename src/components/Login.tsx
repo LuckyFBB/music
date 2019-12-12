@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classnames from "classnames";
-import close from "../static/icon/close.png";
-import { store } from "../store/store";
+import close from "@/static/icon/close.png";
+import { store } from "@/store/store";
 import { Toast } from "antd-mobile";
 
 export const Login = (props: any) => {

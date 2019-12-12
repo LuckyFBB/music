@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { store } from "../store/store";
-import { TopTab } from "./widget/TopTab";
-import play from "../static/home/play.png";
-import { SongList } from "./widget/SongList";
-import { ACTION_MAP } from "./enums";
-import left from "../static/icon/left_arrow.png";
+import { store } from "@/store/store";
+import { TopTab } from "@/components/widget/TopTab";
+import play from "@/static/home/play.png";
+import { SongList } from "@/components/widget/SongList";
+import { ACTION_MAP } from "@/components/enums";
+import left from "@/static/icon/left_arrow.png";
 
 export const SongListDetail = (props: any) => {
   const { id } = props.match.params;

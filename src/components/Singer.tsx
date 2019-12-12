@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { TopTab } from "./widget/TopTab";
-import { BottomTab } from "./widget/BottomTab";
-import { TabBar } from "./widget/TabBar";
-import { store } from "../store/store";
-import { SingerList } from "./widget/SingerList";
-import { TAG_LIST } from "./enums";
+import { TopTab } from "@/components/widget/TopTab";
+import { BottomTab } from "@/components/widget/BottomTab";
+import { TabBar } from "@/components/widget/TabBar";
+import { store } from "@/store/store";
+import { SingerList } from "@/components/widget/SingerList";
+import { TAG_LIST } from "@/components/enums";
 
 export const Singer = (props: any) => {
   const [tag, setTag] = useState("热门");

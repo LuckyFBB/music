@@ -2,16 +2,16 @@
  * @Author: FBB
  * @Date: 2019-09-09 21:42:57
  * @LastEditors: FBB
- * @LastEditTime: 2019-12-02 17:33:13
+ * @LastEditTime: 2019-12-12 15:54:11
  * @Description: 账号信息展示页
  */
 
 import React, { useEffect, useState } from "react";
-import { BottomTab } from "./widget/BottomTab";
-import { TopTab } from "./widget/TopTab";
-import { store } from "../store/store";
+import { BottomTab } from "@/components/widget/BottomTab";
+import { TopTab } from "@/components/widget/TopTab";
+import { store } from "@/store/store";
 import { Toast } from "antd-mobile";
-import edit from "../static/icon/edit.png";
+import edit from "@/static/icon/edit.png";
 
 export const Account = (props: any) => {
   const [profile, setProfile]: [

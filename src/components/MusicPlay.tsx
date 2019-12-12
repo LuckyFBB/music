@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { TopTab } from "./widget/TopTab";
-import left from "../static/icon/left_arrow.png";
-import { store } from "../store/store";
-import { PlayBar } from "./widget/PlayBar";
+import { TopTab } from "@/components/widget/TopTab";
+import left from "@/static/icon/left_arrow.png";
+import { store } from "@/store/store";
+import { PlayBar } from "@/components/widget/PlayBar";
 import cx from "classnames";
 
 export const MusicPlay = (props: any) => {

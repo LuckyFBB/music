@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { TopTab } from "./widget/TopTab";
-import { store } from "../store/store";
-import bg from "../static/recommend_bg.jpg";
-import { SongList } from "./widget/SongList";
+import { TopTab } from "@/components/widget/TopTab";
+import { store } from "@/store/store";
+import bg from "@/static/recommend_bg.jpg";
+import { SongList } from "@/components/widget/SongList";
 import { Toast } from "antd-mobile";
-import left from "../static/icon/left_arrow.png";
+import left from "@/static/icon/left_arrow.png";
 
 export const Recommend = (props: any) => {
   const [songs, setSongs]: [[], Function] = useState([]);

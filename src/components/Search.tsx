@@ -2,17 +2,17 @@
  * @Author: FBB
  * @Date: 2019-09-16 22:09:04
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-20 23:51:00
+ * @LastEditTime: 2019-12-12 15:58:22
  * @Description: 搜索页面
  */
 
 import React, { useEffect, useState } from "react";
-import { TopTab } from "./widget/TopTab";
-import left from "../static/icon/left_arrow.png";
-import search from "../static/icon/search.png";
-import cancel from "../static/icon/cancel.png";
-import { store } from "../store/store";
-import { SearchList } from "./widget/SearchList";
+import { TopTab } from "@/components/widget/TopTab";
+import left from "@/static/icon/left_arrow.png";
+import search from "@/static/icon/search.png";
+import cancel from "@/static/icon/cancel.png";
+import { store } from "@/store/store";
+import { SearchList } from "@/components/widget/SearchList";
 
 export const Search = (props: any) => {
   const [hotList, setHotList]: [

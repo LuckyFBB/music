@@ -2,13 +2,13 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-14 20:19:12
+ * @LastEditTime: 2019-12-12 16:00:19
  */
 
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import classnames from "classnames";
-import { TAB_MAP } from '../enums'
+import { TAB_MAP } from "@/components/enums";
 
 interface ISProps {
   active: string;
