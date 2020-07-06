@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { TopTab } from "@/components/widget/TopTab";
 import left from "@/static/icon/left_arrow.png";
-import { store } from "@/store/store";
+import { getSongDetail, getSongUrl } from "@/store/api";
 import PlayBar from "@/components/widget/PlayBar";
 import cx from "classnames";
 import { connect } from "react-redux";
@@ -14,23 +14,23 @@ const MusicPlay = (props: any) => {
   const [name, setName] = useState("");
 
   useEffect(() => {
-    getSongDetail();
-    getSongUrl();
+    getSongDetailFunc();
+    getSongUrlFunc();
   }, []);
 
   const handleBack = () => {
     props.history.go(-1);
   };
 
-  const getSongDetail = () => {
-    store.getSongDetail(id).then((res: any) => {
+  const getSongDetailFunc = () => {
+    getSongDetail(id).then((res: any) => {
       setPic(res.songs[0].al.picUrl);
       setName(res.songs[0].name);
     });
   };
 
-  const getSongUrl = () => {
-    store.getSongUrl(id).then((res: any) => {
+  const getSongUrlFunc = () => {
+    getSongUrl(id).then((res: any) => {
       setUrl(res.data[0].url);
     });
   };
@@ -55,7 +55,7 @@ const MusicPlay = (props: any) => {
 };
 
 const mapStateToProps = (state: any) => ({
-  playStatus: state.playReducer.isPlay
+  playStatus: state.playReducer.isPlay,
 });
 
 export default connect(mapStateToProps)(MusicPlay);

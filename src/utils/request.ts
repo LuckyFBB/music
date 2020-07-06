@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-22 22:18:13
  * @LastEditors: FBB
- * @LastEditTime: 2019-12-12 17:06:56
+ * @LastEditTime: 2020-07-06 15:02:30
  */
 import axios from "axios";
 import { Toast } from "antd-mobile";
@@ -22,10 +22,10 @@ axios.defaults.withCredentials = true;
 
 // 添加请求拦截器
 axios.interceptors.request.use(
-  config => {
+  (config) => {
     return config;
   },
-  error => {
+  (error) => {
     //请求错误处理
     Promise.reject(error);
   }
@@ -33,16 +33,23 @@ axios.interceptors.request.use(
 
 // 添加响应拦截器
 axios.interceptors.response.use(
-  response => {
+  (response) => {
     // 对响应数据做点什么
-    if (response.status === 200) {
+    const data = response.data || {};
+    const { code, msg, message } = data;
+    if (code === 200 || response.status === 200) {
       return Promise.resolve(response.data);
-    } else {
-      Toast.info(response.data.msg);
-      return Promise.reject(response.data);
     }
+    Toast.info(msg || message || "系统异常");
+    return Promise.reject(response);
   },
-  error => {
+  (error) => {
+    const status = error.response.status;
+    if (status === 301) {
+      Toast.fail("尚未登录");
+    } else if (status) {
+      Toast.fail(`Http Error: ${status}`);
+    }
     return Promise.reject(error);
   }
 );

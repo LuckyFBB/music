@@ -2,14 +2,19 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2019-12-12 16:11:47
+ * @LastEditTime: 2020-07-06 15:14:15
  * @Description: 首页
  */
 
 import React, { useEffect, useState } from "react";
 import { BottomTab } from "@/components/widget/BottomTab";
 import { TopTab } from "@/components/widget/TopTab";
-import { store } from "@/store/store";
+import {
+  getBanner,
+  getPersonalized,
+  getRecommendResource,
+  comfirmLoginStatus,
+} from "@/store/api";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { HOME_ICONS_OPTIONS } from "@/share/enums";
@@ -27,36 +32,35 @@ export const Home = (props: any) => {
   useEffect(() => {
     Toast.loading("加载中");
     getBannerList(1);
-    getPersonalizedList();
+    //getPersonalizedList();
+    comfirmStatus();
   }, []);
 
   //获取banner
   const getBannerList = (type: number) => {
-    store.getBanner(type).then((res: any) => {
+    getBanner(type).then((res: any) => {
       setBannerList(res.banners);
     });
   };
 
   //获取热门推荐
-  const getPersonalizedList = (limit: number = 0) => {
-    store.getPersonalized(limit).then((res: any) => {
+  const getPersonalizedList = (limit: number = 30) => {
+    getPersonalized(limit).then((res: any) => {
       setPersonalizedList(res.result);
       Toast.hide();
     });
   };
 
-  const getRecommendResource = () => {
-    store.getRecommendResource().then((res: any) => {
+  const getRecommendResourceFunc = () => {
+    getRecommendResource().then((res: any) => {
       setPersonalizedList(res.recommend);
       Toast.hide();
     });
   };
-
   const comfirmStatus = () => {
-    store
-      .comfirmLoginStatus()
+    comfirmLoginStatus()
       .then(() => {
-        getRecommendResource();
+        getRecommendResourceFunc();
       })
       .catch(() => {
         getPersonalizedList();

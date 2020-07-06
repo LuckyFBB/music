@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { TopTab } from "@/components/widget/TopTab";
 import { BottomTab } from "@/components/widget/BottomTab";
-import { store } from "@/store/store";
+import { getUserSubcount } from "@/store/api";
 import playlist from "@/static/icon/playlist.png";
 import radio from "@/static/icon/radio.png";
 import right from "@/static/icon/right_arrow.png";
@@ -9,8 +9,8 @@ import right from "@/static/icon/right_arrow.png";
 export const Mine = () => {
   const [createDjRadioCount, setRadioCount] = useState(0);
   const [createdPlaylistCount, setPlaylistCount] = useState(0);
-  const getUserSubcount = () => {
-    store.getUserSubcount().then((res: any) => {
+  const getUserSubcountFunc = () => {
+    getUserSubcount().then((res: any) => {
       setPlaylistCount(res.createdPlaylistCount);
       setRadioCount(res.createDjRadioCount);
     });
@@ -28,7 +28,7 @@ export const Mine = () => {
     }
   ];
   useEffect(() => {
-    getUserSubcount();
+    getUserSubcountFunc();
   }, []);
   return (
     <div className="mine">

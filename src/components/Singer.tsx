@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { TopTab } from "@/components/widget/TopTab";
 import { BottomTab } from "@/components/widget/BottomTab";
 import { TabBar } from "@/components/widget/TabBar";
-import { store } from "@/store/store";
+import { getTopSinger, getCategorySinger } from "@/store/api";
 import { SingerList } from "@/components/widget/SingerList";
 import { TAG_LIST } from "@/share/enums";
 
@@ -11,26 +11,26 @@ export const Singer = (props: any) => {
   const [singerList, setSingerList] = useState([]);
 
   useEffect(() => {
-    getTopSinger();
+    getTopSingerFunc();
   }, []);
 
   const changeSingerCategory = (item: any) => {
     setTag(item.name);
     if (item.id === 0) {
-      getTopSinger();
+      getTopSingerFunc();
     } else {
-      getCategorySinger(item.id);
+      getCategorySingerFunc(item.id);
     }
   };
 
-  const getTopSinger = () => {
-    store.getTopSinger().then((res: any) => {
+  const getTopSingerFunc = () => {
+    getTopSinger().then((res: any) => {
       setSingerList(res.artists);
     });
   };
 
-  const getCategorySinger = (cat: number) => {
-    store.getCategorySinger(cat).then((res: any) => {
+  const getCategorySingerFunc = (cat: number) => {
+    getCategorySinger(cat).then((res: any) => {
       setSingerList(res.artists);
     });
   };

@@ -2,14 +2,14 @@
  * @Author: FBB
  * @Date: 2019-09-09 21:42:57
  * @LastEditors: FBB
- * @LastEditTime: 2019-12-12 15:54:11
+ * @LastEditTime: 2020-07-06 13:40:39
  * @Description: 账号信息展示页
  */
 
 import React, { useEffect, useState } from "react";
 import { BottomTab } from "@/components/widget/BottomTab";
 import { TopTab } from "@/components/widget/TopTab";
-import { store } from "@/store/store";
+import { comfirmLoginStatus, getUserDetail, loginOut } from "@/store/api";
 import { Toast } from "antd-mobile";
 import edit from "@/static/icon/edit.png";
 
@@ -24,27 +24,26 @@ export const Account = (props: any) => {
   }, []);
 
   const comfirmStatus = () => {
-    store
-      .comfirmLoginStatus()
+    comfirmLoginStatus()
       .then((res: any) => {
-        getUserDetail(res.profile.userId);
+        getUserDetailFunc(res.profile.userId);
       })
-      .catch(() => {
+      /* .catch(() => {
         Toast.show("尚未登录，前去登录");
         window.setTimeout(() => {
           props.history.push("/login");
         }, 1000);
-      });
+      }); */
   };
 
-  const getUserDetail = (uid: string) => {
-    store.getUserDetail(uid).then((res: any) => {
+  const getUserDetailFunc = (uid: string) => {
+    getUserDetail(uid).then((res: any) => {
       setProfile(res.profile);
     });
   };
 
   const handleLoginout = () => {
-    store.loginOut().then(() => {
+  loginOut().then(() => {
       Toast.show("退出成功");
       window.setTimeout(() => {
         props.history.push("/home");

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { TopTab } from "@/components/widget/TopTab";
-import { store } from "@/store/store";
+import { getRecommendSongs } from "@/store/api";
 import bg from "@/static/recommend_bg.jpg";
 import { SongList } from "@/components/widget/SongList";
 import { Toast } from "antd-mobile";
@@ -11,24 +11,14 @@ export const Recommend = (props: any) => {
 
   useEffect(() => {
     Toast.loading("加载中");
-    getRecommendSongs();
+    getRecommendSongsFunc();
   }, []);
 
-  const getRecommendSongs = () => {
-    store
-      .getRecommendSongs()
-      .then((res: any) => {
-        setSongs(res.recommend);
-        Toast.hide();
-      })
-      .catch(err => {
-        if (err.code === 301) {
-          Toast.show("尚未登录，前去登录");
-          window.setTimeout(() => {
-            props.history.push("/login");
-          }, 1000);
-        }
-      });
+  const getRecommendSongsFunc = () => {
+    getRecommendSongs().then((res: any) => {
+      setSongs(res.recommend);
+      Toast.hide();
+    });
   };
 
   const handleBack = () => {

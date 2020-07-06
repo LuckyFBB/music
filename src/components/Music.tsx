@@ -2,13 +2,13 @@
  * @Author: FBB
  * @Date: 2019-08-27 21:35:13
  * @LastEditors: FBB
- * @LastEditTime: 2019-12-12 15:57:11
+ * @LastEditTime: 2020-07-06 14:11:09
  * @Description: 首页榜单组件
  */
 
 import React, { useState, useEffect } from "react";
 import { TopTab } from "@/components/widget/TopTab";
-import { store } from "@/store/store";
+import { getHotPlayDetail, getHotPlay } from "@/store/api";
 import { TabBar } from "@/components/widget/TabBar";
 import { SongBlock } from "@/components/widget/SongBlock";
 import left from "@/static/icon/left_arrow.png";
@@ -28,17 +28,17 @@ export const Music = (props: any) => {
     props.history.go(-1);
   };
 
-  const getHotPlayDetail = (item: any) => {
+  const getHotPlayDetailFunc = (item: any) => {
     setTag(item.name);
-    store.getHotPlayDetail(item.name).then((res: any) => {
+    getHotPlayDetail(item.name).then((res: any) => {
       setHotPlayList(res.playlists);
     });
   };
 
   const getTagList = () => {
-    store.getHotPlay().then((res: any) => {
+    getHotPlay().then((res: any) => {
       setHotTagList(res.tags);
-      getHotPlayDetail(res.tags[0]);
+      getHotPlayDetailFunc(res.tags[0]);
     });
   };
 

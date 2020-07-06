@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { store } from "@/store/store";
+import { getPlayDetail } from "@/store/api";
 import { TopTab } from "@/components/widget/TopTab";
 import play from "@/static/home/play.png";
 import { SongList } from "@/components/widget/SongList";
@@ -26,7 +26,7 @@ export const SongListDetail = (props: any) => {
   }, []);
 
   const getSonglist = () => {
-    store.getPlayDetail(id).then((res: any) => {
+    getPlayDetail(id).then((res: any) => {
       setPlaylist(res.playlist);
       setCreator(res.playlist.creator);
       setTracks(res.playlist.tracks);
