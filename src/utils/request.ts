@@ -2,11 +2,19 @@
  * @Author: FBB
  * @Date: 2019-08-22 22:18:13
  * @LastEditors: FBB
- * @LastEditTime: 2020-07-06 15:02:30
+ * @LastEditTime: 2020-07-07 15:59:22
  */
 import axios from "axios";
 import { Toast } from "antd-mobile";
 import "antd-mobile/dist/antd-mobile.css";
+
+const LOGIN_PAGE_PATH =
+  process.env.NODE_ENV === "development"
+    ? "/#/login"
+    : `${(process.env.REACT_APP_BASE_PATHNAME || "").replace(
+        /\/$/,
+        ""
+      )}/#/login`;
 
 //默认请求地址
 axios.defaults.baseURL = "http://localhost:3000";
@@ -46,9 +54,12 @@ axios.interceptors.response.use(
   (error) => {
     const status = error.response.status;
     if (status === 301) {
-      Toast.fail("尚未登录");
+      Toast.info("尚未登录，前往登录", 1.5);
+      setTimeout(() => {
+        window.location.replace(LOGIN_PAGE_PATH);
+      }, 1100);
     } else if (status) {
-      Toast.fail(`Http Error: ${status}`);
+      Toast.info(`Http Error: ${status}`);
     }
     return Promise.reject(error);
   }

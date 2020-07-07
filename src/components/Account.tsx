@@ -85,7 +85,7 @@ export const Account = (props: any) => {
           退出登录
         </div>
       </div>
-      <BottomTab active="account" />
+      <BottomTab active="account" history={props.history} />
     </div>
   );
 };

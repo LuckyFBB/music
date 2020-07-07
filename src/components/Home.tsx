@@ -2,19 +2,14 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2020-07-06 15:14:15
+ * @LastEditTime: 2020-07-07 17:16:13
  * @Description: 首页
  */
 
 import React, { useEffect, useState } from "react";
 import { BottomTab } from "@/components/widget/BottomTab";
 import { TopTab } from "@/components/widget/TopTab";
-import {
-  getBanner,
-  getPersonalized,
-  getRecommendResource,
-  comfirmLoginStatus,
-} from "@/store/api";
+import { getBanner, getPersonalized, comfirmLoginStatus } from "@/store/api";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { HOME_ICONS_OPTIONS } from "@/share/enums";
@@ -32,8 +27,8 @@ export const Home = (props: any) => {
   useEffect(() => {
     Toast.loading("加载中");
     getBannerList(1);
-    //getPersonalizedList();
-    comfirmStatus();
+    getPersonalizedList();
+    //comfirmStatus();
   }, []);
 
   //获取banner
@@ -51,13 +46,13 @@ export const Home = (props: any) => {
     });
   };
 
-  const getRecommendResourceFunc = () => {
+  /* const getRecommendResourceFunc = () => {
     getRecommendResource().then((res: any) => {
       setPersonalizedList(res.recommend);
       Toast.hide();
     });
   };
-  const comfirmStatus = () => {
+   const comfirmStatus = () => {
     comfirmLoginStatus()
       .then(() => {
         getRecommendResourceFunc();
@@ -65,10 +60,15 @@ export const Home = (props: any) => {
       .catch(() => {
         getPersonalizedList();
       });
-  };
+  }; */
 
   const redirectToPath = (path: string) => {
-    props.history.push(path);
+    if (path === "recommend") {
+      //如果是每日推荐，需要判断是否登录
+      comfirmLoginStatus();
+    } else {
+      props.history.push(path);
+    }
   };
 
   const redirectToSonglistDetail = (id: number) => {
@@ -128,7 +128,7 @@ export const Home = (props: any) => {
           </div>
         </div>
       </div>
-      <BottomTab active="home" />
+      <BottomTab active="home" history={props.history} />
     </div>
   );
 };

@@ -42,7 +42,7 @@ export const SongListDetail = (props: any) => {
       <TopTab type="text" text="歌单" left={left} onLeft={handleBack} />
       <div
         className="songlistDetail__bg"
-        style={{ backgroundImage: `url(" + ${playlist.coverImgUrl} + ")` }}
+        style={{ backgroundImage: `url("${playlist.coverImgUrl}")` }}
       ></div>
       <div className="songlistDetail__header">
         <div className="container">

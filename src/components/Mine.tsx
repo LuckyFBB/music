@@ -6,7 +6,7 @@ import playlist from "@/static/icon/playlist.png";
 import radio from "@/static/icon/radio.png";
 import right from "@/static/icon/right_arrow.png";
 
-export const Mine = () => {
+export const Mine = (props: any) => {
   const [createDjRadioCount, setRadioCount] = useState(0);
   const [createdPlaylistCount, setPlaylistCount] = useState(0);
   const getUserSubcountFunc = () => {
@@ -19,13 +19,13 @@ export const Mine = () => {
     {
       label: "我的电台",
       img: radio,
-      value: createDjRadioCount
+      value: createDjRadioCount,
     },
     {
       label: "我的收藏",
       img: playlist,
-      value: createdPlaylistCount
-    }
+      value: createdPlaylistCount,
+    },
   ];
   useEffect(() => {
     getUserSubcountFunc();
@@ -43,13 +43,13 @@ export const Mine = () => {
               <div className="right">
                 <span className="label">{item.label}</span>
                 <span className="value">{item.value}</span>
-                <img className='arrow' src={right} alt="箭头" />
+                <img className="arrow" src={right} alt="箭头" />
               </div>
             </div>
           ))}
         </div>
       </div>
-      <BottomTab active="mine" />
+      <BottomTab active="mine" history={props.history} />
     </div>
   );
 };

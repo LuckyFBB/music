@@ -50,7 +50,7 @@ export const Singer = (props: any) => {
       <div className="singer__container">
         <SingerList list={singerList} onClick={redirectToSinger} />
       </div>
-      <BottomTab active="singer" />
+      <BottomTab active="singer" history={props.history} />
     </div>
   );
 };

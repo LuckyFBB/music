@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-26 20:19:16
  * @LastEditors: FBB
- * @LastEditTime: 2020-07-06 14:10:30
+ * @LastEditTime: 2020-07-07 17:17:17
  * @Description: 排行榜
  */
 
@@ -57,7 +57,7 @@ export const Rank = (props: any) => {
           />
         </div>
       </div>
-      <BottomTab active="home" />
+      <BottomTab active="home" history={props.history} />
     </div>
   );
 };

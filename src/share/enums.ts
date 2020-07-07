@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-25 21:31:03
  * @LastEditors: FBB
- * @LastEditTime: 2019-12-12 20:54:36
+ * @LastEditTime: 2020-07-07 17:08:19
  */
 import rank from "@/static/home/rank.png";
 import recommend from "@/static/home/recommend.png";
@@ -28,21 +28,21 @@ export const HOME_ICONS = {
   RECOMMEND: "每日推荐",
   MUSIC: "榜单",
   RADIO: "电台",
-  RANK: "排行榜"
+  RANK: "排行榜",
 };
 
 export const HOME_PATH = {
-  RECOMMEND: "/recommend",
+  RECOMMEND: "recommend",
   MUSIC: "music",
   RADIO: "radio",
-  RANK: "rank"
+  RANK: "rank",
 };
 
 export const HOME_ICONS_OPTIONS = [
   [HOME_PATH.RECOMMEND, HOME_ICONS.RECOMMEND, recommend],
   [HOME_PATH.MUSIC, HOME_ICONS.MUSIC, music],
   [HOME_PATH.RADIO, HOME_ICONS.RADIO, radio],
-  [HOME_PATH.RANK, HOME_ICONS.RANK, rank]
+  [HOME_PATH.RANK, HOME_ICONS.RANK, rank],
 ];
 
 /*
@@ -51,20 +51,20 @@ export const HOME_ICONS_OPTIONS = [
 export const ACTION_MAP = [
   {
     icon: comment,
-    title: "评论"
+    title: "评论",
   },
   {
     icon: like,
-    title: "点赞"
+    title: "点赞",
   },
   {
     icon: collect,
-    title: "收藏"
+    title: "收藏",
   },
   {
     icon: more,
-    title: "更多"
-  }
+    title: "更多",
+  },
 ];
 
 /*
@@ -73,68 +73,68 @@ export const ACTION_MAP = [
 export const TAG_LIST = [
   {
     name: "热门",
-    id: 0
+    id: 0,
   },
   {
     name: "华语男歌手",
-    id: 1001
+    id: 1001,
   },
   {
     name: "华语女歌手",
-    id: 1002
+    id: 1002,
   },
   {
     name: "华语组合/乐队 ",
-    id: 1003
+    id: 1003,
   },
   {
     name: "欧美男歌手",
-    id: 2001
+    id: 2001,
   },
   {
     name: "欧美女歌手",
-    id: 2002
+    id: 2002,
   },
   {
     name: "欧美组合/乐队",
-    id: 2003
+    id: 2003,
   },
   {
     name: "日本男歌手",
-    id: 6001
+    id: 6001,
   },
   {
     name: "日本女歌手",
-    id: 6002
+    id: 6002,
   },
   {
     name: "日本组合/乐队",
-    id: 6003
+    id: 6003,
   },
   {
     name: "韩国男歌手",
-    id: 7001
+    id: 7001,
   },
   {
     name: "韩国女歌手",
-    id: 7002
+    id: 7002,
   },
   {
     name: "韩国组合/乐队",
-    id: 7003
+    id: 7003,
   },
   {
     name: "其他男歌手",
-    id: 4001
+    id: 4001,
   },
   {
     name: "其他女歌手",
-    id: 4002
+    id: 4002,
   },
   {
     name: "其他组合/乐队",
-    id: 4003
-  }
+    id: 4003,
+  },
 ];
 
 /*
@@ -146,29 +146,25 @@ export const TAB_MAP = [
     title: "发现",
     default_img: home,
     active_img: home_active,
-    link: "/home"
   },
   {
     key: "singer",
     title: "歌手",
     default_img: singer,
     active_img: singer_active,
-    link: "/singer"
   },
   {
     key: "mine",
     title: "我的",
     default_img: mine,
     active_img: mine_active,
-    link: "/mine"
   },
   {
     key: "account",
     title: "账号",
     default_img: account,
     active_img: account_active,
-    link: "/account"
-  }
+  },
 ];
 
 /**
@@ -177,17 +173,17 @@ export const TAB_MAP = [
 export enum PLAY_TYPE {
   PLAY_ONCE = 0,
   PLAY_LOOP = 1,
-  PLAY_RANDOM = 2
+  PLAY_RANDOM = 2,
 }
 
 export const PLAY_TYPE_OPTIONS = [
   [PLAY_TYPE.PLAY_ONCE, "单曲循环"],
   [PLAY_TYPE.PLAY_LOOP, "列表循环"],
-  [PLAY_TYPE.PLAY_RANDOM, "随机播放"]
+  [PLAY_TYPE.PLAY_RANDOM, "随机播放"],
 ];
 
 export const PLAY_TYPE_IMG: Array<[any, any]> = [
   [PLAY_TYPE.PLAY_ONCE, play_once],
   [PLAY_TYPE.PLAY_LOOP, play_loop],
-  [PLAY_TYPE.PLAY_RANDOM, play_random]
+  [PLAY_TYPE.PLAY_RANDOM, play_random],
 ];
