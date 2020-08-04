@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-12-12 16:55:11
  * @LastEditors: FBB
- * @LastEditTime: 2020-07-06 13:34:13
+ * @LastEditTime: 2020-08-04 19:21:09
  * @Description: 请求集和
  */
 import request from "@/utils/request";
@@ -76,26 +76,8 @@ export const getHotPlay = () => {
 export const getHotPlayDetail = (cat: string) => {
   const url = "/top/playlist";
   const params = {
-    tag: cat,
-  };
-  return request({ url, params });
-};
-
-/**
- * 获取歌手热门列表
- */
-/**
- * @description: 获取歌手热门列表
- * @param {number} offset -偏移数量,用于分页
- * @param {number} limit -取出数量
- * @return:
- * @author: FBB
- */
-export const getTopSinger = (offset = 0, limit = 50) => {
-  const url = "/top/artists";
-  const params = {
-    offset,
-    limit,
+    cat,
+    limit: 51,
   };
   return request({ url, params });
 };
@@ -105,7 +87,8 @@ export const getTopSinger = (offset = 0, limit = 50) => {
  */
 /**
  * @description: 获取歌手分类
- * @param {number} cat -歌手类型
+ * @param {number} type  -歌手类型
+ * @param {number} area  -歌手类型
  * @param {string} initial -首字母索引查找参数
  * @param {number} offset -偏移数量，用于分页
  * @param {number} limit -数量
@@ -113,17 +96,19 @@ export const getTopSinger = (offset = 0, limit = 50) => {
  * @author: FBB
  */
 export const getCategorySinger = (
-  cat: number,
+  type: number,
+  area: number,
   initial?: string,
   offset?: number,
   limit?: number
 ) => {
   const url = "/artist/list";
   const params = {
-    cat,
+    type,
+    area,
     initial,
     offset,
-    limit,
+    limit: 20,
   };
   return request({ url, params });
 };

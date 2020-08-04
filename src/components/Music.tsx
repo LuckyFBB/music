@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-27 21:35:13
  * @LastEditors: FBB
- * @LastEditTime: 2020-07-06 14:11:09
+ * @LastEditTime: 2020-08-04 16:15:41
  * @Description: 首页榜单组件
  */
 
@@ -12,9 +12,11 @@ import { getHotPlayDetail, getHotPlay } from "@/store/api";
 import { TabBar } from "@/components/widget/TabBar";
 import { SongBlock } from "@/components/widget/SongBlock";
 import left from "@/static/icon/left_arrow.png";
+import { connect } from "react-redux";
+import { changeMusicTag } from "actions/musicAction";
 
-export const Music = (props: any) => {
-  const [tag, setTag] = useState("");
+const Music = (props: any) => {
+  const { musicTag, changeTag } = props;
   const [hotPlayList, setHotPlayList]: [
     Array<{ [propName: string]: string | number }>,
     Function
@@ -29,16 +31,20 @@ export const Music = (props: any) => {
   };
 
   const getHotPlayDetailFunc = (item: any) => {
-    setTag(item.name);
+    changeTag(item.name);
     getHotPlayDetail(item.name).then((res: any) => {
-      setHotPlayList(res.playlists);
+      const playlists = res.playlists;
+      if (item.name === "华语" || item.name === "流行") {
+        playlists.splice(0, 1);
+      }
+      setHotPlayList(playlists);
     });
   };
 
   const getTagList = () => {
     getHotPlay().then((res: any) => {
       setHotTagList(res.tags);
-      getHotPlayDetailFunc(res.tags[0]);
+      getHotPlayDetailFunc({ name: musicTag });
     });
   };
 
@@ -49,10 +55,24 @@ export const Music = (props: any) => {
   return (
     <div className="music">
       <TopTab text="歌单广场" left={left} type="text" onLeft={handleBack} />
-      <TabBar current={tag} tagList={hotTagList} onChange={getHotPlayDetail} />
+      <TabBar
+        current={musicTag}
+        tagList={hotTagList}
+        onChange={getHotPlayDetailFunc}
+      />
       <div className="music__content">
         <SongBlock list={hotPlayList} onClick={redirectToSonglistDetail} />
       </div>
     </div>
   );
 };
+
+const mapStateProps = (state: any) => ({
+  musicTag: state.musicReducer.musicTag,
+});
+
+const mapDispatchToProps = (dispatch: Function) => ({
+  changeTag: (tag: string) => dispatch(changeMusicTag(tag)),
+});
+
+export default connect(mapStateProps, mapDispatchToProps)(Music);

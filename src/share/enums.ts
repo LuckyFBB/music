@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-25 21:31:03
  * @LastEditors: FBB
- * @LastEditTime: 2020-07-07 17:08:19
+ * @LastEditTime: 2020-08-04 19:24:16
  */
 import rank from "@/static/home/rank.png";
 import recommend from "@/static/home/recommend.png";
@@ -72,67 +72,93 @@ export const ACTION_MAP = [
  */
 export const TAG_LIST = [
   {
-    name: "热门",
-    id: 0,
-  },
-  {
     name: "华语男歌手",
+    type: 1,
+    area: 7,
     id: 1001,
   },
   {
     name: "华语女歌手",
+    area: 7,
+    type: 2,
     id: 1002,
   },
   {
     name: "华语组合/乐队 ",
+    area: 7,
+    type: 3,
     id: 1003,
   },
   {
     name: "欧美男歌手",
+    area: 96,
+    type: 1,
     id: 2001,
   },
   {
     name: "欧美女歌手",
+    area: 96,
+    type: 2,
     id: 2002,
   },
   {
     name: "欧美组合/乐队",
+    area: 96,
+    type: 3,
     id: 2003,
   },
   {
     name: "日本男歌手",
+    area: 8,
+    type: 1,
     id: 6001,
   },
   {
     name: "日本女歌手",
+    area: 8,
+    type: 2,
     id: 6002,
   },
   {
     name: "日本组合/乐队",
+    area: 8,
+    type: 3,
     id: 6003,
   },
   {
     name: "韩国男歌手",
+    area: 16,
+    type: 1,
     id: 7001,
   },
   {
     name: "韩国女歌手",
+    area: 16,
+    type: 2,
     id: 7002,
   },
   {
     name: "韩国组合/乐队",
+    area: 16,
+    type: 3,
     id: 7003,
   },
   {
     name: "其他男歌手",
+    area: 0,
+    type: 1,
     id: 4001,
   },
   {
     name: "其他女歌手",
+    area: 0,
+    type: 2,
     id: 4002,
   },
   {
     name: "其他组合/乐队",
+    area: 0,
+    type: 3,
     id: 4003,
   },
 ];
