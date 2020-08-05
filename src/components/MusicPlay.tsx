@@ -53,16 +53,19 @@ const MusicPlay = (props: any) => {
 
   const handleChangeSong = (value: string) => {
     let other: any = null;
+    let newIndex: number = 0;
     switch (value) {
       case "pre":
-        other = playList[currentIndex - 1];
+        newIndex = currentIndex === 0 ? playList.length - 1 : currentIndex - 1;
+        other = playList[newIndex];
         changePlayId(other.id);
-        changeCurrentIndex(currentIndex - 1);
+        changeCurrentIndex(newIndex);
         return;
       case "next":
-        other = playList[currentIndex + 1];
+        newIndex = currentIndex === playList.length - 1 ? 0 : currentIndex + 1;
+        other = playList[newIndex];
         changePlayId(other.id);
-        changeCurrentIndex(currentIndex + 1);
+        changeCurrentIndex(newIndex);
         return;
     }
   };

@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-12-02 11:09:02
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-05 17:21:57
+ * @LastEditTime: 2020-08-05 20:05:51
  * @Description: 音乐播放等相关操作
  */
 import React, { useState } from "react";
@@ -11,7 +11,7 @@ import next from "@/static/playBar/next.png";
 import pauseImg from "@/static/playBar/pause.png";
 import playImg from "@/static/playBar/play.png";
 import list from "@/static/playBar/list.png";
-import { PLAY_TYPE_IMG } from "@/share/enums";
+import { PLAY_TYPE_IMG, PLAY_TYPE } from "@/share/enums";
 import { connect } from "react-redux";
 import {
   changePlayStateAction,
@@ -74,8 +74,16 @@ const PlayBar = (props: ISprops) => {
         break;
       case "getCurrentTime":
         setCurrentTime(audio.currentTime);
+        //当歌曲播放结束
         if (audio.currentTime === audio.duration) {
-          pause();
+          //判断是不是单曲循环
+          if (playMode === PLAY_TYPE.PLAY_ONCE) {
+            setCurrentTime(0);
+            audio.play();
+            play();
+          } else {
+            onChange("next");
+          }
         }
         break;
     }
