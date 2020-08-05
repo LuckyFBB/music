@@ -6,7 +6,7 @@ import "@/styles/index.less";
 import Music from "@/components/Music";
 import Singer from "@/components/Singer";
 import { Login } from "@/components/Login";
-import { SongListDetail } from "@/components/SongListDetail";
+import SongListDetail from "@/components/SongListDetail";
 import { SingerSongDetail } from "@/components/SingerSongDetail";
 import { Account } from "@/components/Account";
 import { Mine } from "@/components/Mine";

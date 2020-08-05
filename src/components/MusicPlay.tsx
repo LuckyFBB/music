@@ -1,14 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { TopTab } from "@/components/widget/TopTab";
 import left from "@/static/icon/left_arrow.png";
 import { getSongDetail, getSongUrl } from "@/store/api";
 import PlayBar from "@/components/widget/PlayBar";
 import cx from "classnames";
 import { connect } from "react-redux";
+import {
+  changePlayIdAction,
+  changeCurrentIndexAction,
+} from "actions/playAction";
 
 const MusicPlay = (props: any) => {
-  const { playStatus } = props;
-  const { id } = props.match.params;
+  const {
+    playStatus,
+    changePlayId,
+    playId,
+    playList,
+    currentIndex,
+    changeCurrentIndex,
+  } = props;
+
   const [url, setUrl] = useState("");
   const [pic, setPic] = useState("");
   const [name, setName] = useState("");
@@ -23,16 +34,37 @@ const MusicPlay = (props: any) => {
   };
 
   const getSongDetailFunc = () => {
-    getSongDetail(id).then((res: any) => {
+    getSongDetail(playId).then((res: any) => {
       setPic(res.songs[0].al.picUrl);
       setName(res.songs[0].name);
     });
   };
 
   const getSongUrlFunc = () => {
-    getSongUrl(id).then((res: any) => {
+    getSongUrl(playId).then((res: any) => {
       setUrl(res.data[0].url);
     });
+  };
+
+  useMemo(() => {
+    getSongDetailFunc();
+    getSongUrlFunc();
+  }, [playId]);
+
+  const handleChangeSong = (value: string) => {
+    let other: any = null;
+    switch (value) {
+      case "pre":
+        other = playList[currentIndex - 1];
+        changePlayId(other.id);
+        changeCurrentIndex(currentIndex - 1);
+        return;
+      case "next":
+        other = playList[currentIndex + 1];
+        changePlayId(other.id);
+        changeCurrentIndex(currentIndex + 1);
+        return;
+    }
   };
 
   return (
@@ -48,14 +80,25 @@ const MusicPlay = (props: any) => {
           src={pic}
           alt={name}
         />
-        <PlayBar url={url} />
+        <PlayBar url={url} onChange={handleChangeSong} />
       </div>
     </div>
   );
 };
 
-const mapStateToProps = (state: any) => ({
-  playStatus: state.playReducer.isPlay,
+const mapStateToProps = (state: any) => {
+  return {
+    playStatus: state.playReducer.isPlay,
+    playId: state.playReducer.playId,
+    currentIndex: state.playReducer.currentIndex,
+    playList: state.playReducer.playList,
+  };
+};
+
+const mapDispatchToProps = (dispacth: Function) => ({
+  changePlayId: (id: number) => dispacth(changePlayIdAction(id)),
+  changeCurrentIndex: (index: number) =>
+    dispacth(changeCurrentIndexAction(index)),
 });
 
-export default connect(mapStateToProps)(MusicPlay);
+export default connect(mapStateToProps, mapDispatchToProps)(MusicPlay);

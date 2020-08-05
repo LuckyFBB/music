@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { TopTab } from "@/components/widget/TopTab";
 import { getRecommendSongs } from "@/store/api";
 import bg from "@/static/recommend_bg.jpg";
-import { SongList } from "@/components/widget/SongList";
+import SongList from "@/components/widget/SongList";
 import { Toast } from "antd-mobile";
 import left from "@/static/icon/left_arrow.png";
 

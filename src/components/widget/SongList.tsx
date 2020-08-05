@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-09-08 16:49:52
  * @LastEditors: FBB
- * @LastEditTime: 2019-12-12 17:07:34
+ * @LastEditTime: 2020-08-05 17:16:33
  * @Description: 歌曲展示列表
  */
 
@@ -11,16 +11,25 @@ import play from "@/static/icon/play.png";
 import more from "@/static/icon/more_gray.png";
 import { checkMusic } from "@/store/api";
 import { Toast } from "antd-mobile";
+import { connect } from "react-redux";
+import {
+  changeCurrentIndexAction,
+  changePlayIdAction,
+} from "@/actions/playAction";
 
 interface ISProp {
   tracks: any[];
   history: any;
+  changeCurrentIndex: Function;
+  changePlayId: Function;
 }
 
-export const SongList = (props: ISProp) => {
-  const { tracks } = props;
+const SongList = (props: ISProp) => {
+  const { tracks, changeCurrentIndex, changePlayId } = props;
 
-  const handleClick = (id: string) => {
+  const handleClick = (id: string, index: number) => {
+    changeCurrentIndex(index);
+    changePlayId(id);
     checkMusic(id).then((res: any) => {
       if (res.success) {
         props.history.push(`/play/${id}`);
@@ -51,7 +60,7 @@ export const SongList = (props: ISProp) => {
             <div
               className="item"
               key={item.id}
-              onClick={() => handleClick(item.id)}
+              onClick={() => handleClick(item.id, index)}
             >
               <span className="index">{index + 1}</span>
               <div className="content">
@@ -72,3 +81,15 @@ export const SongList = (props: ISProp) => {
     </div>
   );
 };
+
+const mapStateToProps = (state: any) => ({
+  currentIndex: state.playReducer.currentIndex,
+});
+
+const mapDispatchToProps = (dispatch: Function) => ({
+  changeCurrentIndex: (index: number) =>
+    dispatch(changeCurrentIndexAction(index)),
+  changePlayId: (index: number) => dispatch(changePlayIdAction(index)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SongList);

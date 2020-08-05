@@ -2,14 +2,14 @@
  * @Author: FBB
  * @Date: 2019-09-08 21:46:38
  * @LastEditors: FBB
- * @LastEditTime: 2020-07-06 14:21:55
+ * @LastEditTime: 2020-08-05 17:06:39
  * @Description: 歌手所有歌曲展示
  */
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { TopTab } from "@/components/widget/TopTab";
 import { getSingerPlayDetail } from "@/store/api";
-import { SongList } from "@/components/widget/SongList";
+import SongList from "@/components/widget/SongList";
 import left from "@/static/icon/left_arrow.png";
 
 export const SingerSongDetail = (props: any) => {

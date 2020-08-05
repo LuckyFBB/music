@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-12-12 16:55:11
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-04 19:21:09
+ * @LastEditTime: 2020-08-05 17:17:20
  * @Description: 请求集和
  */
 import request from "@/utils/request";
@@ -280,7 +280,7 @@ export const getUserSubcount = () => {
  * @return:
  * @author: FBB
  */
-export const getSongDetail = (id: string) => {
+export const getSongDetail = (id: number) => {
   const url = "/song/detail";
   const params = {
     ids: id,
@@ -294,7 +294,7 @@ export const getSongDetail = (id: string) => {
  * @return:
  * @author: FBB
  */
-export const getSongUrl = (id: string) => {
+export const getSongUrl = (id: number) => {
   const url = "/song/url";
   const params = {
     id,

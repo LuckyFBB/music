@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-12-02 11:09:02
  * @LastEditors: FBB
- * @LastEditTime: 2019-12-12 20:56:16
+ * @LastEditTime: 2020-08-05 17:21:57
  * @Description: 音乐播放等相关操作
  */
 import React, { useState } from "react";
@@ -13,7 +13,10 @@ import playImg from "@/static/playBar/play.png";
 import list from "@/static/playBar/list.png";
 import { PLAY_TYPE_IMG } from "@/share/enums";
 import { connect } from "react-redux";
-import { changePlayState, changePlayMode } from "@/actions/playAction";
+import {
+  changePlayStateAction,
+  changePlayModeAction,
+} from "@/actions/playAction";
 import { getOptionsVlaue } from "@/utils/utils";
 
 interface ISprops {
@@ -23,10 +26,19 @@ interface ISprops {
   play: Function;
   pause: Function;
   changeMode: Function;
+  onChange: Function;
 }
 
 const PlayBar = (props: ISprops) => {
-  const { url, play, pause, playStatus, playMode, changeMode } = props;
+  const {
+    url,
+    play,
+    pause,
+    playStatus,
+    playMode,
+    changeMode,
+    onChange,
+  } = props;
   const [allTime, setAllTime] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
 
@@ -78,7 +90,7 @@ const PlayBar = (props: ISprops) => {
   const getStyle = () => {
     const process = `${(currentTime / allTime) * 100}%`;
     return {
-      background: `linear-gradient(to right, #ffffff 0%,#ffffff ${process},#c7c7c7 ${process},#c7c7c7)`
+      background: `linear-gradient(to right, #ffffff 0%,#ffffff ${process},#c7c7c7 ${process},#c7c7c7)`,
     };
   };
 
@@ -109,7 +121,7 @@ const PlayBar = (props: ISprops) => {
             step="0.01"
             max={allTime}
             value={currentTime}
-            onChange={e => controlAudio("changeCurrentTime", e)}
+            onChange={(e) => controlAudio("changeCurrentTime", e)}
           />
         </div>
         <span>{millisecondToDate(allTime)}</span>
@@ -118,7 +130,7 @@ const PlayBar = (props: ISprops) => {
         <div className="img__wrapper" onClick={handleChangeMode}>
           <img src={getMode()} alt="" />
         </div>
-        <div className="img__wrapper">
+        <div className="img__wrapper" onClick={() => onChange("pre")}>
           <img src={pre} alt="" />
         </div>
         <div className="img__wrapper--bigger">
@@ -128,7 +140,7 @@ const PlayBar = (props: ISprops) => {
             onClick={() => controlAudio("changeStatus")}
           />
         </div>
-        <div className="img__wrapper">
+        <div className="img__wrapper" onClick={() => onChange("next")}>
           <img src={next} alt="" />
         </div>
         <div className="img__wrapper">
@@ -140,15 +152,14 @@ const PlayBar = (props: ISprops) => {
 };
 const mapStateToProps = (state: any) => ({
   playStatus: state.playReducer.playStatus,
-  playMode: state.playReducer.playMode
+  playMode: state.playReducer.playMode,
+  playList: state.playReducer.playList,
 });
 
-const mapDispatchToProps = (dispatch: Function) => {
-  return {
-    play: () => dispatch(changePlayState(true)),
-    pause: () => dispatch(changePlayState(false)),
-    changeMode: (value: number) => dispatch(changePlayMode(value))
-  };
-};
+const mapDispatchToProps = (dispatch: Function) => ({
+  play: () => dispatch(changePlayStateAction(true)),
+  pause: () => dispatch(changePlayStateAction(false)),
+  changeMode: (value: number) => dispatch(changePlayModeAction(value)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayBar);

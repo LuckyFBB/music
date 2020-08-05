@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import { getPlayDetail } from "@/store/api";
 import { TopTab } from "@/components/widget/TopTab";
 import play from "@/static/home/play.png";
-import { SongList } from "@/components/widget/SongList";
+import SongList from "@/components/widget/SongList";
 import { ACTION_MAP } from "@/share/enums";
 import left from "@/static/icon/left_arrow.png";
+import { connect } from "react-redux";
+import { changePlayListAction } from "actions/playAction";
 
-export const SongListDetail = (props: any) => {
+const SongListDetail = (props: any) => {
   const { id } = props.match.params;
+  const { changePlayList } = props;
 
   const [playlist, setPlaylist]: [
     { [propName: string]: string | number },
@@ -30,6 +33,7 @@ export const SongListDetail = (props: any) => {
       setPlaylist(res.playlist);
       setCreator(res.playlist.creator);
       setTracks(res.playlist.tracks);
+      changePlayList(res.playlist.tracks);
     });
   };
 
@@ -86,3 +90,11 @@ export const SongListDetail = (props: any) => {
     </div>
   );
 };
+
+const mapStateToProps = () => ({});
+
+const mapDispatchToProps = (dispacth: Function) => ({
+  changePlayList: (list: []) => dispacth(changePlayListAction(list)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SongListDetail);
