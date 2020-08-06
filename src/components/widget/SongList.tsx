@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-09-08 16:49:52
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-05 17:16:33
+ * @LastEditTime: 2020-08-06 15:13:45
  * @Description: 歌曲展示列表
  */
 
@@ -15,21 +15,31 @@ import { connect } from "react-redux";
 import {
   changeCurrentIndexAction,
   changePlayIdAction,
+  changeCurrentSongAction,
 } from "@/actions/playAction";
 
 interface ISProp {
-  tracks: any[];
   history: any;
   changeCurrentIndex: Function;
   changePlayId: Function;
+  sequenceList: [];
+  totalCount: number;
+  changeCurrentSong: Function;
 }
 
 const SongList = (props: ISProp) => {
-  const { tracks, changeCurrentIndex, changePlayId } = props;
+  const {
+    changeCurrentIndex,
+    changePlayId,
+    sequenceList,
+    totalCount,
+    changeCurrentSong,
+  } = props;
 
   const handleClick = (id: string, index: number) => {
     changeCurrentIndex(index);
     changePlayId(id);
+    changeCurrentSong(sequenceList[index]);
     checkMusic(id).then((res: any) => {
       if (res.success) {
         props.history.push(`/play/${id}`);
@@ -45,7 +55,7 @@ const SongList = (props: ISProp) => {
         <div className="left">
           <img src={play} alt="播放" />
           <span className="title">
-            播放全部<span className="subtitle">共{tracks.length}首</span>
+            播放全部<span className="subtitle">共{totalCount}首</span>
           </span>
         </div>
         <div className="right">
@@ -53,7 +63,7 @@ const SongList = (props: ISProp) => {
         </div>
       </div>
       <div className="songlist__content">
-        {tracks.map((item: any, index: number) => {
+        {sequenceList.map((item: any, index: number) => {
           const ar = item.ar || item.artists;
           const al = item.al || item.album;
           return (
@@ -84,12 +94,17 @@ const SongList = (props: ISProp) => {
 
 const mapStateToProps = (state: any) => ({
   currentIndex: state.playReducer.currentIndex,
+  sequenceList: state.playReducer.sequenceList,
+  totalCount: state.albumReducer.totalCount,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
   changeCurrentIndex: (index: number) =>
     dispatch(changeCurrentIndexAction(index)),
   changePlayId: (index: number) => dispatch(changePlayIdAction(index)),
+  changeCurrentSong: (song: {}) => {
+    dispatch(changeCurrentSongAction(song));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SongList);

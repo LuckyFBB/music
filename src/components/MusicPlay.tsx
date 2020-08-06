@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import {
   changePlayIdAction,
   changeCurrentIndexAction,
+  changeCurrentSongAction,
 } from "actions/playAction";
 
 const MusicPlay = (props: any) => {
@@ -18,26 +19,18 @@ const MusicPlay = (props: any) => {
     playList,
     currentIndex,
     changeCurrentIndex,
+    changeCurrentSong,
+    currentSong,
   } = props;
 
   const [url, setUrl] = useState("");
-  const [pic, setPic] = useState("");
-  const [name, setName] = useState("");
 
   useEffect(() => {
-    getSongDetailFunc();
     getSongUrlFunc();
   }, []);
 
   const handleBack = () => {
     props.history.go(-1);
-  };
-
-  const getSongDetailFunc = () => {
-    getSongDetail(playId).then((res: any) => {
-      setPic(res.songs[0].al.picUrl);
-      setName(res.songs[0].name);
-    });
   };
 
   const getSongUrlFunc = () => {
@@ -47,41 +40,40 @@ const MusicPlay = (props: any) => {
   };
 
   useMemo(() => {
-    getSongDetailFunc();
     getSongUrlFunc();
   }, [playId]);
 
   const handleChangeSong = (value: string) => {
-    let other: any = null;
+    let newSong: any = {};
     let newIndex: number = 0;
-    switch (value) {
-      case "pre":
-        newIndex = currentIndex === 0 ? playList.length - 1 : currentIndex - 1;
-        other = playList[newIndex];
-        changePlayId(other.id);
-        changeCurrentIndex(newIndex);
-        return;
-      case "next":
-        newIndex = currentIndex === playList.length - 1 ? 0 : currentIndex + 1;
-        other = playList[newIndex];
-        changePlayId(other.id);
-        changeCurrentIndex(newIndex);
-        return;
+    if (value === "pre") {
+      newIndex = currentIndex === 0 ? playList.length - 1 : currentIndex - 1;
+    } else {
+      newIndex = currentIndex === playList.length - 1 ? 0 : currentIndex + 1;
     }
+    newSong = playList[newIndex];
+    changePlayId(newSong.id);
+    changeCurrentIndex(newIndex);
+    changeCurrentSong(newSong);
   };
 
   return (
     <div className="play">
-      <TopTab type="text" text={name} left={left} onLeft={handleBack} />
+      <TopTab
+        type="text"
+        text={currentSong.name}
+        left={left}
+        onLeft={handleBack}
+      />
       <div className="play__container">
         <div
           className="play__bg"
-          style={{ backgroundImage: "url(" + `${pic}` + ")" }}
+          style={{ backgroundImage: "url(" + `${currentSong.al.picUrl}` + ")" }}
         />
         <img
           className={cx("play__img", { "play__img--rotate": playStatus })}
-          src={pic}
-          alt={name}
+          src={currentSong.al.picUrl}
+          alt={currentSong.name}
         />
         <PlayBar url={url} onChange={handleChangeSong} />
       </div>
@@ -94,6 +86,7 @@ const mapStateToProps = (state: any) => {
     playStatus: state.playReducer.isPlay,
     playId: state.playReducer.playId,
     currentIndex: state.playReducer.currentIndex,
+    currentSong: state.playReducer.currentSong,
     playList: state.playReducer.playList,
   };
 };
@@ -102,6 +95,8 @@ const mapDispatchToProps = (dispacth: Function) => ({
   changePlayId: (id: number) => dispacth(changePlayIdAction(id)),
   changeCurrentIndex: (index: number) =>
     dispacth(changeCurrentIndexAction(index)),
+  changeCurrentSong: (index: number) =>
+    dispacth(changeCurrentSongAction(index)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MusicPlay);

@@ -6,34 +6,35 @@ import SongList from "@/components/widget/SongList";
 import { ACTION_MAP } from "@/share/enums";
 import left from "@/static/icon/left_arrow.png";
 import { connect } from "react-redux";
-import { changePlayListAction } from "actions/playAction";
+import {
+  changePlayListAction,
+  initSequenceListAction,
+} from "actions/playAction";
+import {
+  initCurrentAlbumAction,
+  changeTotalCountAction,
+} from "@/actions/albumAction";
 
 const SongListDetail = (props: any) => {
   const { id } = props.match.params;
-  const { changePlayList } = props;
-
-  const [playlist, setPlaylist]: [
-    { [propName: string]: string | number },
-    Function
-  ] = useState({});
-
-  const [creator, setCreator]: [
-    { [propName: string]: string },
-    Function
-  ] = useState({});
-
-  const [tracks, setTracks]: [[], Function] = useState([]);
+  const {
+    changePlayList,
+    initSequenceList,
+    initCurrentAlbum,
+    currentAlbum,
+    changeTotalCount,
+  } = props;
 
   useEffect(() => {
     getSonglist();
-  }, []);
+  }, [id]);
 
   const getSonglist = () => {
     getPlayDetail(id).then((res: any) => {
-      setPlaylist(res.playlist);
-      setCreator(res.playlist.creator);
-      setTracks(res.playlist.tracks);
+      initCurrentAlbum(res.playlist);
       changePlayList(res.playlist.tracks);
+      initSequenceList(res.playlist.tracks);
+      changeTotalCount(res.playlist.tracks.length);
     });
   };
 
@@ -46,32 +47,38 @@ const SongListDetail = (props: any) => {
       <TopTab type="text" text="歌单" left={left} onLeft={handleBack} />
       <div
         className="songlistDetail__bg"
-        style={{ backgroundImage: `url("${playlist.coverImgUrl}")` }}
+        style={{ backgroundImage: `url("${currentAlbum.coverImgUrl}")` }}
       ></div>
       <div className="songlistDetail__header">
         <div className="container">
           <div className="bg">
-            {playlist.coverImgUrl && (
+            {currentAlbum.coverImgUrl && (
               <img
                 className="bg__cover"
-                src={playlist.coverImgUrl as string}
+                src={currentAlbum.coverImgUrl as string}
                 alt=""
               />
             )}
             <div className="bg__fixed">
               <img src={play} alt="播放" />
               <span>
-                {((playlist.playCount as number) / 10000).toFixed(0)}万
+                {((currentAlbum.playCount as number) / 10000).toFixed(0)}万
               </span>
             </div>
           </div>
           <div className="content">
-            <p className="title">{playlist.name}</p>
+            <p className="title">{currentAlbum.name}</p>
             <div className="creator">
-              {creator.avatarUrl && (
-                <img className="avatar" src={creator.avatarUrl} alt="" />
+              {currentAlbum.creator && (
+                <React.Fragment>
+                  <img
+                    className="avatar"
+                    src={currentAlbum.creator.avatarUrl}
+                    alt=""
+                  />
+                  <span className="nick">{currentAlbum.creator.nickname}</span>
+                </React.Fragment>
               )}
-              <span className="nick">{creator.nickname}</span>
             </div>
           </div>
         </div>
@@ -85,16 +92,23 @@ const SongListDetail = (props: any) => {
         </div>
       </div>
       <div className="songlistDetail__content">
-        <SongList tracks={tracks} history={props.history} />
+        <SongList history={props.history} />
       </div>
     </div>
   );
 };
 
-const mapStateToProps = () => ({});
+const mapStateToProps = (state: any) => ({
+  sequenceList: state.playReducer.sequenceList,
+  currentAlbum: state.albumReducer.currentAlbum,
+});
 
-const mapDispatchToProps = (dispacth: Function) => ({
-  changePlayList: (list: []) => dispacth(changePlayListAction(list)),
+const mapDispatchToProps = (dispatch: Function) => ({
+  changePlayList: (list: []) => dispatch(changePlayListAction(list)),
+  initSequenceList: (list: []) => dispatch(initSequenceListAction(list)),
+  initCurrentAlbum: (album: {}) => dispatch(initCurrentAlbumAction(album)),
+  changeTotalCount: (number: number) =>
+    dispatch(changeTotalCountAction(number)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SongListDetail);

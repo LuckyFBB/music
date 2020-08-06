@@ -2,12 +2,12 @@
  * @Author: FBB
  * @Date: 2019-12-03 16:04:03
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-05 16:39:01
+ * @LastEditTime: 2020-08-06 15:14:37
  * @Description:
  */
 
-export const initShowListAction = (list: []) => ({
-  type: "INIT_SHOW_LIST",
+export const initSequenceListAction = (list: []) => ({
+  type: "INIT_SEQUENCE_LIST",
   preload: list,
 });
 
@@ -17,8 +17,13 @@ export const changePlayListAction = (list: []) => ({
 });
 
 export const changeCurrentIndexAction = (index: number) => ({
-  type: "CHANGE_CURRENTINDEX",
+  type: "CHANGE_CURRENT_INDEX",
   preload: index,
+});
+
+export const changeCurrentSongAction = (song: {}) => ({
+  type: "CHANGE_CURRENT_SONG",
+  preload: song,
 });
 
 export const changePlayIdAction = (id: number) => ({

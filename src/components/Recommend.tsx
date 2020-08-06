@@ -32,7 +32,7 @@ export const Recommend = (props: any) => {
         <img className="recommend__img" src={bg} alt="" />
       </div>
       <div className="recommend__content">
-        <SongList tracks={songs} history={props.history} />
+        {/* <SongList tracks={songs} history={props.history} /> */}
       </div>
     </div>
   );
