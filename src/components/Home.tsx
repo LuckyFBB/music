@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-04 13:51:28
+ * @LastEditTime: 2020-08-06 20:39:47
  * @Description: 首页
  */
 
@@ -46,26 +46,12 @@ export const Home = (props: any) => {
     });
   };
 
-  /* const getRecommendResourceFunc = () => {
-    getRecommendResource().then((res: any) => {
-      setPersonalizedList(res.recommend);
-      Toast.hide();
-    });
-  };
-   const comfirmStatus = () => {
-    comfirmLoginStatus()
-      .then(() => {
-        getRecommendResourceFunc();
-      })
-      .catch(() => {
-        getPersonalizedList();
-      });
-  }; */
-
   const redirectToPath = (path: string) => {
     if (path === "recommend") {
       //如果是每日推荐，需要判断是否登录
-      comfirmLoginStatus();
+      comfirmLoginStatus().then(() => {
+        props.history.push(path);
+      });
     } else {
       props.history.push(path);
     }

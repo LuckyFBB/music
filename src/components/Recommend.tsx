@@ -5,9 +5,20 @@ import bg from "@/static/recommend_bg.jpg";
 import SongList from "@/components/widget/SongList";
 import { Toast } from "antd-mobile";
 import left from "@/static/icon/left_arrow.png";
+import { connect } from "react-redux";
+import {
+  changePlayListAction,
+  initSequenceListAction,
+} from "@/actions/playAction";
 
-export const Recommend = (props: any) => {
-  const [songs, setSongs]: [[], Function] = useState([]);
+interface ISPorps {
+  history: any;
+  changePlayList: Function;
+  initSequenceList: Function;
+}
+
+const Recommend = (props: ISPorps) => {
+  const { changePlayList, initSequenceList } = props;
 
   useEffect(() => {
     Toast.loading("加载中");
@@ -16,7 +27,8 @@ export const Recommend = (props: any) => {
 
   const getRecommendSongsFunc = () => {
     getRecommendSongs().then((res: any) => {
-      setSongs(res.recommend);
+      changePlayList(res.data.dailySongs);
+      initSequenceList(res.data.dailySongs);
       Toast.hide();
     });
   };
@@ -32,8 +44,16 @@ export const Recommend = (props: any) => {
         <img className="recommend__img" src={bg} alt="" />
       </div>
       <div className="recommend__content">
-        {/* <SongList tracks={songs} history={props.history} /> */}
+        <SongList history={props.history} />
       </div>
     </div>
   );
 };
+
+const mapStateToProps = () => ({});
+const mapDispatchToProps = (dispatch: Function) => ({
+  changePlayList: (list: []) => dispatch(changePlayListAction(list)),
+  initSequenceList: (list: []) => dispatch(initSequenceListAction(list)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Recommend);

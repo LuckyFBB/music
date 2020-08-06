@@ -10,7 +10,7 @@ import SongListDetail from "@/components/SongListDetail";
 import SingerSongDetail from "@/components/SingerSongDetail";
 import { Account } from "@/components/Account";
 import { Mine } from "@/components/Mine";
-import { Recommend } from "@/components/Recommend";
+import Recommend from "@/components/Recommend";
 import { Search } from "@/components/Search";
 import MusicPlay from "@/components/MusicPlay";
 import store from "@/store";
