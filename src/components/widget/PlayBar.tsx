@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-12-02 11:09:02
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-06 15:28:40
+ * @LastEditTime: 2020-08-07 16:28:53
  * @Description: 音乐播放等相关操作
  */
 import React, { useState } from "react";
@@ -27,9 +27,10 @@ interface ISprops {
   play: Function;
   pause: Function;
   changeMode: Function;
-  onChange: Function;
+  changeCurrentSong: Function;
   changePlayList: Function;
   sequenceList: [];
+  showPlayList: Function;
 }
 
 const PlayBar = (props: ISprops) => {
@@ -40,9 +41,10 @@ const PlayBar = (props: ISprops) => {
     playStatus,
     playMode,
     changeMode,
-    onChange,
+    changeCurrentSong,
     changePlayList,
     sequenceList,
+    showPlayList,
   } = props;
   const [allTime, setAllTime] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
@@ -87,7 +89,7 @@ const PlayBar = (props: ISprops) => {
             audio.play();
             play();
           } else {
-            onChange("next");
+            changeCurrentSong("next");
           }
         }
         break;
@@ -107,7 +109,10 @@ const PlayBar = (props: ISprops) => {
     };
   };
 
-  const handleChangeMode = () => {
+  const handleChangeMode = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    event.stopPropagation();
     const newMode = (playMode + 1) % 3;
     changeMode(newMode);
     if (newMode === PLAY_TYPE.PLAY_RANDOM) {
@@ -145,10 +150,13 @@ const PlayBar = (props: ISprops) => {
         <span>{millisecondToDate(allTime)}</span>
       </div>
       <div className="action">
-        <div className="img__wrapper" onClick={handleChangeMode}>
+        <div className="img__wrapper" onClick={(e) => handleChangeMode(e)}>
           <img src={getMode()} alt="" />
         </div>
-        <div className="img__wrapper" onClick={() => onChange("pre")}>
+        <div
+          className="img__wrapper"
+          onClick={(e) => changeCurrentSong("pre", e)}
+        >
           <img src={pre} alt="" />
         </div>
         <div className="img__wrapper--bigger">
@@ -158,10 +166,16 @@ const PlayBar = (props: ISprops) => {
             onClick={() => controlAudio("changeStatus")}
           />
         </div>
-        <div className="img__wrapper" onClick={() => onChange("next")}>
+        <div
+          className="img__wrapper"
+          onClick={(e) => changeCurrentSong("next", e)}
+        >
           <img src={next} alt="" />
         </div>
-        <div className="img__wrapper">
+        <div
+          className="img__wrapper"
+          onClick={(e) => showPlayList(e)}
+        >
           <img src={list} alt="" />
         </div>
       </div>

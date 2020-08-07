@@ -1,14 +1,17 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { TopTab } from "@/components/widget/TopTab";
+import ShowPlaylist from "@/components/widget/ShowPlayList";
 import left from "@/static/icon/left_arrow.png";
-import { getSongDetail, getSongUrl } from "@/store/api";
+import { getSongUrl } from "@/store/api";
 import PlayBar from "@/components/widget/PlayBar";
 import cx from "classnames";
 import { connect } from "react-redux";
+import { CSSTransition } from "react-transition-group";
 import {
   changePlayIdAction,
   changeCurrentIndexAction,
   changeCurrentSongAction,
+  changePlayStateAction,
 } from "actions/playAction";
 
 const MusicPlay = (props: any) => {
@@ -21,12 +24,15 @@ const MusicPlay = (props: any) => {
     changeCurrentIndex,
     changeCurrentSong,
     currentSong,
+    changePlayState,
   } = props;
 
   const [url, setUrl] = useState("");
+  const [showPlaylist, setShowPlaylist] = useState(false);
 
   useEffect(() => {
     getSongUrlFunc();
+    changePlayState(true);
   }, []);
 
   const handleBack = () => {
@@ -43,18 +49,36 @@ const MusicPlay = (props: any) => {
     getSongUrlFunc();
   }, [playId]);
 
-  const handleChangeSong = (value: string) => {
+  const handleChangeCurrentSongByIcon = (
+    value: string,
+    event?: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    event && event.stopPropagation();
     let newSong: any = {};
     let newIndex: number = 0;
     if (value === "pre") {
       newIndex = currentIndex === 0 ? playList.length - 1 : currentIndex - 1;
-    } else {
+    } else if (value == "next") {
       newIndex = currentIndex === playList.length - 1 ? 0 : currentIndex + 1;
     }
     newSong = playList[newIndex];
     changePlayId(newSong.id);
     changeCurrentIndex(newIndex);
     changeCurrentSong(newSong);
+  };
+
+  const handleChangeCurrentSongByList = (index: number) => {
+    const newSong = playList[index];
+    changePlayId(newSong.id);
+    changeCurrentIndex(index);
+    changeCurrentSong(newSong);
+  };
+
+  const handleShowPlayList = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    event && event.stopPropagation();
+    setShowPlaylist(true);
   };
 
   return (
@@ -65,7 +89,12 @@ const MusicPlay = (props: any) => {
         left={left}
         onLeft={handleBack}
       />
-      <div className="play__container">
+      <div
+        className="play__container"
+        onClick={() => {
+          setShowPlaylist(false);
+        }}
+      >
         <div
           className="play__bg"
           style={{ backgroundImage: "url(" + `${currentSong.al.picUrl}` + ")" }}
@@ -75,7 +104,21 @@ const MusicPlay = (props: any) => {
           src={currentSong.al.picUrl}
           alt={currentSong.name}
         />
-        <PlayBar url={url} onChange={handleChangeSong} />
+        <PlayBar
+          url={url}
+          changeCurrentSong={handleChangeCurrentSongByIcon}
+          showPlayList={handleShowPlayList}
+        />
+        <CSSTransition
+          in={showPlaylist}
+          timeout={1000}
+          classNames="fade"
+          unmountOnExit
+        >
+          <ShowPlaylist
+            changeCurrentSong={handleChangeCurrentSongByList}
+          />
+        </CSSTransition>
       </div>
     </div>
   );
@@ -93,6 +136,7 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispacth: Function) => ({
   changePlayId: (id: number) => dispacth(changePlayIdAction(id)),
+  changePlayState: (state: boolean) => dispacth(changePlayStateAction(state)),
   changeCurrentIndex: (index: number) =>
     dispacth(changeCurrentIndexAction(index)),
   changeCurrentSong: (index: number) =>

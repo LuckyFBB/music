@@ -418,6 +418,29 @@
     align-items: center;
     padding: 150px 15px 0;
   }
+  //进入动画
+  .fade-enter{
+    top: 100vh;
+  }
+  .fade-enter-active{
+    top: 30vh;
+    transition: top 1s ease-in;
+  }
+  .fade-enter-done {
+    top: 30vh;
+  }
+  //退出动画
+  .fade-exit {
+    top: 30vh;
+  }
+  .fade-exit-active {
+    top: 100vh;
+    transition: top 1s ease-in;
+  }
+  .fade-exit-done {
+    top: 100vh;
+  }
+
   &__bg {
     position: absolute;
     left: 0px;
