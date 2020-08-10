@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:55
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-07 17:27:15
+ * @LastEditTime: 2020-08-10 21:54:15
  */
 
 @top_height: 50px;
@@ -583,9 +583,17 @@
   border-top-left-radius: 15px;
   background-color: #fff;
   .title {
+    position: fixed;
+    width: 100%;
     line-height: 50px;
     text-align: center;
     margin-bottom: 10px;
     border-bottom: 1px solid #999;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    background-color: rgba(255, 255, 255);
+    &__cover {
+      height: 60px;
+    }
   }
 }
