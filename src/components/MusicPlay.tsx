@@ -12,7 +12,10 @@ import {
   changeCurrentIndexAction,
   changeCurrentSongAction,
   changePlayStateAction,
+  changePlayListAction,
 } from "actions/playAction";
+import { PLAY_TYPE } from "@/share/enums";
+import { randomList, findIndex } from "@/utils/utils";
 
 const MusicPlay = (props: any) => {
   const {
@@ -25,6 +28,8 @@ const MusicPlay = (props: any) => {
     changeCurrentSong,
     currentSong,
     changePlayState,
+    playMode,
+    changePlayList,
   } = props;
 
   const [url, setUrl] = useState("");
@@ -33,6 +38,11 @@ const MusicPlay = (props: any) => {
   useEffect(() => {
     getSongUrlFunc();
     changePlayState(true);
+    if (playMode === PLAY_TYPE.PLAY_RANDOM) {
+      const randomlist = randomList(playList);
+      changePlayList(randomlist);
+      changeCurrentIndex(findIndex(currentSong, randomlist));
+    }
   }, []);
 
   const handleBack = () => {
@@ -115,9 +125,7 @@ const MusicPlay = (props: any) => {
           classNames="fade"
           unmountOnExit
         >
-          <ShowPlaylist
-            changeCurrentSong={handleChangeCurrentSongByList}
-          />
+          <ShowPlaylist changeCurrentSong={handleChangeCurrentSongByList} />
         </CSSTransition>
       </div>
     </div>
@@ -131,16 +139,18 @@ const mapStateToProps = (state: any) => {
     currentIndex: state.playReducer.currentIndex,
     currentSong: state.playReducer.currentSong,
     playList: state.playReducer.playList,
+    playMode: state.playReducer.playMode,
   };
 };
 
-const mapDispatchToProps = (dispacth: Function) => ({
-  changePlayId: (id: number) => dispacth(changePlayIdAction(id)),
-  changePlayState: (state: boolean) => dispacth(changePlayStateAction(state)),
+const mapDispatchToProps = (dispatch: Function) => ({
+  changePlayId: (id: number) => dispatch(changePlayIdAction(id)),
+  changePlayState: (state: boolean) => dispatch(changePlayStateAction(state)),
   changeCurrentIndex: (index: number) =>
-    dispacth(changeCurrentIndexAction(index)),
+    dispatch(changeCurrentIndexAction(index)),
   changeCurrentSong: (index: number) =>
-    dispacth(changeCurrentSongAction(index)),
+    dispatch(changeCurrentSongAction(index)),
+  changePlayList: (list: []) => dispatch(changePlayListAction(list)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MusicPlay);

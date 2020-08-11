@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-12-12 15:01:04
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-06 17:09:40
+ * @LastEditTime: 2020-08-11 21:00:01
  * @Description: 某些工具类方法集和
  */
 
@@ -65,6 +65,6 @@ export const randomList = (list: []) => {
  */
 export const findIndex = (song: any, list: []) => {
   return list.findIndex((item: any) => {
-    return (item.id = song.id);
+    return item.id === song.id;
   });
 };

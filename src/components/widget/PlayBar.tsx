@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-12-02 11:09:02
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-07 16:28:53
+ * @LastEditTime: 2020-08-11 21:06:03
  * @Description: 音乐播放等相关操作
  */
 import React, { useState } from "react";
@@ -17,8 +17,9 @@ import {
   changePlayStateAction,
   changePlayModeAction,
   changePlayListAction,
+  changeCurrentIndexAction,
 } from "@/actions/playAction";
-import { getOptionsVlaue, randomList } from "@/utils/utils";
+import { getOptionsVlaue, randomList, findIndex } from "@/utils/utils";
 
 interface ISprops {
   url: string;
@@ -31,6 +32,8 @@ interface ISprops {
   changePlayList: Function;
   sequenceList: [];
   showPlayList: Function;
+  changeCurrentIndex: Function;
+  currentSong: {};
 }
 
 const PlayBar = (props: ISprops) => {
@@ -45,6 +48,8 @@ const PlayBar = (props: ISprops) => {
     changePlayList,
     sequenceList,
     showPlayList,
+    changeCurrentIndex,
+    currentSong,
   } = props;
   const [allTime, setAllTime] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
@@ -116,9 +121,12 @@ const PlayBar = (props: ISprops) => {
     const newMode = (playMode + 1) % 3;
     changeMode(newMode);
     if (newMode === PLAY_TYPE.PLAY_RANDOM) {
-      changePlayList(randomList(sequenceList));
+      const randomlist = randomList(sequenceList);
+      changePlayList(randomlist);
+      changeCurrentIndex(findIndex(currentSong, randomlist));
     } else if (newMode === PLAY_TYPE.PLAY_LOOP) {
       changePlayList(sequenceList);
+      changeCurrentIndex(findIndex(currentSong, sequenceList));
     }
   };
 
@@ -172,10 +180,7 @@ const PlayBar = (props: ISprops) => {
         >
           <img src={next} alt="" />
         </div>
-        <div
-          className="img__wrapper"
-          onClick={(e) => showPlayList(e)}
-        >
+        <div className="img__wrapper" onClick={(e) => showPlayList(e)}>
           <img src={list} alt="" />
         </div>
       </div>
@@ -186,6 +191,7 @@ const mapStateToProps = (state: any) => ({
   playStatus: state.playReducer.playStatus,
   playMode: state.playReducer.playMode,
   sequenceList: state.playReducer.sequenceList,
+  currentSong: state.playReducer.currentSong,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
@@ -193,6 +199,8 @@ const mapDispatchToProps = (dispatch: Function) => ({
   pause: () => dispatch(changePlayStateAction(false)),
   changeMode: (value: number) => dispatch(changePlayModeAction(value)),
   changePlayList: (list: []) => dispatch(changePlayListAction(list)),
+  changeCurrentIndex: (index: number) =>
+    dispatch(changeCurrentIndexAction(index)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayBar);
