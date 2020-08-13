@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { TopTab } from "./widget/TopTab";
-import { BottomTab } from "./widget/BottomTab";
-import { store } from "../store/store";
-import playlist from "../static/icon/playlist.png";
-import radio from "../static/icon/radio.png";
-import right from "../static/icon/right_arrow.png";
+import { TopTab } from "@/components/widget/TopTab";
+import { BottomTab } from "@/components/widget/BottomTab";
+import { getUserSubcount } from "@/store/api";
+import playlist from "@/static/icon/playlist.png";
+import radio from "@/static/icon/radio.png";
+import right from "@/static/icon/right_arrow.png";
 
-export const Mine = () => {
+export const Mine = (props: any) => {
   const [createDjRadioCount, setRadioCount] = useState(0);
   const [createdPlaylistCount, setPlaylistCount] = useState(0);
-  const getUserSubcount = () => {
-    store.getUserSubcount().then((res: any) => {
+  const getUserSubcountFunc = () => {
+    getUserSubcount().then((res: any) => {
       setPlaylistCount(res.createdPlaylistCount);
       setRadioCount(res.createDjRadioCount);
     });
@@ -19,16 +19,16 @@ export const Mine = () => {
     {
       label: "我的电台",
       img: radio,
-      value: createDjRadioCount
+      value: createDjRadioCount,
     },
     {
       label: "我的收藏",
       img: playlist,
-      value: createdPlaylistCount
-    }
+      value: createdPlaylistCount,
+    },
   ];
   useEffect(() => {
-    getUserSubcount();
+    getUserSubcountFunc();
   }, []);
   return (
     <div className="mine">
@@ -43,13 +43,13 @@ export const Mine = () => {
               <div className="right">
                 <span className="label">{item.label}</span>
                 <span className="value">{item.value}</span>
-                <img className='arrow' src={right} alt="箭头" />
+                <img className="arrow" src={right} alt="箭头" />
               </div>
             </div>
           ))}
         </div>
       </div>
-      <BottomTab active="mine" />
+      <BottomTab active="mine" history={props.history} />
     </div>
   );
 };

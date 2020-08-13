@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import classnames from "classnames";
-import close from "../static/icon/close.png";
-import { store } from "../store/store";
+import close from "@/static/icon/close.png";
+import { setStorage } from "@/utils/utils";
 import { Toast } from "antd-mobile";
+import { submitLoginByEmail } from "@/store/api";
 
 export const Login = (props: any) => {
   const [email, setEmail] = useState("");
@@ -46,9 +47,9 @@ export const Login = (props: any) => {
   };
 
   const submitLogin = () => {
-    store.submitLoginByEmail(email, pass).then((res: any) => {
+    submitLoginByEmail(email, pass).then((res: any) => {
       const { id } = res.account;
-      store.setStorage("uid", id);
+      setStorage("uid", id);
       Toast.show("登录成功");
       setTimeout(() => {
         props.history.go(-1);

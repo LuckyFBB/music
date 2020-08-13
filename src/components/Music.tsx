@@ -2,19 +2,21 @@
  * @Author: FBB
  * @Date: 2019-08-27 21:35:13
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-17 20:30:44
+ * @LastEditTime: 2020-08-04 16:15:41
  * @Description: 首页榜单组件
  */
 
 import React, { useState, useEffect } from "react";
-import { TopTab } from "./widget/TopTab";
-import { store } from "../store/store";
-import { TabBar } from "./widget/TabBar";
-import { SongBlock } from "./widget/SongBlock";
-import left from "../static/icon/left_arrow.png";
+import { TopTab } from "@/components/widget/TopTab";
+import { getHotPlayDetail, getHotPlay } from "@/store/api";
+import { TabBar } from "@/components/widget/TabBar";
+import { SongBlock } from "@/components/widget/SongBlock";
+import left from "@/static/icon/left_arrow.png";
+import { connect } from "react-redux";
+import { changeMusicTag } from "actions/musicAction";
 
-export const Music = (props: any) => {
-  const [tag, setTag] = useState("");
+const Music = (props: any) => {
+  const { musicTag, changeTag } = props;
   const [hotPlayList, setHotPlayList]: [
     Array<{ [propName: string]: string | number }>,
     Function
@@ -28,17 +30,21 @@ export const Music = (props: any) => {
     props.history.go(-1);
   };
 
-  const getHotPlayDetail = (item: any) => {
-    setTag(item.name);
-    store.getHotPlayDetail(item.name).then((res: any) => {
-      setHotPlayList(res.playlists);
+  const getHotPlayDetailFunc = (item: any) => {
+    changeTag(item.name);
+    getHotPlayDetail(item.name).then((res: any) => {
+      const playlists = res.playlists;
+      if (item.name === "华语" || item.name === "流行") {
+        playlists.splice(0, 1);
+      }
+      setHotPlayList(playlists);
     });
   };
 
   const getTagList = () => {
-    store.getHotPlay().then((res: any) => {
+    getHotPlay().then((res: any) => {
       setHotTagList(res.tags);
-      getHotPlayDetail(res.tags[0]);
+      getHotPlayDetailFunc({ name: musicTag });
     });
   };
 
@@ -49,10 +55,24 @@ export const Music = (props: any) => {
   return (
     <div className="music">
       <TopTab text="歌单广场" left={left} type="text" onLeft={handleBack} />
-      <TabBar current={tag} tagList={hotTagList} onChange={getHotPlayDetail} />
+      <TabBar
+        current={musicTag}
+        tagList={hotTagList}
+        onChange={getHotPlayDetailFunc}
+      />
       <div className="music__content">
         <SongBlock list={hotPlayList} onClick={redirectToSonglistDetail} />
       </div>
     </div>
   );
 };
+
+const mapStateProps = (state: any) => ({
+  musicTag: state.musicReducer.musicTag,
+});
+
+const mapDispatchToProps = (dispatch: Function) => ({
+  changeTag: (tag: string) => dispatch(changeMusicTag(tag)),
+});
+
+export default connect(mapStateProps, mapDispatchToProps)(Music);

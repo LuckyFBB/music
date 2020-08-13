@@ -1,34 +1,36 @@
 import React, { useEffect, useState } from "react";
-import { TopTab } from "./widget/TopTab";
-import { store } from "../store/store";
-import bg from "../static/recommend_bg.jpg";
-import { SongList } from "./widget/SongList";
+import { TopTab } from "@/components/widget/TopTab";
+import { getRecommendSongs } from "@/store/api";
+import bg from "@/static/recommend_bg.jpg";
+import SongList from "@/components/widget/SongList";
 import { Toast } from "antd-mobile";
-import left from "../static/icon/left_arrow.png";
+import left from "@/static/icon/left_arrow.png";
+import { connect } from "react-redux";
+import {
+  changePlayListAction,
+  initSequenceListAction,
+} from "@/actions/playAction";
 
-export const Recommend = (props: any) => {
-  const [songs, setSongs] = useState([]);
+interface ISPorps {
+  history: any;
+  changePlayList: Function;
+  initSequenceList: Function;
+}
+
+const Recommend = (props: ISPorps) => {
+  const { changePlayList, initSequenceList } = props;
 
   useEffect(() => {
     Toast.loading("加载中");
-    getRecommendSongs();
+    getRecommendSongsFunc();
   }, []);
 
-  const getRecommendSongs = () => {
-    store
-      .getRecommendSongs()
-      .then((res: any) => {
-        setSongs(res.recommend);
-        Toast.hide();
-      })
-      .catch(err => {
-        if (err.code === 301) {
-          Toast.show("尚未登录，前去登录");
-          window.setTimeout(() => {
-            props.history.push("/login");
-          }, 1000);
-        }
-      });
+  const getRecommendSongsFunc = () => {
+    getRecommendSongs().then((res: any) => {
+      changePlayList(res.data.dailySongs);
+      initSequenceList(res.data.dailySongs);
+      Toast.hide();
+    });
   };
 
   const handleBack = () => {
@@ -42,8 +44,16 @@ export const Recommend = (props: any) => {
         <img className="recommend__img" src={bg} alt="" />
       </div>
       <div className="recommend__content">
-        <SongList tracks={songs} />
+        <SongList history={props.history} />
       </div>
     </div>
   );
 };
+
+const mapStateToProps = () => ({});
+const mapDispatchToProps = (dispatch: Function) => ({
+  changePlayList: (list: []) => dispatch(changePlayListAction(list)),
+  initSequenceList: (list: []) => dispatch(initSequenceListAction(list)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Recommend);

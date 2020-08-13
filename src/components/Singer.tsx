@@ -1,56 +1,65 @@
 import React, { useState, useEffect } from "react";
-import { TopTab } from "./widget/TopTab";
-import { BottomTab } from "./widget/BottomTab";
-import { TabBar } from "./widget/TabBar";
-import { store } from "../store/store";
-import { SingerList } from "./widget/SingerList";
-import { TAG_LIST } from "./enums";
+import { TopTab } from "@/components/widget/TopTab";
+import { BottomTab } from "@/components/widget/BottomTab";
+import { TabBar } from "@/components/widget/TabBar";
+import { getCategorySinger } from "@/store/api";
+import { SingerList } from "@/components/widget/SingerList";
+import { TAG_LIST } from "@/share/enums";
+import { connect } from "react-redux";
+import { changeSingerTag } from "actions/musicAction";
 
-export const Singer = (props: any) => {
-  const [tag, setTag] = useState("热门");
+const Singer = (props: any) => {
+  const { singerTag, changeTag } = props;
   const [singerList, setSingerList] = useState([]);
 
   useEffect(() => {
-    getTopSinger();
+    const { type, area } = getSingerTypeByName();
+    getCategorySingerFunc(type, area);
   }, []);
 
   const changeSingerCategory = (item: any) => {
-    setTag(item.name);
-    if (item.id === 0) {
-      getTopSinger();
-    } else {
-      getCategorySinger(item.id);
-    }
+    changeTag(item.name);
+    getCategorySingerFunc(item.type, item.area);
   };
 
-  const getTopSinger = () => {
-    store.getTopSinger().then((res: any) => {
-      setSingerList(res.artists);
-    });
-  };
-
-  const getCategorySinger = (cat: number) => {
-    store.getCategorySinger(cat).then((res: any) => {
+  const getCategorySingerFunc = (type: number, area: number) => {
+    getCategorySinger(type, area).then((res: any) => {
       setSingerList(res.artists);
     });
   };
 
   const redirectToSinger = (id: string) => {
-    props.history.push(`/singerlist/${id}`);
+    props.history.push(`/singersonglist/${id}`);
+  };
+
+  const getSingerTypeByName = () => {
+    return TAG_LIST.filter((item) => {
+      return item.name === singerTag;
+    })[0];
   };
 
   return (
     <div className="singer">
       <TopTab text="歌手" type="text" />
       <TabBar
-        current={tag}
+        current={singerTag}
         tagList={TAG_LIST}
         onChange={changeSingerCategory}
       />
       <div className="singer__container">
         <SingerList list={singerList} onClick={redirectToSinger} />
       </div>
-      <BottomTab active="singer" />
+      <BottomTab active="singer" history={props.history} />
     </div>
   );
 };
+
+const mapStateProps = (state: any) => ({
+  singerTag: state.musicReducer.singerTag,
+});
+
+const mapDispatchToProps = (dispatch: Function) => ({
+  changeTag: (tag: string) => dispatch(changeSingerTag(tag)),
+});
+
+export default connect(mapStateProps, mapDispatchToProps)(Singer);

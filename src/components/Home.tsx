@@ -2,20 +2,20 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-23 20:59:38
+ * @LastEditTime: 2020-08-06 20:39:47
  * @Description: 首页
  */
 
 import React, { useEffect, useState } from "react";
-import { BottomTab } from "./widget/BottomTab";
-import { TopTab } from "./widget/TopTab";
-import { store } from "../store/store";
+import { BottomTab } from "@/components/widget/BottomTab";
+import { TopTab } from "@/components/widget/TopTab";
+import { getBanner, getPersonalized, comfirmLoginStatus } from "@/store/api";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { HOME_ICONS_OPTIONS } from "./enums";
-import { SongBlock } from "./widget/SongBlock";
+import { HOME_ICONS_OPTIONS } from "@/share/enums";
+import { SongBlock } from "@/components/widget/SongBlock";
 import { Toast } from "antd-mobile";
-import search from "../static/icon/search.png";
+import search from "@/static/icon/search.png";
 
 export const Home = (props: any) => {
   const [bannerList, setBannerList] = useState([]);
@@ -27,44 +27,34 @@ export const Home = (props: any) => {
   useEffect(() => {
     Toast.loading("加载中");
     getBannerList(1);
-    comfirmStatus();
+    getPersonalizedList();
+    //comfirmStatus();
   }, []);
 
   //获取banner
   const getBannerList = (type: number) => {
-    store.getBanner(type).then((res: any) => {
+    getBanner(type).then((res: any) => {
       setBannerList(res.banners);
     });
   };
 
   //获取热门推荐
-  const getPersonalizedList = (limit: number = 0) => {
-    store.getPersonalized(limit).then((res: any) => {
+  const getPersonalizedList = (limit: number = 30) => {
+    getPersonalized(limit).then((res: any) => {
       setPersonalizedList(res.result);
       Toast.hide();
     });
   };
 
-  const getRecommendResource = () => {
-    store.getRecommendResource().then((res: any) => {
-      setPersonalizedList(res.recommend);
-      Toast.hide();
-    });
-  };
-
-  const comfirmStatus = () => {
-    store
-      .comfirmLoginStatus()
-      .then(() => {
-        getRecommendResource();
-      })
-      .catch(() => {
-        getPersonalizedList();
-      });
-  };
-
   const redirectToPath = (path: string) => {
-    props.history.push(path);
+    if (path === "recommend") {
+      //如果是每日推荐，需要判断是否登录
+      comfirmLoginStatus().then(() => {
+        props.history.push(path);
+      });
+    } else {
+      props.history.push(path);
+    }
   };
 
   const redirectToSonglistDetail = (id: number) => {
@@ -124,7 +114,7 @@ export const Home = (props: any) => {
           </div>
         </div>
       </div>
-      <BottomTab active="home" />
+      <BottomTab active="home" history={props.history} />
     </div>
   );
 };
