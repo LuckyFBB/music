@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-09-08 16:49:52
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-16 18:03:41
+ * @LastEditTime: 2020-08-16 21:19:34
  * @Description: 歌曲展示列表
  */
 
@@ -44,7 +44,7 @@ const SongList = (props: ISProp) => {
     changeCurrentSong(sequenceList[index]);
     checkMusic(id).then((res: any) => {
       if (res.success) {
-        props.history.push(`/play/${id}`);
+       // props.history.push(`/play/${id}`);
       } else {
         Toast.show(res.message);
       }

@@ -1,8 +1,7 @@
 import React from "react";
-import { HashRouter as Router, Route } from "react-router-dom";
-import { Home } from "@/components/Home";
-import { Rank } from "@/components/Rank";
+import { HashRouter as Router } from "react-router-dom";
 import "@/styles/index.less";
+import Player from "@/components/Player";
 import store from "@/store";
 import { Provider } from "react-redux";
 import { renderRoutes } from "react-router-config";
@@ -12,6 +11,7 @@ export const App = () => {
   return (
     <Provider store={store}>
       <Router>{renderRoutes(routes)}</Router>
+      <Player />
     </Provider>
   );
 };

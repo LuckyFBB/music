@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:55
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-10 21:54:15
+ * @LastEditTime: 2020-08-16 21:33:49
  */
 
 @top_height: 50px;
@@ -595,5 +595,32 @@
     &__cover {
       height: 60px;
     }
+  }
+}
+
+.miniPlayer {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  top: 70vh;
+  right: 0;
+  width: 100px;
+  height: 50px;
+  z-index: 99;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  background-color: rgba(216, 71, 65, 0.8);
+  .song {
+    margin-left: 10px;
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+  }
+  .close {
+    margin-right: 5px;
+    height: 25px;
+    width: 25px;
   }
 }

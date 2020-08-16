@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-12-12 15:01:04
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-11 21:00:01
+ * @LastEditTime: 2020-08-16 21:20:22
  * @Description: 某些工具类方法集和
  */
 
@@ -68,3 +68,23 @@ export const findIndex = (song: any, list: []) => {
     return item.id === song.id;
   });
 };
+
+/**
+ * @description: 判断对象是否为空
+ * @param {object} obj -待判断对象
+ * @return {type}
+ * @author: FBB
+ */
+
+export const isEmptyObject = (obj: any) =>
+  !obj || Object.keys(obj).length === 0;
+
+/**
+ * @description:
+ * @param {type}
+ * @return {type}
+ * @author: FBB
+ */
+
+export const getUrlForSong = (id: number) =>
+  `https://music.163.com/song/media/outer/url?id=${id}.mp3`;

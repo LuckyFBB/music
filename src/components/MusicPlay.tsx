@@ -148,8 +148,7 @@ const mapDispatchToProps = (dispatch: Function) => ({
   changePlayState: (state: boolean) => dispatch(changePlayStateAction(state)),
   changeCurrentIndex: (index: number) =>
     dispatch(changeCurrentIndexAction(index)),
-  changeCurrentSong: (index: number) =>
-    dispatch(changeCurrentSongAction(index)),
+  changeCurrentSong: (song: {}) => dispatch(changeCurrentSongAction(song)),
   changePlayList: (list: []) => dispatch(changePlayListAction(list)),
 });
 
