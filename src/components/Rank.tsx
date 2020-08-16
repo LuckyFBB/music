@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-26 20:19:16
  * @LastEditors: FBB
- * @LastEditTime: 2020-07-07 17:17:17
+ * @LastEditTime: 2020-08-16 17:40:40
  * @Description: 排行榜
  */
 
@@ -33,7 +33,7 @@ export const Rank = (props: any) => {
   };
 
   const redirectToSonglistDetail = (id: string) => {
-    props.history.push(`/songlist/${id}`);
+    props.history.push(`/music/${id}`);
   };
 
   return (

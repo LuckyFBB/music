@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-09-08 21:46:38
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-06 15:42:08
+ * @LastEditTime: 2020-08-16 20:13:18
  * @Description: 歌手所有歌曲展示
  */
 
@@ -21,7 +21,7 @@ import {
   initCurrentAlbumAction,
 } from "@/actions/albumAction";
 
-const SingerSongDetail = (props: any) => {
+const SingerSongList = (props: any) => {
   const { id } = props.match.params;
   const { changePlayList, changeSequenceList, changeTotalCount } = props;
   const [artist, setArtist]: [
@@ -50,10 +50,11 @@ const SingerSongDetail = (props: any) => {
     <div className="singerdetail">
       <TopTab onLeft={handleBack} type="text" text={artist.name} left={left} />
       <div className="singerdetail__header">
+        <div className="button">收藏歌手</div>
         <img className="img" src={artist.picUrl} alt="" />
       </div>
       <div className="singerdetail__content">
-        <SongList history={props.history} />
+        <SongList history={props.history} type="singer" />
       </div>
     </div>
   );
@@ -76,4 +77,4 @@ const mapDispatchToProps = (dispatch: Function) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingerSongDetail);
+export default connect(mapStateToProps, mapDispatchToProps)(SingerSongList);

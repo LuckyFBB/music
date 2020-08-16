@@ -1,4 +1,12 @@
-import React, { useEffect, useState } from "react";
+/*
+ * @Author: FBB
+ * @Date: 2019-09-07 21:21:58
+ * @LastEditors: FBB
+ * @LastEditTime: 2020-08-16 20:16:19
+ * @Description: 歌单详情
+ */
+
+import React, { useEffect } from "react";
 import { getPlayDetail } from "@/store/api";
 import { TopTab } from "@/components/widget/TopTab";
 import play from "@/static/home/play.png";
@@ -15,7 +23,7 @@ import {
   changeTotalCountAction,
 } from "@/actions/albumAction";
 
-const SongListDetail = (props: any) => {
+const AlbumDetail = (props: any) => {
   const { id } = props.match.params;
   const {
     changePlayList,
@@ -111,4 +119,4 @@ const mapDispatchToProps = (dispatch: Function) => ({
     dispatch(changeTotalCountAction(number)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SongListDetail);
+export default connect(mapStateToProps, mapDispatchToProps)(AlbumDetail);

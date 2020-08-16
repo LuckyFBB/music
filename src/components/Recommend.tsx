@@ -10,15 +10,17 @@ import {
   changePlayListAction,
   initSequenceListAction,
 } from "@/actions/playAction";
+import { changeTotalCountAction } from "@/actions/albumAction";
 
 interface ISPorps {
   history: any;
   changePlayList: Function;
   initSequenceList: Function;
+  changeTotalCount: Function;
 }
 
 const Recommend = (props: ISPorps) => {
-  const { changePlayList, initSequenceList } = props;
+  const { changePlayList, initSequenceList, changeTotalCount } = props;
 
   useEffect(() => {
     Toast.loading("加载中");
@@ -29,6 +31,7 @@ const Recommend = (props: ISPorps) => {
     getRecommendSongs().then((res: any) => {
       changePlayList(res.data.dailySongs);
       initSequenceList(res.data.dailySongs);
+      changeTotalCount(res.data.dailySongs.length);
       Toast.hide();
     });
   };
@@ -54,6 +57,9 @@ const mapStateToProps = () => ({});
 const mapDispatchToProps = (dispatch: Function) => ({
   changePlayList: (list: []) => dispatch(changePlayListAction(list)),
   initSequenceList: (list: []) => dispatch(initSequenceListAction(list)),
+  changeTotalCount: (number: number) => {
+    dispatch(changeTotalCountAction(number));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Recommend);

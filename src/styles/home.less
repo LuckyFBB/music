@@ -236,8 +236,19 @@
 .singerdetail {
   &__header {
     padding-top: 50px;
+    position: relative;
+    .button {
+      position: absolute;
+      bottom: 40px;
+      left: 37.5vw;
+      width: 25vw;
+      border-radius: 25px;
+      text-align: center;
+      line-height: 40px;
+      color: #fff;
+      background-color: rgb(216, 71, 65);
+    }
     img {
-      height: 260px;
       width: 100%;
     }
   }
@@ -252,7 +263,6 @@
   &__header {
     padding-top: 50px;
     img {
-      height: 200px;
       width: 100%;
     }
   }
@@ -419,10 +429,10 @@
     padding: 150px 15px 0;
   }
   //进入动画
-  .fade-enter{
+  .fade-enter {
     top: 100vh;
   }
-  .fade-enter-active{
+  .fade-enter-active {
     top: 30vh;
     transition: top 1s ease-in;
   }

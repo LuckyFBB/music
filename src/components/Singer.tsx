@@ -29,7 +29,7 @@ const Singer = (props: any) => {
   };
 
   const redirectToSinger = (id: string) => {
-    props.history.push(`/singersonglist/${id}`);
+    props.history.push(`/singer/${id}`);
   };
 
   const getSingerTypeByName = () => {

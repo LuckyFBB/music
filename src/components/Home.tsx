@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-06 20:39:47
+ * @LastEditTime: 2020-08-16 20:24:52
  * @Description: 首页
  */
 
@@ -52,13 +52,15 @@ export const Home = (props: any) => {
       comfirmLoginStatus().then(() => {
         props.history.push(path);
       });
+    } else if (path === "radio") {
+      alert("还在开发,未上线");
     } else {
       props.history.push(path);
     }
   };
 
   const redirectToSonglistDetail = (id: number) => {
-    props.history.push(`/songlist/${id}`);
+    props.history.push(`/music/${id}`);
   };
 
   return (

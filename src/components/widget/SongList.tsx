@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-09-08 16:49:52
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-06 15:13:45
+ * @LastEditTime: 2020-08-16 18:03:41
  * @Description: 歌曲展示列表
  */
 
@@ -25,6 +25,7 @@ interface ISProp {
   sequenceList: [];
   totalCount: number;
   changeCurrentSong: Function;
+  type?: string;
 }
 
 const SongList = (props: ISProp) => {
@@ -34,6 +35,7 @@ const SongList = (props: ISProp) => {
     sequenceList,
     totalCount,
     changeCurrentSong,
+    type,
   } = props;
 
   const handleClick = (id: string, index: number) => {
@@ -58,9 +60,11 @@ const SongList = (props: ISProp) => {
             播放全部<span className="subtitle">共{totalCount}首</span>
           </span>
         </div>
-        <div className="right">
-          <div className="button">收藏歌单</div>
-        </div>
+        {type !== "singer" && (
+          <div className="right">
+            <div className="button">收藏歌单</div>
+          </div>
+        )}
       </div>
       <div className="songlist__content">
         {sequenceList.map((item: any, index: number) => {
