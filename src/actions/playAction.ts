@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-12-03 16:04:03
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-06 15:14:37
+ * @LastEditTime: 2020-08-17 21:15:44
  * @Description:
  */
 
@@ -39,4 +39,9 @@ export const changePlayStateAction = (status: boolean) => ({
 export const changePlayModeAction = (mode: number) => ({
   type: "CHANGE_PLAY_MODE",
   preload: mode,
+});
+
+export const changeFullSreenAction = (isFull: boolean) => ({
+  type: "CHANGE_FULLSREEN",
+  preload: isFull,
 });

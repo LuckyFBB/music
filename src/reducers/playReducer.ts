@@ -4,7 +4,7 @@ import { PLAY_TYPE } from "@/share/enums";
  * @Author: FBB
  * @Date: 2019-12-03 16:09:18
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-06 14:59:25
+ * @LastEditTime: 2020-08-17 21:18:33
  * @Description: 播放列表reducer
  */
 interface IState {
@@ -15,6 +15,7 @@ interface IState {
   playId: number;
   currentIndex: number;
   currentSong: {};
+  isFull: boolean;
 }
 
 export const InitialState: IState = {
@@ -25,6 +26,7 @@ export const InitialState: IState = {
   playId: 0,
   currentSong: {},
   currentIndex: -1,
+  isFull: false,
 };
 
 export const playReducer = (state = InitialState, action: any) => {
@@ -43,6 +45,8 @@ export const playReducer = (state = InitialState, action: any) => {
       return Object.assign({}, state, { playStatus: action.preload });
     case "CHANGE_PLAY_MODE":
       return Object.assign({}, state, { playMode: action.preload });
+    case "CHANGE_FULLSREEN":
+      return Object.assign({}, state, { isFull: action.preload });
     default:
       return state;
   }

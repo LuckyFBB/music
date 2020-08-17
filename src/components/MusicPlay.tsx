@@ -132,16 +132,14 @@ const MusicPlay = (props: any) => {
   );
 };
 
-const mapStateToProps = (state: any) => {
-  return {
-    playStatus: state.playReducer.isPlay,
-    playId: state.playReducer.playId,
-    currentIndex: state.playReducer.currentIndex,
-    currentSong: state.playReducer.currentSong,
-    playList: state.playReducer.playList,
-    playMode: state.playReducer.playMode,
-  };
-};
+const mapStateToProps = (state: any) => ({
+  playStatus: state.playReducer.isPlay,
+  playId: state.playReducer.playId,
+  currentIndex: state.playReducer.currentIndex,
+  currentSong: state.playReducer.currentSong,
+  playList: state.playReducer.playList,
+  playMode: state.playReducer.playMode,
+});
 
 const mapDispatchToProps = (dispatch: Function) => ({
   changePlayId: (id: number) => dispatch(changePlayIdAction(id)),
