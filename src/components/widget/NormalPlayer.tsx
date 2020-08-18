@@ -2,11 +2,11 @@
  * @Author: FBB
  * @Date: 2020-08-17 21:29:25
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-17 22:59:26
+ * @LastEditTime: 2020-08-18 21:43:54
  * @Description: 全屏的播放器
  */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CSSTransition } from "react-transition-group";
 import ShowPlaylist from "@/components/widget/ShowPlayList";
 import { connect } from "react-redux";
@@ -16,8 +16,6 @@ import pauseImg from "@/static/playBar/pause.png";
 import playImg from "@/static/playBar/play.png";
 import list from "@/static/playBar/list.png";
 import {
-  changePlayIdAction,
-  changePlayStateAction,
   changeCurrentIndexAction,
   changePlayListAction,
   changeCurrentSongAction,
@@ -32,36 +30,26 @@ import { PLAY_TYPE_IMG, PLAY_TYPE } from "@/share/enums";
 
 interface ISPorps {
   playStatus: boolean;
-  changePlayId: Function;
-  playId: number;
-  playList: [];
-  currentIndex: number;
-  changeCurrentIndex: Function;
-  changeCurrentSong: Function;
   currentSong: any;
-  changePlayState: Function;
   playMode: number;
-  changePlayList: Function;
   isFull: boolean;
-  changeFullSreen: Function;
   sequenceList: [];
-  changeMode: Function;
-  controlAudio: Function;
   allTime: number;
   currentTime: number;
+  changeMode: Function;
+  controlAudio: Function;
+  changePlayList: Function;
+  changeFullSreen: Function;
+  changeCurrentSong: Function;
+  changeCurrentIndex: Function;
+  handleChangeCurrentSong: Function;
 }
 
 const NormalPlayer = (props: ISPorps) => {
   const {
     playStatus,
-    changePlayId,
-    playId,
-    playList,
-    currentIndex,
     changeCurrentIndex,
-    changeCurrentSong,
     currentSong,
-    changePlayState,
     playMode,
     changePlayList,
     isFull,
@@ -71,16 +59,20 @@ const NormalPlayer = (props: ISPorps) => {
     controlAudio,
     allTime,
     currentTime,
+    handleChangeCurrentSong,
   } = props;
-  console.log(isFull);
-  const [showPlaylist, setShowPlaylist] = useState(false);
-  const handleChangeCurrentSongByList = (index: number) => {
-    const newSong = playList[index] as any;
-    changePlayId(newSong.id);
-    changeCurrentIndex(index);
-    changeCurrentSong(newSong);
-  };
 
+  const [showPlaylist, setShowPlaylist] = useState(false);
+  useEffect(() => {
+    isFull &&
+      document.getElementsByClassName("play")[0].addEventListener(
+        "touchmove",
+        (event) => {
+          event.preventDefault();
+        },
+        { passive: false }
+      );
+  }, [isFull]);
   const handleBack = () => {
     changeFullSreen(false);
   };
@@ -91,6 +83,7 @@ const NormalPlayer = (props: ISPorps) => {
       background: `linear-gradient(to right, #ffffff 0%,#ffffff ${process},#c7c7c7 ${process},#c7c7c7)`,
     };
   };
+
   const handleChangeMode = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
@@ -116,6 +109,7 @@ const NormalPlayer = (props: ISPorps) => {
     let minite = Math.floor(time / 60);
     return `${minite}:${second >= 10 ? second : `0${second}`}`;
   };
+
   return (
     <CSSTransition in={isFull} timeout={1000} unmountOnExit>
       <div className="play">
@@ -166,7 +160,7 @@ const NormalPlayer = (props: ISPorps) => {
               </div>
               <div
                 className="img__wrapper"
-                onClick={(e) => changeCurrentSong("pre", e)}
+                onClick={(e) => handleChangeCurrentSong("pre", e)}
               >
                 <img src={pre} alt="" />
               </div>
@@ -179,13 +173,16 @@ const NormalPlayer = (props: ISPorps) => {
               </div>
               <div
                 className="img__wrapper"
-                onClick={(e) => changeCurrentSong("next", e)}
+                onClick={(e) => handleChangeCurrentSong("next", e)}
               >
                 <img src={next} alt="" />
               </div>
               <div
                 className="img__wrapper"
-                onClick={() => setShowPlaylist(true)}
+                onClick={(event: React.MouseEvent) => {
+                  event.stopPropagation();
+                  setShowPlaylist(true);
+                }}
               >
                 <img src={list} alt="" />
               </div>
@@ -197,7 +194,7 @@ const NormalPlayer = (props: ISPorps) => {
             classNames="fade"
             unmountOnExit
           >
-            <ShowPlaylist changeCurrentSong={handleChangeCurrentSongByList} />
+            <ShowPlaylist />
           </CSSTransition>
         </div>
       </div>
@@ -207,7 +204,6 @@ const NormalPlayer = (props: ISPorps) => {
 
 const mapStateToProps = (state: any) => ({
   playStatus: state.playReducer.playStatus,
-  playId: state.playReducer.playId,
   currentIndex: state.playReducer.currentIndex,
   currentSong: state.playReducer.currentSong,
   playList: state.playReducer.playList,
@@ -217,8 +213,6 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  changePlayId: (id: number) => dispatch(changePlayIdAction(id)),
-  changePlayState: (state: boolean) => dispatch(changePlayStateAction(state)),
   changeCurrentIndex: (index: number) =>
     dispatch(changeCurrentIndexAction(index)),
   changeCurrentSong: (song: {}) => dispatch(changeCurrentSongAction(song)),

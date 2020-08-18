@@ -2,15 +2,13 @@
  * @Author: FBB
  * @Date: 2019-09-08 16:49:52
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-16 21:19:34
+ * @LastEditTime: 2020-08-18 22:23:51
  * @Description: 歌曲展示列表
  */
 
 import React from "react";
 import play from "@/static/icon/play.png";
 import more from "@/static/icon/more_gray.png";
-import { checkMusic } from "@/store/api";
-import { Toast } from "antd-mobile";
 import { connect } from "react-redux";
 import {
   changeCurrentIndexAction,
@@ -42,13 +40,6 @@ const SongList = (props: ISProp) => {
     changeCurrentIndex(index);
     changePlayId(id);
     changeCurrentSong(sequenceList[index]);
-    checkMusic(id).then((res: any) => {
-      if (res.success) {
-       // props.history.push(`/play/${id}`);
-      } else {
-        Toast.show(res.message);
-      }
-    });
   };
 
   return (

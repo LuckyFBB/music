@@ -2,28 +2,51 @@
  * @Author: FBB
  * @Date: 2020-08-16 20:38:10
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-17 22:54:05
+ * @LastEditTime: 2020-08-18 22:44:17
  * @Description: 播放器
  */
 
 import React, { useRef, useState, useEffect } from "react";
 import { connect } from "react-redux";
 import MiniPlayer from "./widget/MiniPlayer";
-import { isEmptyObject, getUrlForSong, getOptionsVlaue } from "@/utils/utils";
-import { PLAY_TYPE_IMG, PLAY_TYPE } from "@/share/enums";
-import { changePlayStateAction } from "@/actions/playAction";
+import { isEmptyObject, getUrlForSong } from "@/utils/utils";
+import { PLAY_TYPE } from "@/share/enums";
+import {
+  changePlayStateAction,
+  changeCurrentSongAction,
+  changePlayIdAction,
+} from "@/actions/playAction";
 import NormalPlayer from "./widget/NormalPlayer";
+import { checkMusic } from "@/store/api";
+import { Toast } from "antd-mobile";
 
 const Player = (props: any) => {
-  const { currentSong, playId, playMode, changePlayState } = props;
+  const {
+    currentSong,
+    playId,
+    playMode,
+    changePlayState,
+    currentIndex,
+    playList,
+    changePlayId,
+    changeCurrentIndex,
+    changeCurrentSong,
+  } = props;
 
   const [allTime, setAllTime] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
-  const [showPlaylist, setShowPlaylist] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    audioRef.current!.src = getUrlForSong(playId);
+    if (playId === -1) return;
+    checkMusic(playId)
+      .then(() => {
+        audioRef.current!.src = getUrlForSong(playId);
+      })
+      .catch(() => {
+        Toast.info("暂无版权，为您播放下一首");
+        handleChangeCurrentSong("next");
+      });
   }, [playId, currentSong]);
 
   const controlAudio = (type: string) => {
@@ -49,12 +72,30 @@ const Player = (props: any) => {
             setCurrentTime(0);
             audioRef.current!.play();
             changePlayState(true);
-          } /* else {
-            changeCurrentSong("next");
-          } */
+          } else {
+            handleChangeCurrentSong("next");
+          }
         }
         break;
     }
+  };
+
+  const handleChangeCurrentSong = (
+    value: string,
+    event?: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    event && event.stopPropagation();
+    let newSong: any = {};
+    let newIndex: number = 0;
+    if (value === "pre") {
+      newIndex = currentIndex === 0 ? playList.length - 1 : currentIndex - 1;
+    } else if (value == "next") {
+      newIndex = currentIndex === playList.length - 1 ? 0 : currentIndex + 1;
+    }
+    newSong = playList[newIndex];
+    changePlayId(newSong.id);
+    changeCurrentIndex(newIndex);
+    changeCurrentSong(newSong);
   };
 
   return (
@@ -67,9 +108,18 @@ const Player = (props: any) => {
           controlAudio={controlAudio}
           allTime={allTime}
           currentTime={currentTime}
+          handleChangeCurrentSong={handleChangeCurrentSong}
         />
       )}
-      <audio ref={audioRef} autoPlay />
+      <audio
+        ref={audioRef}
+        autoPlay
+        onCanPlay={() => controlAudio("allTime")}
+        onTimeUpdate={() => controlAudio("getCurrentTime")}
+        onError={() => {
+          alert("出错了");
+        }}
+      />
     </div>
   );
 };
@@ -79,10 +129,16 @@ const mapStateToProps = (state: any) => ({
   playId: state.playReducer.playId,
   playMode: state.playReducer.playMode,
   sequenceList: state.playReducer.sequenceList,
+  currentIndex: state.playReducer.currentIndex,
+  playList: state.playReducer.playList,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
   changePlayState: (state: boolean) => dispatch(changePlayStateAction(state)),
+  changePlayId: (id: number) => dispatch(changePlayIdAction(id)),
+  changeCurrentIndex: (index: number) =>
+    dispatch(changeCurrentSongAction(index)),
+  changeCurrentSong: (song: {}) => dispatch(changeCurrentSongAction(song)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Player);

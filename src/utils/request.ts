@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-22 22:18:13
  * @LastEditors: FBB
- * @LastEditTime: 2020-07-07 15:59:22
+ * @LastEditTime: 2020-08-18 22:25:00
  */
 import axios from "axios";
 import { Toast } from "antd-mobile";
@@ -53,14 +53,15 @@ axios.interceptors.response.use(
   },
   (error) => {
     const status = error.response.status;
+    const { message } = error.response.data;
     if (status === 301) {
       Toast.info("尚未登录，前往登录", 1.5);
       setTimeout(() => {
         window.location.replace(LOGIN_PAGE_PATH);
       }, 1100);
-    } else if (status) {
-      Toast.info(`Http Error: ${status}`);
-    }
+    } /* else if (status) {
+      Toast.info(message);
+    } */
     return Promise.reject(error);
   }
 );

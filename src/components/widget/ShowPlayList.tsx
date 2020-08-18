@@ -2,16 +2,35 @@
  * @Author: FBB
  * @Date: 2020-08-07 13:56:55
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-10 21:53:49
+ * @LastEditTime: 2020-08-18 21:07:07
  * @Description: showPlaylist组件，
  */
 import React from "react";
 import { connect } from "react-redux";
 import more from "@/static/icon/more_gray.png";
 import play from "@/static/icon/headphones.png";
+import {
+  changePlayIdAction,
+  changeCurrentIndexAction,
+  changeCurrentSongAction,
+} from "@/actions/playAction";
 
 const showPlaylist = (props: any) => {
-  const { playList, changeCurrentSong, currentIndex } = props;
+  const {
+    playList,
+    changeCurrentSong,
+    currentIndex,
+    changePlayId,
+    changeCurrentIndex,
+  } = props;
+
+  const handleChangeCurrentSong = (index: number) => {
+    const newSong = playList[index] as any;
+    changePlayId(newSong.id);
+    changeCurrentIndex(index);
+    changeCurrentSong(newSong);
+  };
+
   return (
     <div className="playlist">
       <div className="title">播放列表</div>
@@ -24,7 +43,7 @@ const showPlaylist = (props: any) => {
             <div
               className="item"
               key={item.id}
-              onClick={() => changeCurrentSong(index)}
+              onClick={() => handleChangeCurrentSong(index)}
             >
               <div className="index">
                 {currentIndex === index && <img src={play} alt="" />}
@@ -52,5 +71,10 @@ const mapStateToProps = (state: any) => ({
   playList: state.playReducer.playList,
   currentIndex: state.playReducer.currentIndex,
 });
-const mapDispatchToProps = () => ({});
+const mapDispatchToProps = (dispatch: Function) => ({
+  changePlayId: (id: number) => dispatch(changePlayIdAction(id)),
+  changeCurrentIndex: (index: number) =>
+    dispatch(changeCurrentIndexAction(index)),
+  changeCurrentSong: (song: {}) => dispatch(changeCurrentSongAction(song)),
+});
 export default connect(mapStateToProps, mapDispatchToProps)(showPlaylist);

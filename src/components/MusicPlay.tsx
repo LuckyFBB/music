@@ -121,7 +121,7 @@ const MusicPlay = (props: any) => {
         />
         <CSSTransition
           in={showPlaylist}
-          timeout={1000}
+          timeout={500}
           classNames="fade"
           unmountOnExit
         >

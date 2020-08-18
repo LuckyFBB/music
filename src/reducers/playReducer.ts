@@ -4,7 +4,7 @@ import { PLAY_TYPE } from "@/share/enums";
  * @Author: FBB
  * @Date: 2019-12-03 16:09:18
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-17 21:18:33
+ * @LastEditTime: 2020-08-18 21:55:23
  * @Description: 播放列表reducer
  */
 interface IState {
@@ -23,7 +23,7 @@ export const InitialState: IState = {
   playList: [],
   playStatus: true,
   playMode: PLAY_TYPE.PLAY_LOOP,
-  playId: 0,
+  playId: -1,
   currentSong: {},
   currentIndex: -1,
   isFull: false,
