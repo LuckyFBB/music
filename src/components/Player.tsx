@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2020-08-16 20:38:10
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-18 22:44:17
+ * @LastEditTime: 2020-08-19 20:23:22
  * @Description: 播放器
  */
 
@@ -49,7 +49,10 @@ const Player = (props: any) => {
       });
   }, [playId, currentSong]);
 
-  const controlAudio = (type: string) => {
+  const controlAudio = (
+    type: string,
+    e?: React.ChangeEvent<HTMLInputElement>
+  ) => {
     switch (type) {
       case "allTime":
         setAllTime(audioRef.current!.duration);
@@ -75,6 +78,17 @@ const Player = (props: any) => {
           } else {
             handleChangeCurrentSong("next");
           }
+        }
+        break;
+      case "changeCurrentTime":
+        const value = Number(e!.target.value);
+        setCurrentTime(value);
+        audioRef.current!.currentTime = value;
+        if (Math.round(value) === Math.round(audioRef.current!.duration)) {
+          changePlayState(false);
+        } else {
+          audioRef.current!.play();
+          changePlayState(true);
         }
         break;
     }

@@ -2,11 +2,12 @@
  * @Author: FBB
  * @Date: 2019-08-25 17:19:35
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-04 15:46:13
+ * @LastEditTime: 2020-08-19 21:27:08
  * @Description: 歌单组件
  */
 import React from "react";
 import play from "@/static/home/play.png";
+import LazyLoad from "react-lazyload";
 
 interface ISProps {
   list: Array<{}>;
@@ -25,7 +26,13 @@ export const SongBlock = (props: ISProps) => {
             className="songblock__item"
             onClick={() => onClick(item.id)}
           >
-            <img className="img" src={item.picUrl || item.coverImgUrl} alt="" />
+            <LazyLoad scroll={true} height={100}>
+              <img
+                className="img"
+                src={item.picUrl || item.coverImgUrl}
+                alt=""
+              />
+            </LazyLoad>
             <p className="title">{item.name}</p>
             <div className="fixed">
               <img className="fixed__img" src={play} alt="" />

@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2020-08-16 15:56:45
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-16 20:33:53
+ * @LastEditTime: 2020-08-19 20:34:36
  * @Description: router配置中心
  */
 
@@ -17,7 +17,6 @@ import { Account } from "@/components/Account";
 import { Mine } from "@/components/Mine";
 import Recommend from "@/components/Recommend";
 import { Search } from "@/components/Search";
-import MusicPlay from "@/components/MusicPlay";
 
 export const routes = [
   { path: "/", component: Home, exact: true },
@@ -32,5 +31,4 @@ export const routes = [
   { path: "/account", component: Account },
   { path: "/mine", component: Mine },
   { path: "/search", component: Search },
-  { path: "/play/:id", component: MusicPlay },
 ];

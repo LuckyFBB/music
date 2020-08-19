@@ -2,11 +2,12 @@
  * @Author: FBB
  * @Date: 2019-08-26 21:16:24
  * @LastEditors: FBB
- * @LastEditTime: 2019-09-17 21:06:32
+ * @LastEditTime: 2020-08-19 21:26:41
  * @Description: 排行榜item
  */
 
 import React from "react";
+import LazyLoad from "react-lazyload";
 
 export const RankList = (props: any) => {
   const { type, ranklist, onClick } = props;
@@ -24,7 +25,9 @@ export const RankList = (props: any) => {
                   onClick(item.id);
                 }}
               >
-                <img src={item.coverImgUrl} alt="" />
+                <LazyLoad scroll={true} height={100}>
+                  <img src={item.coverImgUrl} alt="" />
+                </LazyLoad>
                 <div className="block__fixed">{item.updateFrequency}</div>
               </div>
             ))}
@@ -41,8 +44,10 @@ export const RankList = (props: any) => {
                   onClick(item.id);
                 }}
               >
-                <div className='line__left'>
-                  <img className="line__img" src={item.coverImgUrl} alt="" />
+                <div className="line__left">
+                  <LazyLoad scroll={true} height={120}>
+                    <img className="line__img" src={item.coverImgUrl} alt="" />
+                  </LazyLoad>
                   <div className="line__fixed">{item.updateFrequency}</div>
                 </div>
                 <div className="line__content">

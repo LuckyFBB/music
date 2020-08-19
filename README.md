@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-18 22:53:55
+ * @LastEditTime: 2020-08-19 21:47:11
  * @Description:
 -->
 
@@ -11,9 +11,10 @@
 - todos
 
   1. 音乐界面图片旋转
-  2. 音乐小化播放
+  2. ~~音乐小化播放~~
   3. 音乐分页加载
-  4. 图片懒加载
+  4. ~~图片懒加载(使用 react-lazy)~~
+  5. 添加歌词
 
 - problem and solution
   1. NormalPlayer 展示时为遮盖层，当底层为 scroll 时，在遮盖层能够触发底层滚动
