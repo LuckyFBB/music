@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2020-08-16 20:38:10
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-19 20:23:22
+ * @LastEditTime: 2020-08-22 15:32:19
  * @Description: 播放器
  */
 
@@ -15,6 +15,7 @@ import {
   changePlayStateAction,
   changeCurrentSongAction,
   changePlayIdAction,
+  changeCurrentIndexAction,
 } from "@/actions/playAction";
 import NormalPlayer from "./widget/NormalPlayer";
 import { checkMusic } from "@/store/api";
@@ -44,8 +45,10 @@ const Player = (props: any) => {
         audioRef.current!.src = getUrlForSong(playId);
       })
       .catch(() => {
-        Toast.info("暂无版权，为您播放下一首");
-        handleChangeCurrentSong("next");
+        Toast.info("暂无版权，为您播放下一首", 0.8);
+        setTimeout(() => {
+          handleChangeCurrentSong("next");
+        }, 1000);
       });
   }, [playId, currentSong]);
 
@@ -103,7 +106,7 @@ const Player = (props: any) => {
     let newIndex: number = 0;
     if (value === "pre") {
       newIndex = currentIndex === 0 ? playList.length - 1 : currentIndex - 1;
-    } else if (value == "next") {
+    } else if (value === "next") {
       newIndex = currentIndex === playList.length - 1 ? 0 : currentIndex + 1;
     }
     newSong = playList[newIndex];
@@ -131,7 +134,10 @@ const Player = (props: any) => {
         onCanPlay={() => controlAudio("allTime")}
         onTimeUpdate={() => controlAudio("getCurrentTime")}
         onError={() => {
-          alert("出错了");
+          Toast.info("暂无版权，为您播放下一首", 0.8);
+          setTimeout(() => {
+            handleChangeCurrentSong("next");
+          }, 1000);
         }}
       />
     </div>
@@ -151,7 +157,7 @@ const mapDispatchToProps = (dispatch: Function) => ({
   changePlayState: (state: boolean) => dispatch(changePlayStateAction(state)),
   changePlayId: (id: number) => dispatch(changePlayIdAction(id)),
   changeCurrentIndex: (index: number) =>
-    dispatch(changeCurrentSongAction(index)),
+    dispatch(changeCurrentIndexAction(index)),
   changeCurrentSong: (song: {}) => dispatch(changeCurrentSongAction(song)),
 });
 

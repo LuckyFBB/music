@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-19 21:47:11
+ * @LastEditTime: 2020-08-22 15:28:48
  * @Description:
 -->
 
@@ -10,7 +10,7 @@
 
 - todos
 
-  1. 音乐界面图片旋转
+  1. ~~音乐界面图片旋转~~
   2. ~~音乐小化播放~~
   3. 音乐分页加载
   4. ~~图片懒加载(使用 react-lazy)~~
@@ -26,3 +26,5 @@
      audioRef.current.src = xxx; //在进行赋值的时候报错current为未定义
      ```
      解决方案：需要给 useRef()传入一个初始值，并且定义当前初始值的类型，[关于 useRef](https://zhuanlan.zhihu.com/p/105276393)
+  3. 使用 CSS 旋转图片，暂停时停留在当前位置
+     使用 animation-play-state 属性，但是兼容有问题，[具体解决方案](https://www.jianshu.com/p/1fb1a3bba129)

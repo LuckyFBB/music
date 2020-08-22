@@ -1,0 +1,23 @@
+/*
+ * @Author: FBB
+ * @Date: 2020-08-22 15:12:41
+ * @LastEditors: FBB
+ * @LastEditTime: 2020-08-22 15:13:06
+ * @Description: CSS动画合集
+ */
+
+.rotate {
+  animation: rotate 20s linear infinite;
+  animation-play-state: running;
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  &--paused {
+    animation-play-state: paused;
+  }
+}

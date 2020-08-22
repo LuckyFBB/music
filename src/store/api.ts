@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-12-12 16:55:11
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-05 17:17:20
+ * @LastEditTime: 2020-08-22 16:33:50
  * @Description: 请求集和
  */
 import request from "@/utils/request";
@@ -296,6 +296,20 @@ export const getSongDetail = (id: number) => {
  */
 export const getSongUrl = (id: number) => {
   const url = "/song/url";
+  const params = {
+    id,
+  };
+  return request({ url, params });
+};
+
+/**
+ * @description:获取歌词
+ * @param {id}
+ * @return:
+ * @author: FBB
+ */
+export const getSongLyric = (id: number) => {
+  const url = "/lyric";
   const params = {
     id,
   };

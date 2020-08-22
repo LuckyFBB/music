@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2020-08-17 21:29:25
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-18 21:43:54
+ * @LastEditTime: 2020-08-22 15:01:35
  * @Description: 全屏的播放器
  */
 
@@ -132,7 +132,9 @@ const NormalPlayer = (props: ISPorps) => {
             }}
           />
           <img
-            className={cx("play__img", { "play__img--rotate": playStatus })}
+            className={cx("play__img", "rotate", {
+              "rotate--paused": !playStatus,
+            })}
             src={currentSong.al.picUrl}
             alt={currentSong.name}
           />

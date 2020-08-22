@@ -2,17 +2,17 @@
  * @Author: FBB
  * @Date: 2020-08-16 20:42:51
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-17 21:55:32
+ * @LastEditTime: 2020-08-22 15:16:25
  * @Description: 小化播放器
  */
 
 import React from "react";
 import { connect } from "react-redux";
-import close from "@/static/icon/close_white.png";
 import pauseImg from "@/static/playBar/pause.png";
 import playImg from "@/static/playBar/play.png";
 import { changeFullSreenAction } from "@/actions/playAction";
 import { CSSTransition } from "react-transition-group";
+import cx from "classnames";
 
 interface ISProps {
   currentSong: any;
@@ -34,7 +34,9 @@ const MiniPlayer = (props: ISProps) => {
       <div className="miniPlayer">
         <img
           src={currentSong.al.picUrl}
-          className="song"
+          className={cx("song rotate", {
+            "rotate--paused": !playStatus,
+          })}
           onClick={() => {
             changeFullSreen(true);
           }}

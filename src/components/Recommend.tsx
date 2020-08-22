@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { TopTab } from "@/components/widget/TopTab";
 import { getRecommendSongs } from "@/store/api";
 import bg from "@/static/recommend_bg.jpg";
