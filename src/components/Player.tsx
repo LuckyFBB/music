@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2020-08-16 20:38:10
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-22 15:32:19
+ * @LastEditTime: 2020-08-23 16:52:04
  * @Description: 播放器
  */
 
@@ -18,7 +18,7 @@ import {
   changeCurrentIndexAction,
 } from "@/actions/playAction";
 import NormalPlayer from "./widget/NormalPlayer";
-import { checkMusic } from "@/store/api";
+import { checkMusic, getSongLyric } from "@/store/api";
 import { Toast } from "antd-mobile";
 
 const Player = (props: any) => {

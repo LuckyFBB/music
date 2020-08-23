@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:55
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-16 21:33:49
+ * @LastEditTime: 2020-08-23 22:05:28
  */
 
 @top_height: 50px;
@@ -579,6 +579,7 @@
   width: 100%;
   opacity: 0.8;
   overflow: scroll;
+  z-index: 99;
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
   background-color: #fff;
@@ -622,5 +623,17 @@
     margin-right: 5px;
     height: 25px;
     width: 25px;
+  }
+}
+
+.lyricContainer {
+  margin-top: 30px;
+  padding: 0 20px;
+  height: 100px;
+  overflow: scroll;
+  z-index: 9;
+  .lyric {
+    text-align: center;
+    line-height: 20px;
   }
 }

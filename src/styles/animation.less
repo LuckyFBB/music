@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2020-08-22 15:12:41
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-22 15:13:06
+ * @LastEditTime: 2020-08-23 22:05:42
  * @Description: CSS动画合集
  */
 
@@ -20,4 +20,27 @@
   &--paused {
     animation-play-state: paused;
   }
+}
+
+//进入动画
+.fade-enter {
+  top: 100vh;
+}
+.fade-enter-active {
+  top: 30vh;
+  transition: top 1s ease-in;
+}
+.fade-enter-done {
+  top: 30vh;
+}
+//退出动画
+.fade-exit {
+  top: 30vh;
+}
+.fade-exit-active {
+  top: 100vh;
+  transition: top 1s ease-in;
+}
+.fade-exit-done {
+  top: 100vh;
 }
