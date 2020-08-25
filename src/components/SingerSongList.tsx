@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-09-08 21:46:38
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-16 20:13:18
+ * @LastEditTime: 2020-08-25 16:56:31
  * @Description: 歌手所有歌曲展示
  */
 
@@ -23,7 +23,10 @@ import {
 
 const SingerSongList = (props: any) => {
   const { id } = props.match.params;
-  const { changePlayList, changeSequenceList, changeTotalCount } = props;
+  const {
+    changeTotalCount,
+    initCurrentAlbum,
+  } = props;
   const [artist, setArtist]: [
     { [propName: string]: string },
     Function
@@ -36,8 +39,7 @@ const SingerSongList = (props: any) => {
   const getSingerPlayDetailFunc = () => {
     getSingerPlayDetail(id).then((res: any) => {
       setArtist(res.artist);
-      changeSequenceList(res.hotSongs);
-      changePlayList(res.hotSongs);
+      initCurrentAlbum({ tracks: res.hotSongs });
       changeTotalCount(res.hotSongs.length);
     });
   };

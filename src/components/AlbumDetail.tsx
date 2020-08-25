@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-09-07 21:21:58
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-16 20:16:19
+ * @LastEditTime: 2020-08-25 17:24:01
  * @Description: 歌单详情
  */
 
@@ -15,10 +15,6 @@ import { ACTION_MAP } from "@/share/enums";
 import left from "@/static/icon/left_arrow.png";
 import { connect } from "react-redux";
 import {
-  changePlayListAction,
-  initSequenceListAction,
-} from "actions/playAction";
-import {
   initCurrentAlbumAction,
   changeTotalCountAction,
 } from "@/actions/albumAction";
@@ -26,8 +22,6 @@ import {
 const AlbumDetail = (props: any) => {
   const { id } = props.match.params;
   const {
-    changePlayList,
-    initSequenceList,
     initCurrentAlbum,
     currentAlbum,
     changeTotalCount,
@@ -40,8 +34,6 @@ const AlbumDetail = (props: any) => {
   const getSonglist = () => {
     getPlayDetail(id).then((res: any) => {
       initCurrentAlbum(res.playlist);
-      changePlayList(res.playlist.tracks);
-      initSequenceList(res.playlist.tracks);
       changeTotalCount(res.playlist.tracks.length);
     });
   };
@@ -112,8 +104,6 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  changePlayList: (list: []) => dispatch(changePlayListAction(list)),
-  initSequenceList: (list: []) => dispatch(initSequenceListAction(list)),
   initCurrentAlbum: (album: {}) => dispatch(initCurrentAlbumAction(album)),
   changeTotalCount: (number: number) =>
     dispatch(changeTotalCountAction(number)),

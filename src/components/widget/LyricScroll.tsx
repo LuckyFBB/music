@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2020-08-23 16:47:13
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-24 18:27:43
+ * @LastEditTime: 2020-08-25 17:11:49
  * @Description: 歌词滚动组件
  */
 
@@ -20,20 +20,22 @@ const LyricScroll = (props: ISProps) => {
   const { playId, currentTime } = props;
   const [lyriclist, setLyricList] = useState([]);
   const [currentLine, setCurrentLine] = useState(0);
-  let [lyricHeight, setLyricHeight] = useState(-40);
+  let [lyricHeight, setLyricHeight] = useState(0);
 
   useEffect(() => {
     if (playId === -1) return;
-    setLyricHeight(-40);
+    setLyricHeight(0);
     getSongLyric(playId).then((res: any) => {
       const { lrc } = res;
+      if (!lrc) return;
       const lyclist = lrc!.lyric
         .split(/[\n]/)
         .map((item: any) => {
           const temp = item.split(/\[(.+?)\]/);
           return { time: dateToMillisecond(temp[1]), lyc: temp[2] };
         })
-        .filter((item: any) => item.lyc);
+        .filter((item: any) => item.lyc)
+        .sort((a: any, b: any) => a.time - b.time);
       setLyricList(lyclist);
     });
   }, [playId]);
@@ -66,9 +68,7 @@ const LyricScroll = (props: ISProps) => {
   };
 
   const getLyricStyle = () => {
-    const currentDom = document.getElementById(`${currentLine}`);
-    const currentDomHeight = currentDom && currentDom.offsetHeight;
-    lyricHeight += currentDomHeight as number;
+    lyricHeight = -40 + currentLine * 20;
     setLyricHeight(lyricHeight);
   };
 
@@ -81,19 +81,17 @@ const LyricScroll = (props: ISProps) => {
         }}
       >
         {lyriclist.length ? (
-          lyriclist.map((item: any, index: number) => {
-            return (
-              <p
-                className={cx({ current: currentLine === index })}
-                key={index}
-                id={`${index}`}
-              >
-                {item.lyc}
-              </p>
-            );
-          })
+          lyriclist.map((item: any, index: number) => (
+            <p
+              className={cx({ current: currentLine === index })}
+              key={index}
+              id={`${index}`}
+            >
+              {item.lyc}
+            </p>
+          ))
         ) : (
-          <p>纯音乐，暂无歌词~~</p>
+          <p className="current">纯音乐，暂无歌词~~</p>
         )}
       </div>
     </div>

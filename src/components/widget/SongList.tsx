@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-09-08 16:49:52
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-18 22:23:51
+ * @LastEditTime: 2020-08-25 17:29:30
  * @Description: 歌曲展示列表
  */
 
@@ -14,32 +14,46 @@ import {
   changeCurrentIndexAction,
   changePlayIdAction,
   changeCurrentSongAction,
+  changePlayListAction,
+  initSequenceListAction,
 } from "@/actions/playAction";
+import { PLAY_TYPE } from "@/share/enums";
+import { randomList } from "@/utils/utils";
 
 interface ISProp {
   history: any;
-  changeCurrentIndex: Function;
-  changePlayId: Function;
-  sequenceList: [];
+  currentAlbum: any;
   totalCount: number;
-  changeCurrentSong: Function;
   type?: string;
+  playMode: number;
+  changePlayId: Function;
+  changePlayList: Function;
+  initSequenceList: Function;
+  changeCurrentSong: Function;
+  changeCurrentIndex: Function;
 }
 
 const SongList = (props: ISProp) => {
   const {
+    playMode,
     changeCurrentIndex,
     changePlayId,
-    sequenceList,
+    currentAlbum,
     totalCount,
     changeCurrentSong,
+    initSequenceList,
     type,
+    changePlayList,
   } = props;
 
   const handleClick = (id: string, index: number) => {
     changeCurrentIndex(index);
     changePlayId(id);
-    changeCurrentSong(sequenceList[index]);
+    playMode === PLAY_TYPE.PLAY_RANDOM
+      ? changePlayList(randomList(currentAlbum.tracks))
+      : changePlayList(currentAlbum.tracks);
+    initSequenceList(currentAlbum.tracks);
+    changeCurrentSong(currentAlbum.tracks[index]);
   };
 
   return (
@@ -58,30 +72,31 @@ const SongList = (props: ISProp) => {
         )}
       </div>
       <div className="songlist__content">
-        {sequenceList.map((item: any, index: number) => {
-          const ar = item.ar || item.artists;
-          const al = item.al || item.album;
-          return (
-            <div
-              className="item"
-              key={item.id}
-              onClick={() => handleClick(item.id, index)}
-            >
-              <span className="index">{index + 1}</span>
-              <div className="content">
-                <p className="song">{item.name}</p>
-                <p className="ar">
-                  {ar.map((item: any) => (
-                    <span key={item.name}>{item.name}</span>
-                  ))}
-                  <span>-</span>
-                  <span>{al.name}</span>
-                </p>
+        {currentAlbum.tracks &&
+          currentAlbum.tracks.map((item: any, index: number) => {
+            const ar = item.ar || item.artists;
+            const al = item.al || item.album;
+            return (
+              <div
+                className="item"
+                key={item.id}
+                onClick={() => handleClick(item.id, index)}
+              >
+                <span className="index">{index + 1}</span>
+                <div className="content">
+                  <p className="song">{item.name}</p>
+                  <p className="ar">
+                    {ar.map((item: any) => (
+                      <span key={item.name}>{item.name}</span>
+                    ))}
+                    <span>-</span>
+                    <span>{al.name}</span>
+                  </p>
+                </div>
+                <img src={more} alt="更多" />
               </div>
-              <img src={more} alt="更多" />
-            </div>
-          );
-        })}
+            );
+          })}
       </div>
     </div>
   );
@@ -89,8 +104,9 @@ const SongList = (props: ISProp) => {
 
 const mapStateToProps = (state: any) => ({
   currentIndex: state.playReducer.currentIndex,
-  sequenceList: state.playReducer.sequenceList,
+  currentAlbum: state.albumReducer.currentAlbum,
   totalCount: state.albumReducer.totalCount,
+  playMode: state.playReducer.playMode,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
@@ -99,6 +115,12 @@ const mapDispatchToProps = (dispatch: Function) => ({
   changePlayId: (index: number) => dispatch(changePlayIdAction(index)),
   changeCurrentSong: (song: {}) => {
     dispatch(changeCurrentSongAction(song));
+  },
+  changePlayList: (list: []) => {
+    dispatch(changePlayListAction(list));
+  },
+  initSequenceList: (list: []) => {
+    dispatch(initSequenceListAction(list));
   },
 });
 

@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:55
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-24 13:42:48
+ * @LastEditTime: 2020-08-25 16:13:37
  */
 
 @top_height: 50px;
@@ -635,6 +635,12 @@
   .lyric {
     text-align: center;
     line-height: 20px;
+    p {
+      width: 300px;
+      white-space: nowrap; /* 规定文本是否折行 */
+      overflow: hidden; /* 规定超出内容宽度的元素隐藏 */
+      text-overflow: ellipsis;
+    }
     .current {
       color: #fff;
     }
