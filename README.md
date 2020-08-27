@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-25 16:32:33
+ * @LastEditTime: 2020-08-27 21:10:25
  * @Description:
 -->
 
@@ -12,9 +12,9 @@
 
   1. ~~音乐界面图片旋转~~
   2. ~~音乐小化播放~~
-  3. 音乐分页加载
+  3. ~~音乐分页加载~~
   4. ~~图片懒加载(使用 react-lazy)~~
-  5. 添加歌词
+  5. ~~添加歌词~~
 
 - problem and solution
 
@@ -30,6 +30,6 @@
   3. 使用 CSS 旋转图片，暂停时停留在当前位置
      使用 animation-play-state 属性，但是兼容有问题，[具体解决方案](https://www.jianshu.com/p/1fb1a3bba129)
 
-- bus
+- bug
   1.  歌词滚动，如果当前一句歌词超过 1 行，滚动有问题。
   2.  每次进入全屏播放页面，useEffect(()=>{},[playId])都会执行逻辑，但是 playId 没变

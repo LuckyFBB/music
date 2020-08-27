@@ -2,18 +2,19 @@
  * @Author: FBB
  * @Date: 2019-09-03 23:00:39
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-19 21:28:03
+ * @LastEditTime: 2020-08-27 17:17:19
  * @Description: 歌手展示列表
  */
 
 import React from "react";
 import LazyLoad from "react-lazyload";
+import { connect } from "react-redux";
 
-export const SingerList = (props: any) => {
-  const { list, onClick } = props;
+const SingerList = (props: any) => {
+  const { singerList, onClick } = props;
   return (
     <div className="singerlist">
-      {list.map((item: any) => (
+      {singerList.map((item: any) => (
         <div
           className="singerlist__item"
           key={item.id}
@@ -34,3 +35,11 @@ export const SingerList = (props: any) => {
     </div>
   );
 };
+
+const mapStateToProps = (state: any) => ({
+  singerList: state.musicReducer.singerList,
+});
+
+const mapDispatchToProps = () => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingerList);

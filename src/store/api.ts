@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-12-12 16:55:11
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-22 16:33:50
+ * @LastEditTime: 2020-08-27 16:31:24
  * @Description: 请求集和
  */
 import request from "@/utils/request";
@@ -90,7 +90,7 @@ export const getHotPlayDetail = (cat: string) => {
  * @param {number} type  -歌手类型
  * @param {number} area  -歌手类型
  * @param {string} initial -首字母索引查找参数
- * @param {number} offset -偏移数量，用于分页
+ * @param {number} page -页数，用于分页
  * @param {number} limit -数量
  * @return:
  * @author: FBB
@@ -98,17 +98,17 @@ export const getHotPlayDetail = (cat: string) => {
 export const getCategorySinger = (
   type: number,
   area: number,
+  page = 0,
   initial?: string,
-  offset?: number,
-  limit?: number
+  limit = 20
 ) => {
   const url = "/artist/list";
   const params = {
     type,
     area,
     initial,
-    offset,
-    limit: 20,
+    offset: page * limit,
+    limit,
   };
   return request({ url, params });
 };

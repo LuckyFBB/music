@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-09-08 21:46:38
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-25 16:56:31
+ * @LastEditTime: 2020-08-27 21:08:02
  * @Description: 歌手所有歌曲展示
  */
 
@@ -20,13 +20,11 @@ import {
   changeTotalCountAction,
   initCurrentAlbumAction,
 } from "@/actions/albumAction";
+import { HasMore } from "./widget/HasMore";
 
 const SingerSongList = (props: any) => {
   const { id } = props.match.params;
-  const {
-    changeTotalCount,
-    initCurrentAlbum,
-  } = props;
+  const { changeTotalCount, initCurrentAlbum } = props;
   const [artist, setArtist]: [
     { [propName: string]: string },
     Function
@@ -58,6 +56,7 @@ const SingerSongList = (props: any) => {
       <div className="singerdetail__content">
         <SongList history={props.history} type="singer" />
       </div>
+      <HasMore isLoading={false} handleMore={() => console.log(111)} />
     </div>
   );
 };
