@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2020-08-17 21:29:25
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-23 22:02:05
+ * @LastEditTime: 2020-08-27 14:24:55
  * @Description: 全屏的播放器
  */
 
@@ -60,7 +60,14 @@ const NormalPlayer = (props: ISPorps) => {
   };
 
   return (
-    <CSSTransition in={isFull} timeout={1000} unmountOnExit>
+    <CSSTransition
+      in={isFull}
+      timeout={300}
+      unmountOnExit
+      mountOnEnter
+      appear={true}
+      classNames="full"
+    >
       <div className="play">
         <TopTab
           type="text"

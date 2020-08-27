@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2020-08-16 20:42:51
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-22 15:16:25
+ * @LastEditTime: 2020-08-27 15:05:57
  * @Description: 小化播放器
  */
 
@@ -30,7 +30,14 @@ const MiniPlayer = (props: ISProps) => {
     isFull,
   } = props;
   return (
-    <CSSTransition in={!isFull} timeout={1000} unmountOnExit>
+    <CSSTransition
+      in={!isFull}
+      timeout={1000}
+      appear={true}
+      unmountOnExit
+      mountOnEnter
+      classNames="mini"
+    >
       <div className="miniPlayer">
         <img
           src={currentSong.al.picUrl}

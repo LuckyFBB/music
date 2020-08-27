@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-09-08 16:49:52
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-25 17:29:30
+ * @LastEditTime: 2020-08-27 14:54:46
  * @Description: 歌曲展示列表
  */
 
@@ -16,6 +16,7 @@ import {
   changeCurrentSongAction,
   changePlayListAction,
   initSequenceListAction,
+  changePlayStateAction,
 } from "@/actions/playAction";
 import { PLAY_TYPE } from "@/share/enums";
 import { randomList } from "@/utils/utils";
@@ -28,6 +29,7 @@ interface ISProp {
   playMode: number;
   changePlayId: Function;
   changePlayList: Function;
+  changePlayState: Function;
   initSequenceList: Function;
   changeCurrentSong: Function;
   changeCurrentIndex: Function;
@@ -44,6 +46,7 @@ const SongList = (props: ISProp) => {
     initSequenceList,
     type,
     changePlayList,
+    changePlayState,
   } = props;
 
   const handleClick = (id: string, index: number) => {
@@ -54,6 +57,7 @@ const SongList = (props: ISProp) => {
       : changePlayList(currentAlbum.tracks);
     initSequenceList(currentAlbum.tracks);
     changeCurrentSong(currentAlbum.tracks[index]);
+    changePlayState(true);
   };
 
   return (
@@ -121,6 +125,9 @@ const mapDispatchToProps = (dispatch: Function) => ({
   },
   initSequenceList: (list: []) => {
     dispatch(initSequenceListAction(list));
+  },
+  changePlayState: (state: boolean) => {
+    dispatch(changePlayStateAction(state));
   },
 });
 
