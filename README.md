@@ -2,34 +2,44 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-27 21:10:25
+ * @LastEditTime: 2020-08-28 17:51:10
  * @Description:
 -->
 
-### music task/third_version
+# music
 
-- todos
+### 2019.12.02 (task/first_version)
 
-  1. ~~音乐界面图片旋转~~
-  2. ~~音乐小化播放~~
-  3. ~~音乐分页加载~~
-  4. ~~图片懒加载(使用 react-lazy)~~
-  5. ~~添加歌词~~
+初步完成功能
 
-- problem and solution
+-  登录页
+-  首页
+-  搜索页面
+-  歌单(排行榜，歌单广场)
+-  歌手
+-  音乐播放页(暂停/播放)
 
-  1. NormalPlayer 展示时为遮盖层，当底层为 scroll 时，在遮盖层能够触发底层滚动
-     解决方案：为遮盖层添加 touchmove 监听事件，调用 e.preventDefault()，[具体解决方案](https://www.jianshu.com/p/bf4b3693a4f1)。
-  2. ts 中使用 useRef()这个 hook 函数，类型设置。在 player 中使用 audio，我们使用 ref 来拿到当前的 audio。
-     ```js
-     const audioRef = useRef();
-     //...省略
-     audioRef.current.src = xxx; //在进行赋值的时候报错current为未定义
-     ```
-     解决方案：需要给 useRef()传入一个初始值，并且定义当前初始值的类型，[关于 useRef](https://zhuanlan.zhihu.com/p/105276393)
-  3. 使用 CSS 旋转图片，暂停时停留在当前位置
-     使用 animation-play-state 属性，但是兼容有问题，[具体解决方案](https://www.jianshu.com/p/1fb1a3bba129)
+### 2020.08.13 (task/second_version)
 
-- bug
-  1.  歌词滚动，如果当前一句歌词超过 1 行，滚动有问题。
-  2.  每次进入全屏播放页面，useEffect(()=>{},[playId])都会执行逻辑，但是 playId 没变
+进一步优化已有界面
+
+-  音乐播放功能(切换音乐/切换播放模式)
+-  引入  redux
+-  需登录页面提前校验
+-  更改  api  格式
+
+在第二版本主要把播放行为进行了完善，引入了 redux。但是随着某些需求的实现，发现最初的结构实现有较大的问题，所以提前结束第二版本。将在第三版对某些代码结构进行重新实现，已达到更好的播放效果。
+
+### 2020.09.01 (task/three_version)
+目标：更好的实现播放效果，播放小窗化，每个页面都能播放。
+
+- 音乐界面图片旋转
+- 音乐小化播放
+- 音乐分页加载
+- 图片懒加载(使用 react-lazy)
+- 添加歌词
+
+依然存在一些小的问题尚未解决，具体在该分支的md文件上
+
+### 2020.09.15 (task/fourth_version)
+目标：优化加载更多，二级页面的动画效果，滚动组件封装。
