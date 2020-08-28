@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-09-08 21:46:38
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-27 21:08:02
+ * @LastEditTime: 2020-08-28 17:13:30
  * @Description: 歌手所有歌曲展示
  */
 
@@ -56,7 +56,6 @@ const SingerSongList = (props: any) => {
       <div className="singerdetail__content">
         <SongList history={props.history} type="singer" />
       </div>
-      <HasMore isLoading={false} handleMore={() => console.log(111)} />
     </div>
   );
 };
