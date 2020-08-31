@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-09-08 21:46:38
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-28 17:13:30
+ * @LastEditTime: 2020-08-31 14:50:59
  * @Description: 歌手所有歌曲展示
  */
 
@@ -20,7 +20,6 @@ import {
   changeTotalCountAction,
   initCurrentAlbumAction,
 } from "@/actions/albumAction";
-import { HasMore } from "./widget/HasMore";
 
 const SingerSongList = (props: any) => {
   const { id } = props.match.params;

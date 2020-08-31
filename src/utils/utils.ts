@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-12-12 15:01:04
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-16 21:20:22
+ * @LastEditTime: 2020-08-31 15:33:09
  * @Description: 某些工具类方法集和
  */
 
@@ -31,7 +31,7 @@ export const getOptionsVlaue = (options: Array<[any, any]>, value: any) => {
 /**
  * @description: 随机数
  * @param {type}
- * @return {type}
+ * @return {number}
  * @author: FBB
  */
 export const getRandomInt = (min: number, max: number) => {
@@ -41,7 +41,7 @@ export const getRandomInt = (min: number, max: number) => {
 /**
  * @description: 随机排列歌曲顺序
  * @param {array} list -需要排序的列表
- * @return {type}
+ * @return {array}
  * @author: FBB
  */
 export const randomList = (list: []) => {
@@ -60,7 +60,7 @@ export const randomList = (list: []) => {
  * @description: 根据歌曲查找它在列表的index
  * @param {object} song -待查找歌曲
  * @param {array} list -查找列表
- * @return {type}
+ * @return {array}
  * @author: FBB
  */
 export const findIndex = (song: any, list: []) => {
@@ -72,7 +72,7 @@ export const findIndex = (song: any, list: []) => {
 /**
  * @description: 判断对象是否为空
  * @param {object} obj -待判断对象
- * @return {type}
+ * @return {boolean}
  * @author: FBB
  */
 
@@ -82,9 +82,23 @@ export const isEmptyObject = (obj: any) =>
 /**
  * @description:
  * @param {type}
- * @return {type}
+ * @return {string}
  * @author: FBB
  */
 
 export const getUrlForSong = (id: number) =>
   `https://music.163.com/song/media/outer/url?id=${id}.mp3`;
+
+/**
+ * @description: 获取所有字母
+ * @param {type}
+ * @return {Array}
+ * @author: FBB
+ */
+export const getAlphabet = () => {
+  const alphabet = [];
+  for (let index = 65; index <= 90; index++) {
+    alphabet.push(String.fromCharCode(index));
+  }
+  return alphabet;
+};
