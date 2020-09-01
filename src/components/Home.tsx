@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-16 20:24:52
+ * @LastEditTime: 2020-09-01 21:02:07
  * @Description: 首页
  */
 
@@ -16,6 +16,7 @@ import { HOME_ICONS_OPTIONS } from "@/share/enums";
 import { SongBlock } from "@/components/widget/SongBlock";
 import { Toast } from "antd-mobile";
 import search from "@/static/icon/search.png";
+import BScroll from "better-scroll";
 
 export const Home = (props: any) => {
   const [bannerList, setBannerList] = useState([]);
@@ -30,6 +31,15 @@ export const Home = (props: any) => {
     getPersonalizedList();
     //comfirmStatus();
   }, []);
+
+  useEffect(() => {
+    const homeWrapper = document.querySelector(".home__wrapper") as HTMLElement;
+    const bc = new BScroll(homeWrapper, {
+      scrollY: true,
+      click: true,
+    });
+    console.log(bc);
+  }, [personalizedList]);
 
   //获取banner
   const getBannerList = (type: number) => {
@@ -71,48 +81,53 @@ export const Home = (props: any) => {
         right={search}
         onRight={() => redirectToPath("/search")}
       />
-      <div className="home__container">
-        <div className="home__banner">
-          <Carousel
-            autoPlay={true}
-            infiniteLoop={true}
-            showStatus={false}
-            showThumbs={false}
-            showArrows={false}
-          >
-            {bannerList.map((item: any, index: number) => (
-              <div className="banner__item" key={index}>
-                <img src={item.pic} alt="" />
+      <div className="home__wrapper">
+        <div className="home__content">
+          <div className="home__banner">
+            <Carousel
+              autoPlay={true}
+              infiniteLoop={true}
+              showStatus={false}
+              showThumbs={false}
+              showArrows={false}
+            >
+              {bannerList.map((item: any, index: number) => (
+                <div className="banner__item" key={index}>
+                  <img src={item.pic} alt="" />
+                </div>
+              ))}
+            </Carousel>
+          </div>
+          <div className="home__icons">
+            {HOME_ICONS_OPTIONS.map(([path, title, icon]) => (
+              <div
+                className="icon__item"
+                key={title}
+                onClick={() => redirectToPath(path)}
+              >
+                <div className="item__img">
+                  <img src={icon} alt={title} />
+                </div>
+                <p className="item__title">{title}</p>
               </div>
             ))}
-          </Carousel>
-        </div>
-        <div className="home__icons">
-          {HOME_ICONS_OPTIONS.map(([path, title, icon]) => (
-            <div
-              className="icon__item"
-              key={title}
-              onClick={() => redirectToPath(path)}
-            >
-              <div className="item__img">
-                <img src={icon} alt={title} />
-              </div>
-              <p className="item__title">{title}</p>
-            </div>
-          ))}
-        </div>
-        <div className="home__personalized">
-          <div className="personalized__header">
-            <span className="title">推荐歌单</span>
-            <span className="redirect" onClick={() => redirectToPath("/music")}>
-              歌单广场
-            </span>
           </div>
-          <div className="personalized__content">
-            <SongBlock
-              list={personalizedList.slice(0, 6)}
-              onClick={redirectToSonglistDetail}
-            />
+          <div className="home__personalized">
+            <div className="personalized__header">
+              <span className="title">推荐歌单</span>
+              <span
+                className="redirect"
+                onClick={() => redirectToPath("/music")}
+              >
+                歌单广场
+              </span>
+            </div>
+            <div className="personalized__content">
+              <SongBlock
+                list={personalizedList.slice(0, 12)}
+                onClick={redirectToSonglistDetail}
+              />
+            </div>
           </div>
         </div>
       </div>

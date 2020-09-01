@@ -1,11 +1,14 @@
 .home {
+  display: flex;
+  flex-direction: column;
   position: relative;
   height: 100%;
   overflow: scroll;
   background-color: #fff;
 
-  &__container {
-    padding: 55px 0 55px;
+  &__wrapper {
+    flex: 1;
+    overflow: hidden;
   }
 
   &__banner {
@@ -111,15 +114,21 @@
 /* 歌单 */
 .music {
   &__content {
-    padding: 95px 0 10px;
+    position: fixed;
+    top: 95px;
+    left: 0;
   }
 }
 
 /* 歌手 */
 .singer {
-  padding-bottom: 65px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: scroll;
   &__container {
-    padding: 95px 0 0;
+    flex: 1;
+    overflow: scroll;
   }
 }
 

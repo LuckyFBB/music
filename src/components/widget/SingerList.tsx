@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-09-03 23:00:39
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-27 17:17:19
+ * @LastEditTime: 2020-09-01 22:13:04
  * @Description: 歌手展示列表
  */
 
@@ -20,11 +20,9 @@ const SingerList = (props: any) => {
           key={item.id}
           onClick={() => onClick(item.id)}
         >
-          <LazyLoad scroll={true} height={65}>
-            <div className="singerlist__img">
-              <img src={item.picUrl} alt={item.name} />
-            </div>
-          </LazyLoad>
+          <div className="singerlist__img">
+            <img src={item.picUrl} alt={item.name} />
+          </div>
           <div className="singerlist__content">
             <p className="name">{item.name}</p>
             <p className="album">专辑数量：{item.albumSize}</p>

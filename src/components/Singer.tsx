@@ -76,12 +76,14 @@ const Singer = (props: any) => {
       />
       <div className="singer__container">
         <SingerList onClick={redirectToSinger} />
+        {hasMore && (
+          <HasMore handleMore={getMoreSinger} isLoading={isLoading} />
+        )}
       </div>
       <Alphabet
         initial={initial}
         onChange={(item: string) => setInitial(item)}
       />
-      {hasMore && <HasMore handleMore={getMoreSinger} isLoading={isLoading} />}
       <BottomTab active="singer" history={props.history} />
     </div>
   );

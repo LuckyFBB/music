@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-25 17:19:35
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-19 21:27:08
+ * @LastEditTime: 2020-09-01 22:03:02
  * @Description: 歌单组件
  */
 import React from "react";
@@ -26,13 +26,9 @@ export const SongBlock = (props: ISProps) => {
             className="songblock__item"
             onClick={() => onClick(item.id)}
           >
-            <LazyLoad scroll={true} height={100}>
-              <img
-                className="img"
-                src={item.picUrl || item.coverImgUrl}
-                alt=""
-              />
-            </LazyLoad>
+            {/* <LazyLoad scroll={true} height={100}> */}
+            <img className="img" src={item.picUrl || item.coverImgUrl} alt="" />
+            {/*  </LazyLoad> */}
             <p className="title">{item.name}</p>
             <div className="fixed">
               <img className="fixed__img" src={play} alt="" />
