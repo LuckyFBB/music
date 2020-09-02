@@ -9,6 +9,7 @@ import { TAG_LIST } from "@/share/enums";
 import { connect } from "react-redux";
 import { changeSingerTag, changeSingerListAction } from "actions/musicAction";
 import { Alphabet } from "./widget/Alphabet";
+import BScroll from "better-scroll";
 
 const Singer = (props: any) => {
   const { singerTag, changeTag, changeSingerList, singerList } = props;
@@ -31,9 +32,16 @@ const Singer = (props: any) => {
   }, []);
 
   useEffect(() => {
-    console.log(1111);
     getCategorySingerFunc();
   }, [singerTag, initial]);
+
+  useEffect(() => {
+    const warpper = document.querySelector(".singer__container") as HTMLElement;
+    const bc = new BScroll(warpper, {
+      scrollY: true,
+      click: true,
+    });
+  }, [page]);
 
   //处理第一次获取当前tag下的singerlist
   const getCategorySingerFunc = () => {

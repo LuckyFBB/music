@@ -10,17 +10,19 @@ import {
   changePlayListAction,
   initSequenceListAction,
 } from "@/actions/playAction";
-import { changeTotalCountAction } from "@/actions/albumAction";
+import {
+  changeTotalCountAction,
+  initCurrentAlbumAction,
+} from "@/actions/albumAction";
 
 interface ISPorps {
   history: any;
-  changePlayList: Function;
-  initSequenceList: Function;
+  initCurrentAlbum: Function;
   changeTotalCount: Function;
 }
 
 const Recommend = (props: ISPorps) => {
-  const { changePlayList, initSequenceList, changeTotalCount } = props;
+  const { initCurrentAlbum, changeTotalCount } = props;
 
   useEffect(() => {
     Toast.loading("加载中");
@@ -29,8 +31,7 @@ const Recommend = (props: ISPorps) => {
 
   const getRecommendSongsFunc = () => {
     getRecommendSongs().then((res: any) => {
-      changePlayList(res.data.dailySongs);
-      initSequenceList(res.data.dailySongs);
+      initCurrentAlbum({ tracks: res.data.dailySongs });
       changeTotalCount(res.data.dailySongs.length);
       Toast.hide();
     });
@@ -41,7 +42,7 @@ const Recommend = (props: ISPorps) => {
   };
 
   return (
-    <div className="recommend">
+    <div className="container">
       <TopTab text="每日推荐" type="text" left={left} onLeft={handleBack} />
       <div className="recommend__header">
         <img className="recommend__img" src={bg} alt="" />
@@ -55,6 +56,7 @@ const Recommend = (props: ISPorps) => {
 
 const mapStateToProps = () => ({});
 const mapDispatchToProps = (dispatch: Function) => ({
+  initCurrentAlbum: (album: {}) => dispatch(initCurrentAlbumAction(album)),
   changePlayList: (list: []) => dispatch(changePlayListAction(list)),
   initSequenceList: (list: []) => dispatch(initSequenceListAction(list)),
   changeTotalCount: (number: number) => {

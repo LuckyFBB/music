@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2020-09-01 21:02:07
+ * @LastEditTime: 2020-09-02 19:39:47
  * @Description: 首页
  */
 
@@ -12,7 +12,7 @@ import { TopTab } from "@/components/widget/TopTab";
 import { getBanner, getPersonalized, comfirmLoginStatus } from "@/store/api";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { HOME_ICONS_OPTIONS } from "@/share/enums";
+import { HOME_ICONS_OPTIONS, HOME_PATH } from "@/share/enums";
 import { SongBlock } from "@/components/widget/SongBlock";
 import { Toast } from "antd-mobile";
 import search from "@/static/icon/search.png";
@@ -34,12 +34,11 @@ export const Home = (props: any) => {
 
   useEffect(() => {
     const homeWrapper = document.querySelector(".home__wrapper") as HTMLElement;
-    const bc = new BScroll(homeWrapper, {
+    new BScroll(homeWrapper, {
       scrollY: true,
       click: true,
     });
-    console.log(bc);
-  }, [personalizedList]);
+  }, [personalizedList, bannerList]);
 
   //获取banner
   const getBannerList = (type: number) => {
@@ -107,6 +106,9 @@ export const Home = (props: any) => {
               >
                 <div className="item__img">
                   <img src={icon} alt={title} />
+                  {path === HOME_PATH.RECOMMEND && (
+                    <span className="item__date">{new Date().getDay()}</span>
+                  )}
                 </div>
                 <p className="item__title">{title}</p>
               </div>

@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-27 21:35:13
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-16 17:16:49
+ * @LastEditTime: 2020-09-02 13:43:41
  * @Description: 首页榜单组件
  */
 
@@ -14,6 +14,7 @@ import { SongBlock } from "@/components/widget/SongBlock";
 import left from "@/static/icon/left_arrow.png";
 import { connect } from "react-redux";
 import { changeMusicTag } from "actions/musicAction";
+import BScroll from "better-scroll";
 
 const Music = (props: any) => {
   const { musicTag, changeTag } = props;
@@ -26,6 +27,15 @@ const Music = (props: any) => {
   useEffect(() => {
     getTagList();
   }, []);
+
+  useEffect(() => {
+    const warpper = document.querySelector(".music__content") as HTMLElement;
+    const bc = new BScroll(warpper, {
+      scrollY: true,
+      click: true,
+    });
+  }, [hotPlayList]);
+
   const handleBack = () => {
     props.history.go(-1);
   };

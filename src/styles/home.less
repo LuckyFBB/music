@@ -35,6 +35,7 @@
       &__item {
         .item {
           &__img {
+            position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -45,9 +46,15 @@
             background-color: @bgColor;
 
             img {
-              height: 22px;
-              width: 22px;
+              height: 24px;
+              width: 24px;
             }
+          }
+          &__date {
+            position: absolute;
+            top: 18px;
+            color: #fff;
+            font-size: 12px;
           }
 
           &__title {
@@ -70,7 +77,8 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        height: 50px;
+        height: 30px;
+        padding-top: 10px;
 
         .title {
           font-size: 20px;
@@ -91,12 +99,16 @@
 
 /* 排行榜 */
 .rank {
-  margin-bottom: 55px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   overflow: scroll;
   background-color: #fff;
 
   &__container {
-    padding: 55px 4vw 0;
+    flex: 1;
+    padding: 0 4vw;
+    overflow: scroll;
   }
 
   &__content {
@@ -108,15 +120,21 @@
     font-size: 18px;
     font-family: @PingFangSC-Medium;
     font-weight: 500;
+    &--second {
+      padding-top: 15px;
+    }
   }
 }
 
 /* 歌单 */
 .music {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: scroll;
   &__content {
-    position: fixed;
-    top: 95px;
-    left: 0;
+    flex: 1;
+    overflow: hidden;
   }
 }
 
@@ -132,31 +150,30 @@
   }
 }
 
-.songlistDetail {
-  &__bg {
-    position: absolute;
-    height: 270px;
-    width: 100%;
-    filter: brightness(0.5);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    &::after {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 100%;
-    }
-  }
+.album {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
   &__header {
     position: relative;
-    padding-top: 70px;
-    .container {
+    .bg {
+      width: 100%;
+      height: 270px;
+      filter: brightness(0.5);
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+    }
+    .detail {
+      position: absolute;
+      top: 50px;
+      width: 96vw;
       display: flex;
       flex-direction: row;
       padding-left: 4vw;
-      .bg {
+      .cover {
         position: relative;
-        &__cover {
+        &__img {
           height: 100px;
           width: 100px;
           border-radius: 5px;
@@ -219,6 +236,9 @@
       }
     }
     .action {
+      position: absolute;
+      bottom: 35px;
+      width: 100%;
       display: flex;
       flex-direction: row;
       justify-content: space-around;
@@ -238,14 +258,19 @@
     }
   }
   &__content {
+    flex: 1;
     position: relative;
-    margin-top: 25px;
+    margin-top: -15px;
+    overflow: hidden;
   }
 }
 
 .singerdetail {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
   &__header {
-    padding-top: 50px;
     position: relative;
     .button {
       position: absolute;
@@ -259,27 +284,31 @@
       background-color: rgb(216, 71, 65);
     }
     img {
+      height: 300px;
       width: 100%;
     }
   }
   &__content {
+    flex: 1;
     position: relative;
     margin-top: -20px;
     z-index: 1;
+    overflow: hidden;
   }
 }
 
 .recommend {
   &__header {
-    padding-top: 50px;
     img {
       width: 100%;
     }
   }
   &__content {
+    flex: 1;
     position: relative;
     margin-top: -20px;
     z-index: 1;
+    overflow: hidden;
   }
 }
 
@@ -296,11 +325,6 @@
 }
 
 .account {
-  height: 100%;
-  background-color: #f4f4f4;
-  &__content {
-    padding-top: 50px;
-  }
   &__bg {
     position: absolute;
     height: 150px;
@@ -389,47 +413,45 @@
     background-color: #fff;
   }
 }
+
 .mine {
-  &__content {
-    padding-top: 60px;
-  }
-  &__subcount {
-    background-color: #fff;
-    .line {
+  margin-top: 15px;
+  background-color: #fff;
+  .line {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 50px;
+    .left {
+      width: 16vw;
+      text-align: center;
+      .img {
+        height: 25px;
+        width: 25px;
+      }
+    }
+    .right {
       display: flex;
       flex-direction: row;
       align-items: center;
-      height: 50px;
-      .left {
-        width: 16vw;
-        text-align: center;
-        .img {
-          height: 25px;
-          width: 25px;
-        }
-      }
-      .right {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
+      flex: 1;
+      padding-right: 10px;
+      height: 100%;
+      border-bottom: 1px solid #f4f4f4;
+      .label {
         flex: 1;
-        padding-right: 10px;
-        height: 100%;
-        border-bottom: 1px solid #f4f4f4;
-        .label {
-          flex: 1;
-        }
-        .value {
-          width: 50px;
-        }
-        .arrow {
-          height: 25px;
-          width: 20px;
-        }
+      }
+      .value {
+        width: 50px;
+      }
+      .arrow {
+        height: 25px;
+        width: 20px;
       }
     }
   }
 }
+
 .play {
   height: 100%;
   position: fixed;
@@ -471,4 +493,14 @@
     border-color: rgba(255, 255, 255, 0.3);
     border-radius: 50%;
   }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.wrapper {
+  flex: 1;
+  overflow: hidden;
 }

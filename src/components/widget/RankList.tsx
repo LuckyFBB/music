@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-26 21:16:24
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-19 21:26:41
+ * @LastEditTime: 2020-09-02 14:04:30
  * @Description: 排行榜item
  */
 
@@ -25,9 +25,9 @@ export const RankList = (props: any) => {
                   onClick(item.id);
                 }}
               >
-                <LazyLoad scroll={true} height={100}>
-                  <img src={item.coverImgUrl} alt="" />
-                </LazyLoad>
+                {/* <LazyLoad scroll={true} height={100}> */}
+                <img src={item.coverImgUrl} alt="" />
+                {/* </LazyLoad> */}
                 <div className="block__fixed">{item.updateFrequency}</div>
               </div>
             ))}
@@ -45,9 +45,9 @@ export const RankList = (props: any) => {
                 }}
               >
                 <div className="line__left">
-                  <LazyLoad scroll={true} height={120}>
-                    <img className="line__img" src={item.coverImgUrl} alt="" />
-                  </LazyLoad>
+                  {/* <LazyLoad scroll={true} height={120}> */}
+                  <img className="line__img" src={item.coverImgUrl} alt="" />
+                  {/* </LazyLoad> */}
                   <div className="line__fixed">{item.updateFrequency}</div>
                 </div>
                 <div className="line__content">

@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:55
  * @LastEditors: FBB
- * @LastEditTime: 2020-09-01 22:15:27
+ * @LastEditTime: 2020-09-02 17:21:40
  */
 
 @top_height: 50px;
@@ -62,7 +62,6 @@
   height: @top_height;
   width: 100%;
   background-color: @bgColor;
-  z-index: 999;
 
   &__left {
     position: absolute;
@@ -114,6 +113,7 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  padding-top: 10px;
 
   &__item {
     position: relative;
@@ -297,6 +297,9 @@
   white-space: nowrap;
   background-color: @bgColor;
 
+  .content {
+    display: inline-block;
+  }
   &::-webkit-scrollbar {
     display: none;
   }
@@ -327,6 +330,7 @@
 }
 
 .singerlist {
+  padding: 10px 0;
   &__item {
     display: flex;
     flex-direction: row;
@@ -350,7 +354,7 @@
       color: #333;
       font-family: @PingFangSC-Medium;
     }
-    .album {
+    .number {
       padding-top: 8px;
       font-size: 13px;
       color: #666;
@@ -369,6 +373,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100%;
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
   background-color: #fff;
@@ -411,7 +416,7 @@
     }
   }
   &__wrapper {
-    height: 300px;
+    flex: 1;
     overflow: hidden;
   }
   &__content {

@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-09-09 21:42:57
  * @LastEditors: FBB
- * @LastEditTime: 2020-07-06 13:40:39
+ * @LastEditTime: 2020-09-02 14:38:37
  * @Description: 账号信息展示页
  */
 
@@ -24,11 +24,10 @@ export const Account = (props: any) => {
   }, []);
 
   const comfirmStatus = () => {
-    comfirmLoginStatus()
-      .then((res: any) => {
-        getUserDetailFunc(res.profile.userId);
-      })
-      /* .catch(() => {
+    comfirmLoginStatus().then((res: any) => {
+      getUserDetailFunc(res.profile.userId);
+    });
+    /* .catch(() => {
         Toast.show("尚未登录，前去登录");
         window.setTimeout(() => {
           props.history.push("/login");
@@ -43,7 +42,7 @@ export const Account = (props: any) => {
   };
 
   const handleLoginout = () => {
-  loginOut().then(() => {
+    loginOut().then(() => {
       Toast.show("退出成功");
       window.setTimeout(() => {
         props.history.push("/home");
@@ -52,12 +51,12 @@ export const Account = (props: any) => {
   };
 
   return (
-    <div className="account">
+    <div className="container">
       <TopTab type="text" text="账号" />
-      <div className="account__content">
+      <div className="wrapper">
         <div
           className="account__bg"
-          style={{ backgroundImage: `url(" + ${profile.backgroundUrl} + ")` }}
+          style={{ backgroundImage: `url(" ${profile.backgroundUrl}  ")` }}
         ></div>
         <div className="account__header">
           <img src={profile.avatarUrl} alt="" />

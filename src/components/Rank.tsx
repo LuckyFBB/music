@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-26 20:19:16
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-16 17:40:40
+ * @LastEditTime: 2020-09-02 14:11:31
  * @Description: 排行榜
  */
 
@@ -13,6 +13,7 @@ import { RankList } from "@/components/widget/RankList";
 import { getTopListDetail } from "@/store/api";
 import { Toast } from "antd-mobile";
 import left from "@/static/icon/left_arrow.png";
+import BScroll from "better-scroll";
 
 export const Rank = (props: any) => {
   const [rankList, setRankList] = useState([]);
@@ -20,6 +21,14 @@ export const Rank = (props: any) => {
     Toast.loading("加载中");
     getTopListDetailFunc();
   }, []);
+
+  useEffect(() => {
+    const warpper = document.querySelector(".rank__container") as HTMLElement;
+    const bs = new BScroll(warpper, {
+      scrollY: true,
+      click: true,
+    });
+  }, [rankList]);
 
   const getTopListDetailFunc = () => {
     getTopListDetail().then((res: any) => {
@@ -47,9 +56,7 @@ export const Rank = (props: any) => {
             type="line"
             onClick={redirectToSonglistDetail}
           />
-        </div>
-        <div className="rank__content">
-          <div className="rank__title">推荐磅</div>
+          <div className="rank__title rank__title--second">推荐磅</div>
           <RankList
             ranklist={rankList.slice(4)}
             type="block"

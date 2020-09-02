@@ -31,10 +31,10 @@ export const Mine = (props: any) => {
     getUserSubcountFunc();
   }, []);
   return (
-    <div className="mine">
+    <div className="container">
       <TopTab type="text" text="我的" />
-      <div className="mine__content">
-        <div className="mine__subcount">
+      <div className="wrapper">
+        <div className="mine">
           {MINE_SHOW_LIST.map((item: any) => (
             <div className="line" key={item.label}>
               <div className="left">

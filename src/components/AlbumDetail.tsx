@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-09-07 21:21:58
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-25 17:24:01
+ * @LastEditTime: 2020-09-02 16:31:24
  * @Description: 歌单详情
  */
 
@@ -21,11 +21,7 @@ import {
 
 const AlbumDetail = (props: any) => {
   const { id } = props.match.params;
-  const {
-    initCurrentAlbum,
-    currentAlbum,
-    changeTotalCount,
-  } = props;
+  const { initCurrentAlbum, currentAlbum, changeTotalCount } = props;
 
   useEffect(() => {
     getSonglist();
@@ -43,23 +39,20 @@ const AlbumDetail = (props: any) => {
   };
 
   return (
-    <div className="songlistDetail">
+    <div className="album">
       <TopTab type="text" text="歌单" left={left} onLeft={handleBack} />
-      <div
-        className="songlistDetail__bg"
-        style={{ backgroundImage: `url("${currentAlbum.coverImgUrl}")` }}
-      ></div>
-      <div className="songlistDetail__header">
-        <div className="container">
-          <div className="bg">
+      <div className="album__header">
+        <img className="bg" src={currentAlbum.coverImgUrl} alt="" />
+        <div className="detail">
+          <div className="cover">
             {currentAlbum.coverImgUrl && (
               <img
-                className="bg__cover"
+                className="cover__img"
                 src={currentAlbum.coverImgUrl as string}
                 alt=""
               />
             )}
-            <div className="bg__fixed">
+            <div className="cover__fixed">
               <img src={play} alt="播放" />
               <span>
                 {((currentAlbum.playCount as number) / 10000).toFixed(0)}万
@@ -91,7 +84,7 @@ const AlbumDetail = (props: any) => {
           ))}
         </div>
       </div>
-      <div className="songlistDetail__content">
+      <div className="album__content">
         <SongList history={props.history} />
       </div>
     </div>

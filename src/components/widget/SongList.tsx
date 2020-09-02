@@ -2,11 +2,11 @@
  * @Author: FBB
  * @Date: 2019-09-08 16:49:52
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-27 14:54:46
+ * @LastEditTime: 2020-09-02 19:23:57
  * @Description: 歌曲展示列表
  */
 
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import play from "@/static/icon/play.png";
 import more from "@/static/icon/more_gray.png";
 import { connect } from "react-redux";
@@ -20,6 +20,7 @@ import {
 } from "@/actions/playAction";
 import { PLAY_TYPE } from "@/share/enums";
 import { randomList } from "@/utils/utils";
+import BScroll from "better-scroll";
 
 interface ISProp {
   history: any;
@@ -49,6 +50,15 @@ const SongList = (props: ISProp) => {
     changePlayState,
   } = props;
 
+  useEffect(() => {
+    const wrapper = document.querySelector(".songlist__wrapper") as HTMLElement;
+    const bs = new BScroll(wrapper, {
+      scrollY: true,
+      click: true,
+    });
+    console.log(bs);
+  }, [currentAlbum]);
+
   const handleClick = (id: string, index: number) => {
     changeCurrentIndex(index);
     changePlayId(id);
@@ -75,32 +85,34 @@ const SongList = (props: ISProp) => {
           </div>
         )}
       </div>
-      <div className="songlist__content">
-        {currentAlbum.tracks &&
-          currentAlbum.tracks.map((item: any, index: number) => {
-            const ar = item.ar || item.artists;
-            const al = item.al || item.album;
-            return (
-              <div
-                className="item"
-                key={item.id}
-                onClick={() => handleClick(item.id, index)}
-              >
-                <span className="index">{index + 1}</span>
-                <div className="content">
-                  <p className="song">{item.name}</p>
-                  <p className="ar">
-                    {ar.map((item: any) => (
-                      <span key={item.name}>{item.name}</span>
-                    ))}
-                    <span>-</span>
-                    <span>{al.name}</span>
-                  </p>
+      <div className="songlist__wrapper">
+        <div className="songlist__content">
+          {currentAlbum.tracks &&
+            currentAlbum.tracks.map((item: any, index: number) => {
+              const ar = item.ar || item.artists;
+              const al = item.al || item.album;
+              return (
+                <div
+                  className="item"
+                  key={item.id}
+                  onClick={() => handleClick(item.id, index)}
+                >
+                  <span className="index">{index + 1}</span>
+                  <div className="content">
+                    <p className="song">{item.name}</p>
+                    <p className="ar">
+                      {ar.map((item: any) => (
+                        <span key={item.name}>{item.name}</span>
+                      ))}
+                      <span>-</span>
+                      <span>{al.name}</span>
+                    </p>
+                  </div>
+                  <img src={more} alt="更多" />
                 </div>
-                <img src={more} alt="更多" />
-              </div>
-            );
-          })}
+              );
+            })}
+        </div>
       </div>
     </div>
   );
