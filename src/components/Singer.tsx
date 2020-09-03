@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import { changeSingerTag, changeSingerListAction } from "actions/musicAction";
 import { Alphabet } from "./widget/Alphabet";
 import BScroll from "better-scroll";
+import { Scroll } from "./widget/Scroll";
 
 const Singer = (props: any) => {
   const { singerTag, changeTag, changeSingerList, singerList } = props;
@@ -34,14 +35,6 @@ const Singer = (props: any) => {
   useEffect(() => {
     getCategorySingerFunc();
   }, [singerTag, initial]);
-
-  useEffect(() => {
-    const warpper = document.querySelector(".singer__container") as HTMLElement;
-    const bc = new BScroll(warpper, {
-      scrollY: true,
-      click: true,
-    });
-  }, [page]);
 
   //处理第一次获取当前tag下的singerlist
   const getCategorySingerFunc = () => {
@@ -82,12 +75,9 @@ const Singer = (props: any) => {
         tagList={TAG_LIST}
         onChange={(item) => handleChangeSingerTag(item)}
       />
-      <div className="singer__container">
+      <Scroll pullUpStatus={true} pullUp={getMoreSinger}>
         <SingerList onClick={redirectToSinger} />
-        {hasMore && (
-          <HasMore handleMore={getMoreSinger} isLoading={isLoading} />
-        )}
-      </div>
+      </Scroll>
       <Alphabet
         initial={initial}
         onChange={(item: string) => setInitial(item)}

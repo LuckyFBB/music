@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-09-08 16:49:52
  * @LastEditors: FBB
- * @LastEditTime: 2020-09-02 19:23:57
+ * @LastEditTime: 2020-09-03 15:14:41
  * @Description: 歌曲展示列表
  */
 
@@ -21,6 +21,7 @@ import {
 import { PLAY_TYPE } from "@/share/enums";
 import { randomList } from "@/utils/utils";
 import BScroll from "better-scroll";
+import { Scroll } from "./Scroll";
 
 interface ISProp {
   history: any;
@@ -50,15 +51,6 @@ const SongList = (props: ISProp) => {
     changePlayState,
   } = props;
 
-  useEffect(() => {
-    const wrapper = document.querySelector(".songlist__wrapper") as HTMLElement;
-    const bs = new BScroll(wrapper, {
-      scrollY: true,
-      click: true,
-    });
-    console.log(bs);
-  }, [currentAlbum]);
-
   const handleClick = (id: string, index: number) => {
     changeCurrentIndex(index);
     changePlayId(id);
@@ -85,7 +77,7 @@ const SongList = (props: ISProp) => {
           </div>
         )}
       </div>
-      <div className="songlist__wrapper">
+      <Scroll>
         <div className="songlist__content">
           {currentAlbum.tracks &&
             currentAlbum.tracks.map((item: any, index: number) => {
@@ -113,7 +105,7 @@ const SongList = (props: ISProp) => {
               );
             })}
         </div>
-      </div>
+      </Scroll>
     </div>
   );
 };

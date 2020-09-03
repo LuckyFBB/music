@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2020-09-02 19:39:47
+ * @LastEditTime: 2020-09-03 15:09:37
  * @Description: 首页
  */
 
@@ -16,7 +16,7 @@ import { HOME_ICONS_OPTIONS, HOME_PATH } from "@/share/enums";
 import { SongBlock } from "@/components/widget/SongBlock";
 import { Toast } from "antd-mobile";
 import search from "@/static/icon/search.png";
-import BScroll from "better-scroll";
+import { Scroll } from "./widget/Scroll";
 
 export const Home = (props: any) => {
   const [bannerList, setBannerList] = useState([]);
@@ -31,14 +31,6 @@ export const Home = (props: any) => {
     getPersonalizedList();
     //comfirmStatus();
   }, []);
-
-  useEffect(() => {
-    const homeWrapper = document.querySelector(".home__wrapper") as HTMLElement;
-    new BScroll(homeWrapper, {
-      scrollY: true,
-      click: true,
-    });
-  }, [personalizedList, bannerList]);
 
   //获取banner
   const getBannerList = (type: number) => {
@@ -80,7 +72,7 @@ export const Home = (props: any) => {
         right={search}
         onRight={() => redirectToPath("/search")}
       />
-      <div className="home__wrapper">
+      <Scroll>
         <div className="home__content">
           <div className="home__banner">
             <Carousel
@@ -132,7 +124,7 @@ export const Home = (props: any) => {
             </div>
           </div>
         </div>
-      </div>
+      </Scroll>
       <BottomTab active="home" history={props.history} />
     </div>
   );

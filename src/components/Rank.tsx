@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-26 20:19:16
  * @LastEditors: FBB
- * @LastEditTime: 2020-09-02 14:11:31
+ * @LastEditTime: 2020-09-03 15:16:22
  * @Description: 排行榜
  */
 
@@ -14,6 +14,7 @@ import { getTopListDetail } from "@/store/api";
 import { Toast } from "antd-mobile";
 import left from "@/static/icon/left_arrow.png";
 import BScroll from "better-scroll";
+import { Scroll } from "./widget/Scroll";
 
 export const Rank = (props: any) => {
   const [rankList, setRankList] = useState([]);
@@ -21,14 +22,6 @@ export const Rank = (props: any) => {
     Toast.loading("加载中");
     getTopListDetailFunc();
   }, []);
-
-  useEffect(() => {
-    const warpper = document.querySelector(".rank__container") as HTMLElement;
-    const bs = new BScroll(warpper, {
-      scrollY: true,
-      click: true,
-    });
-  }, [rankList]);
 
   const getTopListDetailFunc = () => {
     getTopListDetail().then((res: any) => {
@@ -48,7 +41,7 @@ export const Rank = (props: any) => {
   return (
     <div className="rank">
       <TopTab type="text" text="排行榜" left={left} onLeft={handleBack} />
-      <div className="rank__container">
+      <Scroll cx="rank__container">
         <div className="rank__content">
           <div className="rank__title">官方榜</div>
           <RankList
@@ -63,7 +56,7 @@ export const Rank = (props: any) => {
             onClick={redirectToSonglistDetail}
           />
         </div>
-      </div>
+      </Scroll>
       <BottomTab active="home" history={props.history} />
     </div>
   );

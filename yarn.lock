@@ -928,6 +928,13 @@
   dependencies:
     "@better-scroll/shared-utils" "^2.0.1"
 
+"@better-scroll/core@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@better-scroll/core/-/core-2.0.2.tgz#0cd1870d5c6a3307201d2ae0a5650f0599b0eaf8"
+  integrity sha512-4EZj4mU8s3e2bfemL17giR79mIrh6+N0fzrznDH4ytZCwkPvARVAiPRCzVHc9QN8yJoKSWTysLoIoaKfWPXaUQ==
+  dependencies:
+    "@better-scroll/shared-utils" "^2.0.2"
+
 "@better-scroll/mouse-wheel@^2.0.1":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@better-scroll/mouse-wheel/-/mouse-wheel-2.0.1.tgz#1924034996845b228a44e09bc2d9ecb8d8888e09"
@@ -956,6 +963,13 @@
   dependencies:
     "@better-scroll/core" "^2.0.1"
 
+"@better-scroll/pull-up@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@better-scroll/pull-up/-/pull-up-2.0.2.tgz#c15301303568191a2b1e66cefd2c50911301c432"
+  integrity sha512-IC67/5+X2jjHQzfaKuA1qxcBrQMOYFotL239X2bcjGvUmvc0V8Omy0qibjRlIagT+4v8MsNcy4lxSTawjg+TyA==
+  dependencies:
+    "@better-scroll/core" "^2.0.2"
+
 "@better-scroll/scroll-bar@^2.0.1":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@better-scroll/scroll-bar/-/scroll-bar-2.0.1.tgz#6312905aa0c5ecf207d2325fc39ebda88f3fb9fb"
@@ -967,6 +981,11 @@
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@better-scroll/shared-utils/-/shared-utils-2.0.1.tgz#937b0665576a3ed9a4075690ca6d291cc67b8773"
   integrity sha512-IrL0rPMj9O3Oh8FP5A0poqSm3sG32NcNe88quZpyfknV5O4cejk/UrwRrLJftN17fmZ76rfINKguoazmhdZwHA==
+
+"@better-scroll/shared-utils@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@better-scroll/shared-utils/-/shared-utils-2.0.2.tgz#3b08aa9724615fc5dcd60cf953d77022b33f399d"
+  integrity sha512-7IIoFbpA8eR22o44q039D3s+35mCcEzl1o7vXHGaSJY8+kEBYOVOF9gOUure2w2lAhbd387GPMM3JB01p8Y4pA==
 
 "@better-scroll/slide@^2.0.1":
   version "2.0.1"
