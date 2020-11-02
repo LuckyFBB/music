@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-09-16 22:09:04
  * @LastEditors: FBB
- * @LastEditTime: 2020-07-06 14:17:02
+ * @LastEditTime: 2020-11-02 22:31:26
  * @Description: 搜索页面
  */
 
@@ -17,6 +17,7 @@ import {
   getSearchKeywords,
 } from "@/store/api";
 import { SearchList } from "@/components/widget/SearchList";
+import { Scroll } from "./widget/Scroll";
 
 export const Search = (props: any) => {
   const [hotList, setHotList]: [
@@ -75,13 +76,25 @@ export const Search = (props: any) => {
         placeholder={placeholder}
         onRight={handleSearch}
       />
+
+      {/* <Scroll cx={status ? "hot" : "content"}>
+        <SearchList
+          list={status ? searchList : hotList}
+          title={status ? "搜索结果" : "热搜榜"}
+          type={status ? "content" : "hot"}
+        />
+      </Scroll> */}
       {status ? (
         <div className="search__hot">
-          <SearchList list={searchList} title="搜索结果" type="content" />
+          <Scroll cx="content">
+            <SearchList list={searchList} title="搜索结果" type="content" />
+          </Scroll>
         </div>
       ) : (
         <div className="search__hot">
-          <SearchList hot={hotList} title="热搜榜" type="hot" />
+          <Scroll cx="hot">
+            <SearchList hot={hotList} title="热搜榜" type="hot" />
+          </Scroll>
         </div>
       )}
     </div>

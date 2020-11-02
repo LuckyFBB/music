@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2020-08-17 21:29:25
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-27 14:24:55
+ * @LastEditTime: 2020-11-02 22:04:13
  * @Description: 全屏的播放器
  */
 
@@ -69,12 +69,15 @@ const NormalPlayer = (props: ISPorps) => {
       classNames="full"
     >
       <div className="play">
-        <TopTab
-          type="text"
-          text={currentSong.name}
-          left={left}
-          onLeft={handleBack}
-        />
+        <div className="play__top">
+          <TopTab
+            type="text"
+            text={currentSong.name}
+            left={left}
+            onLeft={handleBack}
+            style={{ backgroundColor: "unset" }}
+          />
+        </div>
         <div
           className="play__container"
           onClick={() => {

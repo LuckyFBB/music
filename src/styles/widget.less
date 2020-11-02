@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:55
  * @LastEditors: FBB
- * @LastEditTime: 2020-09-03 15:21:54
+ * @LastEditTime: 2020-11-02 22:13:04
  */
 
 @top_height: 50px;
@@ -58,16 +58,11 @@
 
 .top {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
   height: @top_height;
   width: 100%;
   background-color: @bgColor;
-
-  &__left {
-    position: absolute;
-    top: 15px;
-    left: 5px;
-  }
 
   &__container {
     display: flex;
@@ -101,11 +96,21 @@
     position: absolute;
     top: 17px;
     right: 10px;
+    width: 20px;
   }
 
   &__slideimg {
+    position: absolute;
     height: 20px;
     width: 20px;
+  }
+  .img {
+    &--right {
+      margin-right: 5px;
+    }
+    &--left {
+      margin-left: 5px;
+    }
   }
 }
 
