@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-09-07 21:21:58
  * @LastEditors: FBB
- * @LastEditTime: 2020-09-02 16:31:24
+ * @LastEditTime: 2020-11-03 22:32:45
  * @Description: 歌单详情
  */
 
@@ -40,7 +40,11 @@ const AlbumDetail = (props: any) => {
 
   return (
     <div className="album">
-      <TopTab type="text" text="歌单" left={left} onLeft={handleBack} />
+      <TopTab left={left} onLeft={handleBack}>
+        <div className="top__container">
+          <p className="top__text">歌单</p>
+        </div>
+      </TopTab>
       <div className="album__header">
         <img className="bg" src={currentAlbum.coverImgUrl} alt="" />
         <div className="detail">

@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2020-09-03 11:27:12
  * @LastEditors: FBB
- * @LastEditTime: 2020-09-03 20:46:21
+ * @LastEditTime: 2020-11-03 22:15:15
  * @Description: 滚动组件
  */
 import React, { useRef, useEffect, useState } from "react";
@@ -12,7 +12,7 @@ import BScrollConstructor from "better-scroll";
 interface ISProps {
   direction?: string;
   click?: boolean;
-  children: any;
+  children: React.ReactChild;
   refresh?: boolean;
   cx?: string;
   pullUpStatus?: boolean;
@@ -33,6 +33,7 @@ export const Scroll = (props: ISProps) => {
         probeType: 3,
       });
     }
+    console.log(bs);
     setBs(bs);
   }, [props.children]);
 

@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-09-16 22:09:04
  * @LastEditors: FBB
- * @LastEditTime: 2020-11-02 22:31:26
+ * @LastEditTime: 2020-11-04 20:19:55
  * @Description: 搜索页面
  */
 
@@ -69,13 +69,15 @@ export const Search = (props: any) => {
   return (
     <div className="search">
       <TopTab
-        type="search"
         left={left}
         onLeft={handleBack}
         right={status ? cancel : search}
-        placeholder={placeholder}
         onRight={handleSearch}
-      />
+      >
+        <div className="top__search">
+          <input type="text" placeholder={placeholder || "请输入"} />
+        </div>
+      </TopTab>
 
       {/* <Scroll cx={status ? "hot" : "content"}>
         <SearchList

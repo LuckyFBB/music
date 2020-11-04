@@ -2,12 +2,11 @@
  * @Author: FBB
  * @Date: 2019-09-03 23:00:39
  * @LastEditors: FBB
- * @LastEditTime: 2020-09-02 16:53:20
+ * @LastEditTime: 2020-11-04 20:24:18
  * @Description: 歌手展示列表
  */
 
 import React from "react";
-import LazyLoad from "react-lazyload";
 import { connect } from "react-redux";
 
 const SingerList = (props: any) => {

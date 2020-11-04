@@ -4,18 +4,16 @@ import { BottomTab } from "@/components/widget/BottomTab";
 import { TabBar } from "@/components/widget/TabBar";
 import { getCategorySinger } from "@/store/api";
 import SingerList from "@/components/widget/SingerList";
-import { HasMore } from "@/components/widget/HasMore";
 import { TAG_LIST } from "@/share/enums";
 import { connect } from "react-redux";
 import { changeSingerTag, changeSingerListAction } from "actions/musicAction";
 import { Alphabet } from "./widget/Alphabet";
-import BScroll from "better-scroll";
 import { Scroll } from "./widget/Scroll";
 
 const Singer = (props: any) => {
   const { singerTag, changeTag, changeSingerList, singerList } = props;
-  const [hasMore, setHasMore] = useState(false);
-  const [isLoading, setIsLoding] = useState(false);
+  //const [hasMore, setHasMore] = useState(false);
+  //const [isLoading, setIsLoding] = useState(false);
   const [page, setPage] = useState(0); //当前分页页数
   const [initial, setInitial] = useState(""); //当前靠字母搜索
 
@@ -28,7 +26,7 @@ const Singer = (props: any) => {
   const { type, area } = getSingerTypeByName();
 
   useEffect(() => {
-    setIsLoding(true);
+    //setIsLoding(true);
     getCategorySingerFunc();
   }, []);
 
@@ -38,11 +36,11 @@ const Singer = (props: any) => {
 
   //处理第一次获取当前tag下的singerlist
   const getCategorySingerFunc = () => {
-    setIsLoding(true);
+    //setIsLoding(true);
     getCategorySinger(type, area, 0, initial).then((res: any) => {
       changeSingerList(res.artists);
-      setHasMore(res.more);
-      setIsLoding(false);
+      //setHasMore(res.more);
+      //setIsLoding(false);
       setPage(1);
     });
   };
@@ -51,8 +49,8 @@ const Singer = (props: any) => {
   const getMoreSinger = () => {
     getCategorySinger(type, area, page, initial).then((res: any) => {
       changeSingerList([...singerList, ...res.artists]);
-      setHasMore(res.more);
-      setIsLoding(false);
+      //setHasMore(res.more);
+      //setIsLoding(false);
       setPage(page + 1);
     });
   };
@@ -69,7 +67,11 @@ const Singer = (props: any) => {
 
   return (
     <div className="singer">
-      <TopTab text="歌手" type="text" />
+      <TopTab>
+        <div className="top__container">
+          <p className="top__text">歌手</p>
+        </div>
+      </TopTab>
       <TabBar
         current={singerTag}
         tagList={TAG_LIST}

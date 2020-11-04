@@ -2,11 +2,11 @@
  * @Author: FBB
  * @Date: 2019-09-08 16:49:52
  * @LastEditors: FBB
- * @LastEditTime: 2020-09-03 15:14:41
+ * @LastEditTime: 2020-11-04 20:26:51
  * @Description: 歌曲展示列表
  */
 
-import React, { useCallback, useEffect } from "react";
+import React from "react";
 import play from "@/static/icon/play.png";
 import more from "@/static/icon/more_gray.png";
 import { connect } from "react-redux";
@@ -20,7 +20,6 @@ import {
 } from "@/actions/playAction";
 import { PLAY_TYPE } from "@/share/enums";
 import { randomList } from "@/utils/utils";
-import BScroll from "better-scroll";
 import { Scroll } from "./Scroll";
 
 interface ISProp {

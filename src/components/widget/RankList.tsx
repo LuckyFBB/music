@@ -7,7 +7,6 @@
  */
 
 import React from "react";
-import LazyLoad from "react-lazyload";
 
 export const RankList = (props: any) => {
   const { type, ranklist, onClick } = props;

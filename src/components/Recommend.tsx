@@ -43,7 +43,11 @@ const Recommend = (props: ISPorps) => {
 
   return (
     <div className="container">
-      <TopTab text="每日推荐" type="text" left={left} onLeft={handleBack} />
+      <TopTab left={left} onLeft={handleBack}>
+        <div className="top__container">
+          <p className="top__text">每日推荐</p>
+        </div>
+      </TopTab>
       <div className="recommend__header">
         <img className="recommend__img" src={bg} alt="" />
       </div>

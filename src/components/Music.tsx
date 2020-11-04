@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-27 21:35:13
  * @LastEditors: FBB
- * @LastEditTime: 2020-09-03 15:12:22
+ * @LastEditTime: 2020-11-03 22:33:20
  * @Description: 首页榜单组件
  */
 
@@ -14,7 +14,6 @@ import { SongBlock } from "@/components/widget/SongBlock";
 import left from "@/static/icon/left_arrow.png";
 import { connect } from "react-redux";
 import { changeMusicTag } from "actions/musicAction";
-import BScroll from "better-scroll";
 import { Scroll } from "./widget/Scroll";
 
 const Music = (props: any) => {
@@ -57,7 +56,11 @@ const Music = (props: any) => {
 
   return (
     <div className="music">
-      <TopTab text="歌单广场" left={left} type="text" onLeft={handleBack} />
+      <TopTab left={left} onLeft={handleBack}>
+        <div className="top__container">
+          <p className="top__text">歌单广场</p>
+        </div>
+      </TopTab>
       <TabBar
         current={musicTag}
         tagList={hotTagList}

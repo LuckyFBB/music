@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-09-09 21:42:57
  * @LastEditors: FBB
- * @LastEditTime: 2020-09-02 14:38:37
+ * @LastEditTime: 2020-11-03 22:34:38
  * @Description: 账号信息展示页
  */
 
@@ -52,7 +52,11 @@ export const Account = (props: any) => {
 
   return (
     <div className="container">
-      <TopTab type="text" text="账号" />
+      <TopTab>
+        <div className="top__container">
+          <p className="top__text">账号</p>
+        </div>
+      </TopTab>
       <div className="wrapper">
         <div
           className="account__bg"

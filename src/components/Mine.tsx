@@ -32,7 +32,11 @@ export const Mine = (props: any) => {
   }, []);
   return (
     <div className="container">
-      <TopTab type="text" text="我的" />
+      <TopTab>
+        <div className="top__container">
+          <p className="top__text">我的</p>
+        </div>
+      </TopTab>
       <div className="wrapper">
         <div className="mine">
           {MINE_SHOW_LIST.map((item: any) => (

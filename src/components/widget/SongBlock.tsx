@@ -2,12 +2,11 @@
  * @Author: FBB
  * @Date: 2019-08-25 17:19:35
  * @LastEditors: FBB
- * @LastEditTime: 2020-09-01 22:03:02
+ * @LastEditTime: 2020-11-04 20:24:27
  * @Description: 歌单组件
  */
 import React from "react";
 import play from "@/static/home/play.png";
-import LazyLoad from "react-lazyload";
 
 interface ISProps {
   list: Array<{}>;

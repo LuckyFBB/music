@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2020-09-03 15:09:37
+ * @LastEditTime: 2020-11-03 22:35:14
  * @Description: 首页
  */
 
@@ -66,12 +66,11 @@ export const Home = (props: any) => {
 
   return (
     <div className="home">
-      <TopTab
-        type="text"
-        text="云音乐"
-        right={search}
-        onRight={() => redirectToPath("/search")}
-      />
+      <TopTab right={search} onRight={() => redirectToPath("/search")}>
+        <div className="top__container">
+          <p className="top__text">云音乐</p>
+        </div>
+      </TopTab>
       <Scroll>
         <div className="home__content">
           <div className="home__banner">

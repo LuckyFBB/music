@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-26 20:19:16
  * @LastEditors: FBB
- * @LastEditTime: 2020-09-03 15:16:22
+ * @LastEditTime: 2020-11-03 22:38:35
  * @Description: 排行榜
  */
 
@@ -13,7 +13,6 @@ import { RankList } from "@/components/widget/RankList";
 import { getTopListDetail } from "@/store/api";
 import { Toast } from "antd-mobile";
 import left from "@/static/icon/left_arrow.png";
-import BScroll from "better-scroll";
 import { Scroll } from "./widget/Scroll";
 
 export const Rank = (props: any) => {
@@ -40,7 +39,11 @@ export const Rank = (props: any) => {
 
   return (
     <div className="rank">
-      <TopTab type="text" text="排行榜" left={left} onLeft={handleBack} />
+      <TopTab left={left} onLeft={handleBack}>
+        <div className="top__container">
+          <p className="top__text">排行榜</p>
+        </div>
+      </TopTab>
       <Scroll cx="rank__container">
         <div className="rank__content">
           <div className="rank__title">官方榜</div>

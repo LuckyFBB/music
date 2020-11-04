@@ -311,14 +311,16 @@
 }
 
 .search {
+  display: flex;
+  flex-direction: column;
   height: 100%;
   overflow: scroll;
   background-color: #fff;
   &__hot {
-    padding-top: 10px;
-  }
-  &__content {
-    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: scroll;
   }
 }
 

@@ -2,73 +2,43 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2020-11-02 22:13:19
+ * @LastEditTime: 2020-11-04 21:31:03
  */
 
-import React, { CSSProperties, useState } from "react";
+import React, { CSSProperties } from "react";
 
 interface ISProps {
   left?: string;
   right?: string;
-  type: string;
-  text?: string;
-  placeholder?: string;
+  children?: React.ReactNode;
   style?: CSSProperties;
   onLeft?: () => void;
   onRight?: (value?: string) => void;
 }
 
-export const TopTab = (props: ISProps) => {
-  const {
-    left,
-    right,
-    onRight,
-    onLeft,
-    type,
-    style,
-    text = "云音乐",
-    placeholder = "请输入",
-  } = props;
-  const [value, setValue] = useState("");
-  const renderTop = (type: string) => {
-    switch (type) {
-      case "text":
-        return <div className="top__text">{text}</div>;
-      case "search":
-        return (
-          <div className="top__search">
-            <input
-              type="text"
-              placeholder={placeholder}
-              value={value}
-              onChange={handleChange}
-            />
-          </div>
-        );
-    }
-  };
-  const handleChange = (e: any) => {
-    setValue(e.target.value);
-  };
+export const TopTab: React.FC<ISProps> = (props) => {
+  const { left, right, onRight, onLeft, style, children } = props;
   return (
     <div className="top" style={style}>
       {left && (
-        <img
-          className="top__slideimg img--left"
-          src={left}
-          alt=""
-          onClick={onLeft}
-        />
-      )}
-      <div className="top__container">{renderTop(type)}</div>
-      {right && (
-        <div className="top__right">
+        <div className="top__side">
           <img
-            className="top__slideimg img--right"
+            src={left}
+            alt=""
+            onClick={() => {
+              onLeft && onLeft();
+            }}
+          />
+        </div>
+      )}
+      {children}
+      {right && (
+        <div className="top__side">
+          <img
             src={right}
             alt=""
             onClick={() => {
-              onRight && onRight(value);
+              onRight && onRight();
             }}
           />
         </div>

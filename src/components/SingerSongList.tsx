@@ -2,11 +2,11 @@
  * @Author: FBB
  * @Date: 2019-09-08 21:46:38
  * @LastEditors: FBB
- * @LastEditTime: 2020-09-02 19:24:05
+ * @LastEditTime: 2020-11-04 20:27:01
  * @Description: 歌手所有歌曲展示
  */
 
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { TopTab } from "@/components/widget/TopTab";
 import { getSingerPlayDetail } from "@/store/api";
 import SongList from "@/components/widget/SongList";
@@ -47,7 +47,11 @@ const SingerSongList = (props: any) => {
 
   return (
     <div className="singerdetail">
-      <TopTab onLeft={handleBack} type="text" text={artist.name} left={left} />
+      <TopTab onLeft={handleBack} left={left}>
+        <div className="top__container">
+          <p className="top__text">{artist.name}</p>
+        </div>
+      </TopTab>
       <div className="singerdetail__header">
         <div className="button">收藏歌手</div>
         <img className="img" src={artist.picUrl} alt="" />
