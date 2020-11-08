@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2020-08-23 16:47:13
  * @LastEditors: FBB
- * @LastEditTime: 2020-11-04 20:26:30
+ * @LastEditTime: 2020-11-05 15:09:00
  * @Description: 歌词滚动组件
  */
 
@@ -10,6 +10,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { getSongLyric } from "@/store/api";
 import cx from "classnames";
+import { Scroll } from "./Scroll";
 
 interface ISProps {
   playId: number;

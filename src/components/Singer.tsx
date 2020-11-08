@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { TopTab } from "@/components/widget/TopTab";
 import { BottomTab } from "@/components/widget/BottomTab";
 import { TabBar } from "@/components/widget/TabBar";
@@ -9,10 +9,12 @@ import { connect } from "react-redux";
 import { changeSingerTag, changeSingerListAction } from "actions/musicAction";
 import { Alphabet } from "./widget/Alphabet";
 import { Scroll } from "./widget/Scroll";
+import BScrollConstructor from "better-scroll";
 
 const Singer = (props: any) => {
   const { singerTag, changeTag, changeSingerList, singerList } = props;
-  //const [hasMore, setHasMore] = useState(false);
+  const scrollRef = useRef<BScrollConstructor>();
+  const [hasMore, setHasMore] = useState(false);
   //const [isLoading, setIsLoding] = useState(false);
   const [page, setPage] = useState(0); //当前分页页数
   const [initial, setInitial] = useState(""); //当前靠字母搜索
@@ -32,6 +34,9 @@ const Singer = (props: any) => {
 
   useEffect(() => {
     getCategorySingerFunc();
+    if (scrollRef) {
+      scrollRef.current && scrollRef.current.refresh();
+    }
   }, [singerTag, initial]);
 
   //处理第一次获取当前tag下的singerlist
@@ -49,7 +54,7 @@ const Singer = (props: any) => {
   const getMoreSinger = () => {
     getCategorySinger(type, area, page, initial).then((res: any) => {
       changeSingerList([...singerList, ...res.artists]);
-      //setHasMore(res.more);
+      setHasMore(res.more);
       //setIsLoding(false);
       setPage(page + 1);
     });
@@ -77,7 +82,7 @@ const Singer = (props: any) => {
         tagList={TAG_LIST}
         onChange={(item) => handleChangeSingerTag(item)}
       />
-      <Scroll pullUpStatus={true} pullUp={getMoreSinger}>
+      <Scroll ref={scrollRef} pullUpStatus={hasMore} pullUp={getMoreSinger}>
         <SingerList onClick={redirectToSinger} />
       </Scroll>
       <Alphabet

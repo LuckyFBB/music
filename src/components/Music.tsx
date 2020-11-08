@@ -2,11 +2,11 @@
  * @Author: FBB
  * @Date: 2019-08-27 21:35:13
  * @LastEditors: FBB
- * @LastEditTime: 2020-11-03 22:33:20
+ * @LastEditTime: 2020-11-08 22:50:11
  * @Description: 首页榜单组件
  */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { TopTab } from "@/components/widget/TopTab";
 import { getHotPlayDetail, getHotPlay } from "@/store/api";
 import { TabBar } from "@/components/widget/TabBar";
@@ -15,6 +15,7 @@ import left from "@/static/icon/left_arrow.png";
 import { connect } from "react-redux";
 import { changeMusicTag } from "actions/musicAction";
 import { Scroll } from "./widget/Scroll";
+import BScrollConstructor from "better-scroll";
 
 const Music = (props: any) => {
   const { musicTag, changeTag } = props;
@@ -23,10 +24,17 @@ const Music = (props: any) => {
     Function
   ] = useState([]);
   const [hotTagList, setHotTagList]: [[], Function] = useState([]);
+  const scrollRef = useRef<BScrollConstructor>();
 
   useEffect(() => {
     getTagList();
   }, []);
+
+  useEffect(() => {
+    if (scrollRef) {
+      scrollRef.current && scrollRef.current.refresh();
+    }
+  }, [musicTag]);
 
   const handleBack = () => {
     props.history.go(-1);
@@ -36,9 +44,6 @@ const Music = (props: any) => {
     changeTag(item.name);
     getHotPlayDetail(item.name).then((res: any) => {
       const playlists = res.playlists;
-      if (item.name === "华语" || item.name === "流行") {
-        playlists.splice(0, 1);
-      }
       setHotPlayList(playlists);
     });
   };
@@ -66,7 +71,7 @@ const Music = (props: any) => {
         tagList={hotTagList}
         onChange={getHotPlayDetailFunc}
       />
-      <Scroll>
+      <Scroll ref={scrollRef}>
         <SongBlock list={hotPlayList} onClick={redirectToSonglistDetail} />
       </Scroll>
     </div>

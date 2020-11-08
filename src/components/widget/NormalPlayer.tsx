@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2020-08-17 21:29:25
  * @LastEditors: FBB
- * @LastEditTime: 2020-11-03 22:34:05
+ * @LastEditTime: 2020-11-08 20:29:00
  * @Description: 全屏的播放器
  */
 
@@ -76,7 +76,9 @@ const NormalPlayer = (props: ISPorps) => {
             style={{ backgroundColor: "unset" }}
           >
             <div className="top__container">
-              <p className="top__text">{currentSong.name}</p>
+              <p className="top__text top__text--marquee ">
+                {currentSong.name}
+              </p>
             </div>
           </TopTab>
         </div>

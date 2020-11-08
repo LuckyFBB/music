@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-13 21:34:54
  * @LastEditors: FBB
- * @LastEditTime: 2020-11-04 21:31:03
+ * @LastEditTime: 2020-11-08 20:30:20
  */
 
 import React, { CSSProperties } from "react";
@@ -20,8 +20,8 @@ export const TopTab: React.FC<ISProps> = (props) => {
   const { left, right, onRight, onLeft, style, children } = props;
   return (
     <div className="top" style={style}>
-      {left && (
-        <div className="top__side">
+      <div className="top__side">
+        {left && (
           <img
             src={left}
             alt=""
@@ -29,11 +29,11 @@ export const TopTab: React.FC<ISProps> = (props) => {
               onLeft && onLeft();
             }}
           />
-        </div>
-      )}
+        )}
+      </div>
       {children}
-      {right && (
-        <div className="top__side">
+      <div className="top__side">
+        {right && (
           <img
             src={right}
             alt=""
@@ -41,8 +41,8 @@ export const TopTab: React.FC<ISProps> = (props) => {
               onRight && onRight();
             }}
           />
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

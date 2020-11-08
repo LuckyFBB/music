@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-09-08 16:49:52
  * @LastEditors: FBB
- * @LastEditTime: 2020-11-04 20:26:51
+ * @LastEditTime: 2020-11-08 20:38:21
  * @Description: 歌曲展示列表
  */
 
@@ -61,10 +61,14 @@ const SongList = (props: ISProp) => {
     changePlayState(true);
   };
 
+  const handlePlayAll = () => {
+    handleClick(currentAlbum.tracks[0].id, 0);
+  };
+
   return (
     <div className="songlist">
       <div className="songlist__header">
-        <div className="left">
+        <div className="left" onClick={handlePlayAll}>
           <img src={play} alt="播放" />
           <span className="title">
             播放全部<span className="subtitle">共{totalCount}首</span>
