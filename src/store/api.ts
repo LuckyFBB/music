@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-12-12 16:55:11
  * @LastEditors: FBB
- * @LastEditTime: 2020-08-27 16:31:24
+ * @LastEditTime: 2020-11-09 21:59:32
  * @Description: 请求集和
  */
 import request from "@/utils/request";
@@ -73,11 +73,12 @@ export const getHotPlay = () => {
  * @return:
  * @author: FBB
  */
-export const getHotPlayDetail = (cat: string) => {
+export const getHotPlayDetail = (cat: string, page: number) => {
   const url = "/top/playlist";
   const params = {
     cat,
-    limit: 51,
+    limit: 21,
+    offset: page * 21,
   };
   return request({ url, params });
 };

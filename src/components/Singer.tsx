@@ -44,7 +44,7 @@ const Singer = (props: any) => {
     //setIsLoding(true);
     getCategorySinger(type, area, 0, initial).then((res: any) => {
       changeSingerList(res.artists);
-      //setHasMore(res.more);
+      setHasMore(res.more);
       //setIsLoding(false);
       setPage(1);
     });

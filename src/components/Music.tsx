@@ -2,7 +2,7 @@
  * @Author: FBB
  * @Date: 2019-08-27 21:35:13
  * @LastEditors: FBB
- * @LastEditTime: 2020-11-08 22:50:11
+ * @LastEditTime: 2020-11-09 22:12:26
  * @Description: 首页榜单组件
  */
 
@@ -25,6 +25,8 @@ const Music = (props: any) => {
   ] = useState([]);
   const [hotTagList, setHotTagList]: [[], Function] = useState([]);
   const scrollRef = useRef<BScrollConstructor>();
+  const [page, setPage] = useState(0); //当前分页页数
+  const [hasMore, setHasMore] = useState(false);
 
   useEffect(() => {
     getTagList();
@@ -42,9 +44,20 @@ const Music = (props: any) => {
 
   const getHotPlayDetailFunc = (item: any) => {
     changeTag(item.name);
-    getHotPlayDetail(item.name).then((res: any) => {
+    getHotPlayDetail(item.name, 0).then((res: any) => {
       const playlists = res.playlists;
       setHotPlayList(playlists);
+      setPage(page + 1);
+      setHasMore(res.more);
+    });
+  };
+
+  //处理获取更多singerlist
+  const getMoreHotPlay = () => {
+    getHotPlayDetail(musicTag, page).then((res: any) => {
+      setHotPlayList([...hotPlayList, ...res.playlists]);
+      setHasMore(res.more);
+      setPage(page + 1);
     });
   };
 
@@ -71,7 +84,7 @@ const Music = (props: any) => {
         tagList={hotTagList}
         onChange={getHotPlayDetailFunc}
       />
-      <Scroll ref={scrollRef}>
+      <Scroll ref={scrollRef} pullUpStatus={hasMore} pullUp={getMoreHotPlay}>
         <SongBlock list={hotPlayList} onClick={redirectToSonglistDetail} />
       </Scroll>
     </div>
